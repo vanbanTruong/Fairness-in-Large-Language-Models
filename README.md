@@ -4,7 +4,7 @@ This ongoing project aims to consolidate interesting efforts in the field of fai
 
 **Disclaimer: We may have missed some relevant papers in the list. If you have suggestions or want to add papers, please submit a pull request or email us—your contributions are greatly appreciated!**
 
-**Tutorial:** [Fairness in Large Language Models: A Tutorial](https://fairnessinllmstutorial.github.io)<br>
+**Tutorial:** [Fairness in Large Language Models: A Tutorial](https://fairness-llms-tutorial.github.io)<br>
 Zichong Wang, Avash Palikhe, Zhipeng Yin, Jiale Zhang and Wenbin Zhang<br>
 *The 34<sup>th</sup> International Joint Conference on Artificial Intelligence (IJCAI), Montreal, Canada, 2025*
 
