@@ -221,8 +221,9 @@ If you find that our definition survey helps your research, we would appreciate 
   author={Wang, Zichong and Palikhe, Avash and Yin, Zhipeng and Zhang, Wenbin},
   journal={arXiv preprint arXiv:2407.18454},
   year={2024}
-} 
 }
+
+```
 
 ### Datasets for Fairness in Language Models: An In-Depth Survey [![PDF](https://img.shields.io/badge/PDF-Download-red)](https://arxiv.org/abs/2506.23411)
 
