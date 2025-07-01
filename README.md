@@ -237,7 +237,6 @@ If you find that our dataset survey helps your research, we would appreciate cit
       archivePrefix={arXiv},
       primaryClass={cs.CL},
       url={https://arxiv.org/abs/2506.23411}, 
-} 
 }
 
 
