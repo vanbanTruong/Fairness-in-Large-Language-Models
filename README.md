@@ -216,14 +216,27 @@ If you find that our introduction survey helps your research, we would appreciat
 
 If you find that our definition survey helps your research, we would appreciate citations to the following paper:
 ```
-@misc{doan2024fairnessdefinitionslanguagemodels,
-      title={Fairness Definitions in Language Models Explained}, 
-      author={Thang Viet Doan and Zhibo Chu and Zichong Wang and Wenbin Zhang},
-      year={2024},
-      eprint={2407.18454},
+@article{wang2024fairness,
+  title={Fairness definitions in language models explained},
+  author={Wang, Zichong and Palikhe, Avash and Yin, Zhipeng and Zhang, Wenbin},
+  journal={arXiv preprint arXiv:2407.18454},
+  year={2024}
+} 
+}
+
+### Datasets for Fairness in Language Models: An In-Depth Survey [![PDF](https://img.shields.io/badge/PDF-Download-red)](https://arxiv.org/abs/2506.23411)
+
+If you find that our dataset survey helps your research, we would appreciate citations to the following paper:
+```
+@misc{zhang2025datasetsfairnesslanguagemodels,
+      title={Datasets for Fairness in Language Models: An In-Depth Survey}, 
+      author={Jiale Zhang and Zichong Wang and Avash Palikhe and Zhipeng Yin and Wenbin Zhang},
+      year={2025},
+      eprint={2506.23411},
       archivePrefix={arXiv},
       primaryClass={cs.CL},
-      url={https://arxiv.org/abs/2407.18454}, 
+      url={https://arxiv.org/abs/2506.23411}, 
+} 
 }
 
 
