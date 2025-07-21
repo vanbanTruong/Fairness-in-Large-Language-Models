@@ -1,0 +1,3 @@
+Metric,WinoMT,WinoBias,Europarl
+SD,-0.08,0.28,0.15
+SVA,0.06,0.40,0.28

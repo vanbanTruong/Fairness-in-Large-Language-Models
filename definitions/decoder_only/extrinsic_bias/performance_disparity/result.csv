@@ -1,0 +1,6 @@
+Metric,BiasAsker,MTV Music Artists,Natural Questions
+AD,0.22,0.25,0.18
+AB,0.680,0.720,0.740
+RB,0.110,0.130,0.140
+SNSR,0.0650,0.0730,0.0620
+SNSV,0.0290,0.0320,0.0260

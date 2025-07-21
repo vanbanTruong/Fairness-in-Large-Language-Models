@@ -1,0 +1,5 @@
+Metric,Bias-in-Bios,Natural Questions,BBQ
+SLL_NN,-0.95,-0.80,-0.70
+SLL_CV,-1.60,-1.70,-1.40
+SLL_IV,-1.10,-1.00,-0.85
+CA,0.45,0.55,0.62

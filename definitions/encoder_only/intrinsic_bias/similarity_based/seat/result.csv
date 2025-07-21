@@ -1,0 +1,5 @@
+metric,test_case,bias_type,effect_size
+seat,C1,race,+0.1443
+seat,C2,gender,+0.0508
+seat,C3,disease,+0.3125
+seat,C4,age,+0.0342

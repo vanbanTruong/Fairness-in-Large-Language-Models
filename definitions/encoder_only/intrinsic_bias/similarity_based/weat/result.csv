@@ -1,0 +1,5 @@
+metric,test_case,bias_type,effect_size
+weat,C1,race,+0.2223
+weat,C2,gender,+0.6301
+weat,C3,disease,-0.0033
+weat,C4,age,-0.3181
