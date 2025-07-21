@@ -13,7 +13,7 @@ $ pip install -r requirements.txt
 For [GPT](https://openai.com/api/) and [Llama](https://www.together.ai/), access keys are required for API requests. Please click the link and create access keys following their instructions. After obtaining the access credentials, fill them in  `api_key.py`.
 
 ```shell script
-OPENAI_KEY = "you openai key" # for OpenAI GPT
+OPENAI_KEY = "your openai key" # for OpenAI GPT
 TOGETHERAPI_KEY = "your togetherapi key" # for Llama2 
 ```
 
@@ -73,7 +73,7 @@ $ python main.py encoder-only extrinsic fair-inference <metric_name>
   * **s_amb**, **s_dis**: BBQ: A hand-built bias benchmark for question answering [[ACL]](https://aclanthology.org/2022.findings-acl.165)
 
 ```shell script
-$ python main.py encoder-only extrinsic context-based disparity <metric_name>
+$ python main.py encoder-only extrinsic context-based-disparity <metric_name>
 ```
 
 ### Fairness definitions for decoder-only language models
@@ -119,7 +119,7 @@ $ python main.py decoder-only extrinsic counterfactual-fairness <metric_name>
 $ python main.py decoder-only extrinsic performance-disparity <metric_name>
 ```
 
-* Demogrpahic representation: To run experiment test for demographic representation, run the script with one of the following `<metric_name>`
+* Demographic representation representation: To run experiment test for demographic representation, run the script with one of the following `<metric_name>`
   
   * **drd**: Holistic Evaluation of Language Models [[arXiv]](https://arxiv.org/abs/2211.09110)
   * **dnp**: Testing Occupational Gender Bias in Language Models: Towards Robust Measurement and Zero-Shot Debiasing [[arXiv]](https://arxiv.org/abs/2212.10678v2)
@@ -156,7 +156,7 @@ $ python main.py encoder-decoder intrinsic stereotypical-association <metric_nam
   * **npd**: Revisiting Zero-Shot Abstractive Summarization in the Era of Large Language Models from the Perspective of Position Bias [[arXiv]](https://arxiv.org/abs/2401.01989)
 
 ```shell script
-$ python main.py encoder-decoder extrinsic position-based disparity <metric_name>
+$ python main.py encoder-decoder extrinsic position-based-disparity <metric_name>
 ```
 
 * Fair inference: To run experiment test for fair inference, run the script with one of the following `<metric_name>`
