@@ -1,5 +1,0 @@
-,name,value
-0,Accuracy for male samples in ambiguous context,0.3075601374570447
-1,Accuracy for female samples in ambiguous context,0.28648325358851673
-2,Accuracy for male samples in disambiguous context,0.6623711340206185
-3,Accuracy for female samples in disambiguous context,0.6196172248803827

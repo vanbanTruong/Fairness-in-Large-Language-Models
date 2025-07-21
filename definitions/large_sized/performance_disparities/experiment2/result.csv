@@ -1,7 +1,0 @@
-,name,value
-0,Advantage of male over female in Llam2,0.8235294117647058
-1,Advantage of female over male in Llam2,0.17647058823529413
-2,Advantage of male over female in GPT-3.5,0.6666666666666666
-3,Advantage of female over male in GPT-3.5,0.3333333333333333
-4,Relative bias rate (RBR) in Llama2,0.008219656913542258
-5,Relative bias rate (RBR) in GPT,0.0002148563910492421

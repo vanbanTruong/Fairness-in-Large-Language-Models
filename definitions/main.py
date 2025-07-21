@@ -1,35 +1,58 @@
-from medium_sized.intrinsic_bias.similarity_based.weat import main as weat
-from medium_sized.intrinsic_bias.similarity_based.seat import main as seat
-from medium_sized.intrinsic_bias.similarity_based.ceat import main as ceat
+from encoder_only.intrinsic_bias.similarity_based.weat import main as weat
+from encoder_only.intrinsic_bias.similarity_based.seat import main as seat
+from encoder_only.intrinsic_bias.similarity_based.ceat import main as ceat
 
-from medium_sized.intrinsic_bias.probability_based.masked_token_metrics.lbps import main as lbps
-from medium_sized.intrinsic_bias.probability_based.masked_token_metrics.cbs import main as cbs
-from medium_sized.intrinsic_bias.probability_based.masked_token_metrics.disco import main as disco
+from encoder_only.intrinsic_bias.probability_based.masked_token_metrics.lbps import main as lbps
+from encoder_only.intrinsic_bias.probability_based.masked_token_metrics.cbs import main as cbs
+from encoder_only.intrinsic_bias.probability_based.masked_token_metrics.disco import main as disco
 
-from medium_sized.intrinsic_bias.probability_based.pseudo_log_likelihood_metrics.ppl import main as ppl
-from medium_sized.intrinsic_bias.probability_based.pseudo_log_likelihood_metrics.aul import main as aul
-from medium_sized.intrinsic_bias.probability_based.pseudo_log_likelihood_metrics.aula import main as aula
-from medium_sized.intrinsic_bias.probability_based.pseudo_log_likelihood_metrics.cat import main as cat
-from medium_sized.intrinsic_bias.probability_based.pseudo_log_likelihood_metrics.icat import main as icat
-from medium_sized.intrinsic_bias.probability_based.pseudo_log_likelihood_metrics.cps import main as cps
+from encoder_only.intrinsic_bias.probability_based.pseudo_log_likelihood_metrics.ppl import main as ppl
+from encoder_only.intrinsic_bias.probability_based.pseudo_log_likelihood_metrics.aul import main as aul
+from encoder_only.intrinsic_bias.probability_based.pseudo_log_likelihood_metrics.aula import main as aula
+from encoder_only.intrinsic_bias.probability_based.pseudo_log_likelihood_metrics.cat import main as cat
+from encoder_only.intrinsic_bias.probability_based.pseudo_log_likelihood_metrics.icat import main as icat
+from encoder_only.intrinsic_bias.probability_based.pseudo_log_likelihood_metrics.cps import main as cps
 
-from medium_sized.extrinsic_bias.classification import main as classification
-from medium_sized.extrinsic_bias.question_answering import main as qa
+from encoder_only.extrinsic_bias.equal_opportunity import main as gap
+from encoder_only.extrinsic_bias.fair_inference import main as nn
+from encoder_only.extrinsic_bias.fair_inference import main as fn
+from encoder_only.extrinsic_bias.fair_inference import main as t_0.5
+from encoder_only.extrinsic_bias.fair_inference import main as t_0.7
+from encoder_only.extrinsic_bias.context_based import main as s_amb
+from encoder_only.extrinsic_bias.fair_inference import main as s_dis
 
-from large_sized.demographic_representation.experiment1 import main as dr_exp1
-from large_sized.demographic_representation.experiment2 import main as dr_exp2
-from large_sized.demographic_representation.experiment3 import main as dr_exp3
+from decoder_only.intrinsic_bias.attention_head_based.nie import main as nie
+from decoder_only.intrinsic_bias.attention_head_based.gbe import main as gbe
 
-from large_sized.stereotypical_association.experiment1 import main as sa_exp1
-from large_sized.stereotypical_association.experiment2 import main as sa_exp2
-from large_sized.stereotypical_association.experiment3 import main as sa_exp3
+from decoder_only.intrinsic_bias.stereotype_association.sll import main as sll
+from decoder_only.intrinsic_bias.stereotype_association.ca import main as ca
 
-from large_sized.counterfactual_fairness.experiment1 import main as cf_exp1
-from large_sized.counterfactual_fairness.experiment2 import main as cf_exp2
+from decoder_only.extrinsic_bias.counterfactual_fairness.cr import main as cr
+from decoder_only.extrinsic_bias.counterfactual_fairness.ctf import main as ctf
 
-from large_sized.performance_disparities.experiment1 import main as pd_exp1
-from large_sized.performance_disparities.experiment2 import main as pd_exp2
-from large_sized.performance_disparities.experiment3 import main as pd_exp3
+from decoder_only.extrinsic_bias.performance_disparity.ad import main as ad
+from decoder_only.extrinsic_bias.performance_disparity.ba import main as ba
+from decoder_only.extrinsic_bias.performance_disparity.sns import main as sns
+
+from decoder_only.extrinsic_bias.demographic_representation.drd import main as drd
+from decoder_only.extrinsic_bias.demographic_representation.dnp import main as dnp
+
+from encoder_decoder.intrinsic_bias.algorithmic_disparity.lfp import main as lfp
+from encoder_decoder.intrinsic_bias.algorithmic_disparity.mcd import main as mcd
+
+from encoder_decoder.intrinsic_bias.stereotype_association.sd import main as sd
+from encoder_decoder.intrinsic_bias.stereotype_association.sva import main as sva
+
+from encoder_decoder.extrinsic_bias.position_based_disparity.npd import main as npd
+
+from encoder_decoder.extrinsic_bias.fair_inference.ibs import main as ibs
+
+from encoder_decoder.extrinsic_bias.individual_fairness.ss import main as ss
+
+from encoder_decoder.extrinsic_bias.counterfactual_fairness.auc import main as auc
+
+
+
 
 import sys
 
