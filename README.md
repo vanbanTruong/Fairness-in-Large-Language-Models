@@ -18,7 +18,7 @@ Zichong Wang, Zhibo Chu, Thang Viet Doan, Shiwen Ni, Min Yang and Wenbin Zhang<b
 *AI and Ethics, 2024*
 
 **Fairness Definitions in LLMs:** [Fairness Definitions in Language Models Explained](https://arxiv.org/abs/2407.18454)<br>
-Zichong Wang, Avash Palikhe, Zhipeng Yin and Wenbin Zhang
+Avash Palikhe, Zichong Wang, Zhipeng Yin and Wenbin Zhang
 
 **Datasets for Fairness in LLMs:** [Datasets for Fairness in Language Models: An In-Depth Survey](https://arxiv.org/abs/2506.23411)<br>
 Jiale Zhang, Zichong Wang, Avash Palikhe, Zhipeng Yin and Wenbin Zhang
