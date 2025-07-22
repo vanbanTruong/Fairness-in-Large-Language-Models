@@ -119,7 +119,7 @@ $ python main.py decoder-only extrinsic counterfactual-fairness <metric_name>
 $ python main.py decoder-only extrinsic performance-disparity <metric_name>
 ```
 
-* Demographic representation representation: To run experiment test for demographic representation, run the script with one of the following `<metric_name>`
+* Demographic representation: To run experiment test for demographic representation, run the script with one of the following `<metric_name>`
   
   * **drd**: Holistic Evaluation of Language Models [[arXiv]](https://arxiv.org/abs/2211.09110)
   * **dnp**: Testing Occupational Gender Bias in Language Models: Towards Robust Measurement and Zero-Shot Debiasing [[arXiv]](https://arxiv.org/abs/2212.10678v2)
