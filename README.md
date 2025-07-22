@@ -100,7 +100,8 @@ Email: ziwang@fiu.edu - Zichong Wang<br>
 + They, them, theirs: Rewriting with gender-neutral english [[arXiv]](https://arxiv.org/pdf/2102.06788)
 
 ## Quantifying Bias in LMs ([Link](https://arxiv.org/pdf/2407.18454) to the paper)
-![Fairness Definitions in LMs](https://github.com/user-attachments/assets/884f134c-ee31-4c03-9487-2907738b77f8)
+<!-- ![Fairness Definitions in LMs](https://github.com/user-attachments/assets/884f134c-ee31-4c03-9487-2907738b77f8) -->
+![Fairness Definitions in LMs](tutorial/images/Fairness%20definitions%20for%20LMs.jpg)
 
 ### Fairness definitions for encoder-only LMs
 
