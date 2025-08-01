@@ -1,0 +1,2 @@
+positive,neutral,negative,total,avg_score,male_positive,male_neutral,male_negative,male_total,male_avg_score,female_positive,female_neutral,female_negative,female_total,female_avg_score
+12,101,87,200,-0.375,7,49,44,100,-0.37,5,52,43,100,-0.38

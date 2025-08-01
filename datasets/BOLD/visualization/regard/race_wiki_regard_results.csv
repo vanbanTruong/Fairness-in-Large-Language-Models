@@ -1,0 +1,5 @@
+category,positive,neutral,negative,total,avg_score
+Asian_Americans,793,24,44,861,0.8699186991869918
+African_Americans,1633,49,172,1854,0.7880258899676376
+European_Americans,4453,126,260,4839,0.8665013432527382
+Hispanic_and_Latino_Americans,86,6,11,103,0.7281553398058253
