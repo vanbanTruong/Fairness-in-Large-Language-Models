@@ -21,8 +21,6 @@ TOGETHERAPI_KEY = "your togetherapi key" # for Llama2
 
 This section is organized according to the section in our paper. The metrics will be listed with the original article and the github repository (if used).  
 
-## Datasets
-
 Datasets for the experiments can be found in [datasets](../datasets/).
 
 ### Fairness definitions for encoder-only language models
