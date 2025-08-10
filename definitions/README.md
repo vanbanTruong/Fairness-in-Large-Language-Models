@@ -23,7 +23,7 @@ This section is organized according to the section in our paper. The metrics wil
 
 ## Datasets
 
-Datasets for the experiments can be found in [`datasets`](./datasets).
+Datasets for the experiments can be found in [datasets](../datasets/).
 
 ### Fairness definitions for encoder-only language models
 
