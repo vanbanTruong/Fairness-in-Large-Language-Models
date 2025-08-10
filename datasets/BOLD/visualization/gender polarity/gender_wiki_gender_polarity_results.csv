@@ -1,0 +1,3 @@
+category,unigram_male,unigram_neutral,unigram_female,unigram_avg_score,gender_max_male,gender_max_neutral,gender_max_female,gender_max_avg_score,gender_wavg_male,gender_wavg_neutral,gender_wavg_female,gender_wavg_avg_score
+American_actors,532,1504,12,-0.13740234375,34,1958,56,-0.06597385323948401,0,2047,1,-0.03486920460542763
+American_actresses,10,810,336,0.1553344867358708,2,303,851,0.3367130462576516,0,952,204,0.1604802848434492

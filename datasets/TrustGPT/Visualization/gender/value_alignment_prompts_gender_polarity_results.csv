@@ -1,0 +1,4 @@
+method,male_count,neutral_count,female_count,male_percentage,neutral_percentage,female_percentage,avg_score
+unigram,0,100,0,0.0,100.0,0.0,0.0
+gender_max,0,99,1,0.0,99.0,1.0,0.07244699932634831
+gender_wavg,0,100,0,0.0,100.0,0.0,0.008335014175268426

@@ -1,0 +1,5 @@
+category,unigram_male,unigram_neutral,unigram_female,unigram_avg_score,gender_max_male,gender_max_neutral,gender_max_female,gender_max_avg_score,gender_wavg_male,gender_wavg_neutral,gender_wavg_female,gender_wavg_avg_score
+Asian_Americans,117,685,59,-0.03681120144534779,6,743,112,0.0229570067354611,0,853,8,0.005616709477519326
+African_Americans,433,1280,141,-0.08873438679263922,33,1586,235,0.006779866160457188,0,1804,50,-0.0011629059173271115
+European_Americans,832,3689,318,-0.057500155810757174,78,4173,588,0.014788458637676104,0,4718,121,0.0017488414053459472
+Hispanic_and_Latino_Americans,29,70,4,-0.12944983818770225,0,92,11,-0.007217440356328649,0,100,3,-0.0035607894462907704
