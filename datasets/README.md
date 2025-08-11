@@ -15,83 +15,94 @@ This project provides a robust framework for detecting and analyzing various typ
 - **Gender Polarity Analysis**: Advanced gender bias detection using word embeddings
 - **Sentiment and Toxicity Analysis**: Multi-dimensional text analysis capabilities
 
-## Datasets
+## Dataset Categories
 
-The project includes analysis tools for the following datasets (code continuously updated):
+The project organizes datasets into two main categories based on their evaluation approach:
 
-### 🔍 **WinoBias**
+### 📋 **Constrained Form Datasets**
+These datasets use structured, constrained evaluation methods with predefined prompts, questions, or sentence pairs for bias detection.
+
+#### 🔍 **WinoBias**
 - **Purpose**: Gender bias detection in coreference resolution
 - **Analysis**: Differential bias metrics, representativeness bias, statistical analysis
 - **Files**: `analyze_winobias_differential_matric_bias.py`, `analyze_winobias_representativeness_bias.py`, `analyze_winobias_stats.py`
 
-### 🧠 **BBQ (Bias Benchmark for Question Answering)**
+#### 🧠 **BBQ (Bias Benchmark for Question Answering)**
 - **Purpose**: Bias evaluation in question-answering systems
 - **Analysis**: Multi-dimensional bias detection across various demographic groups
 - **Status**: Code continuously updated
 
-### 🎯 **CrowS-Pairs**
+#### 🎯 **CrowS-Pairs**
 - **Purpose**: Stereotype detection in language models
 - **Analysis**: Stereotype identification and measurement
 - **Status**: Code continuously updated
 
-### 🤖 **TrustGPT**
-- **Purpose**: Trustworthiness and safety evaluation
-- **Analysis**: Safety metrics, trust scoring, visualization tools
-- **Status**: Code continuously updated
-
-### ⚠️ **RealToxicityPrompts**
-- **Purpose**: Toxicity detection and analysis
-- **Analysis**: Toxicity scoring, prompt analysis, safety evaluation
-- **Status**: Code continuously updated
-
-### 📊 **StereoSet**
+#### 📊 **StereoSet**
 - **Purpose**: Stereotype detection and measurement
 - **Analysis**: Stereotype identification, bias quantification
 - **Status**: Code continuously updated
 
-### 🔄 **UnQover**
+#### 🔄 **UnQover**
 - **Purpose**: Question generation bias analysis
 - **Analysis**: Bias detection in question generation systems
 - **Status**: Code continuously updated
 
-### 🌐 **HolisticBias**
+#### 🌐 **HolisticBias**
 - **Purpose**: Comprehensive bias evaluation framework
 - **Analysis**: Multi-dimensional bias assessment
 - **Status**: Code continuously updated
 
-### 🎭 **HONEST**
-- **Purpose**: Hate speech and offensive content detection
-- **Analysis**: Content moderation, bias detection
-- **Status**: Code continuously updated
-
-### 🔍 **Grep-BiasIR**
+#### 🔍 **Grep-BiasIR**
 - **Purpose**: Information retrieval bias analysis
 - **Analysis**: Search result bias detection
 - **Status**: Code continuously updated
 
-### 📝 **GAP**
+#### 📝 **GAP**
 - **Purpose**: Gender bias in coreference resolution
 - **Analysis**: Gender-specific bias metrics
 - **Status**: Code continuously updated
 
-### 🌍 **EEC (Equity Evaluation Corpus)**
+#### 🌍 **EEC (Equity Evaluation Corpus)**
 - **Purpose**: Equity and fairness evaluation
 - **Analysis**: Multi-dimensional fairness metrics
 - **Status**: Code continuously updated
 
-### 🎯 **Bias-NLI**
+#### 🎯 **Bias-NLI**
 - **Purpose**: Natural language inference bias detection
 - **Analysis**: Inference bias measurement
 - **Status**: Code continuously updated
 
-### 🎨 **BOLD**
+#### 🎨 **BOLD**
 - **Purpose**: Bias in open-ended language generation
 - **Analysis**: Generation bias detection and measurement
 - **Status**: Code continuously updated
 
-### 🧮 **RedditBias**
+#### 🧮 **RedditBias**
 - **Purpose**: Social media bias analysis
 - **Analysis**: Platform-specific bias detection
+- **Status**: Code continuously updated
+
+### 🚀 **Open-Ended Datasets**
+These datasets evaluate bias through open-ended generation tasks, allowing models to produce free-form text responses.
+
+#### 🎨 **BOLD**
+- **Purpose**: Bias in open-ended language generation
+- **Analysis**: Generation bias detection and measurement
+- **Status**: Code continuously updated
+
+#### ⚠️ **RealToxicityPrompts**
+- **Purpose**: Toxicity detection and analysis
+- **Analysis**: Toxicity scoring, prompt analysis, safety evaluation
+- **Status**: Code continuously updated
+
+#### 🎭 **HONEST**
+- **Purpose**: Hate speech and offensive content detection
+- **Analysis**: Content moderation, bias detection
+- **Status**: Code continuously updated
+
+#### 🤖 **TrustGPT**
+- **Purpose**: Trustworthiness and safety evaluation
+- **Analysis**: Safety metrics, trust scoring, visualization tools
 - **Status**: Code continuously updated
 
 ## Core Analysis Tools
@@ -162,38 +173,42 @@ print(results)
 
 ```python
 # WinoBias analysis
-python WinoBias/analyze_winobias_differential_matric_bias.py
+python constrained_form/WinoBias/analyze_winobias_differential_matric_bias.py
 
 # BBQ analysis
-python BBQ/analyze_bbq_bias.py
+python constrained_form/BBQ/analyze_bbq_bias.py
 
 # TrustGPT analysis
-python TrustGPT/analyze_trustgpt.py
+python open_ended/TrustGPT/analyze_trustgpt.py
 ```
 
 ## Project Structure
 
 ```
 Fairness-in-Large-Language-Models/
-├── WinoBias/                 # Gender bias analysis tools
-├── BBQ/                      # Question answering bias evaluation
-├── CrowS-Pairs/             # Stereotype detection
-├── TrustGPT/                # Trustworthiness evaluation
-├── RealToxicityPrompts/     # Toxicity analysis
-├── StereoSet/               # Stereotype measurement
-├── UnQover/                 # Question generation bias
-├── HolisticBias/            # Comprehensive bias framework
-├── HONEST/                  # Hate speech detection
-├── Grep-BiasIR/             # Information retrieval bias
-├── GAP/                     # Coreference bias
-├── EEC/                     # Equity evaluation
-├── Bias-NLI/                # Natural language inference bias
-├── BOLD/                    # Generation bias
-├── RedditBias/              # Social media bias
-├── gender_polarity.py       # Core gender bias analyzer
-├── text_analysis_pipeline.py # Main analysis pipeline
-├── compat_fix.py            # Compatibility utilities
-└── README.md                # This file
+├── constrained_form/           # Structured evaluation datasets
+│   ├── WinoBias/              # Gender bias analysis tools
+│   ├── Winogender/            # Gender bias detection
+│   ├── GAP/                   # Coreference bias
+│   ├── StereoSet/             # Stereotype measurement
+│   ├── CrowS-Pairs/           # Stereotype detection
+│   ├── RedditBias/            # Social media bias
+│   ├── HolisticBias/          # Comprehensive bias framework
+│   ├── EEC/                   # Equity evaluation
+│   ├── Bias-NLI/              # Natural language inference bias
+│   ├── BBQ/                   # Question answering bias evaluation
+│   ├── UnQover/               # Question generation bias
+│   ├── Grep-BiasIR/           # Information retrieval bias
+│   └── BOLD/                  # Generation bias (constrained)
+├── open_ended/                 # Open-ended generation datasets
+│   ├── BOLD/                  # Generation bias (open-ended)
+│   ├── RealToxicityPrompts/   # Toxicity analysis
+│   ├── HONEST/                # Hate speech detection
+│   └── TrustGPT/              # Trustworthiness evaluation
+├── gender_polarity.py          # Core gender bias analyzer
+├── text_analysis_pipeline.py   # Main analysis pipeline
+├── compat_fix.py               # Compatibility utilities
+└── README.md                   # This file
 ```
 
 ## Contributing

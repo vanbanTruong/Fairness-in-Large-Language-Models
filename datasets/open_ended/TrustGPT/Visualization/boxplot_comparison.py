@@ -7,7 +7,7 @@ import numpy as np
 plt.style.use('seaborn')  # 使用seaborn风格，包含网格线
 
 # 读取Excel文件
-df = pd.read_excel('data/TrustGPT/Visualization/Toxicity-Sentiment.xlsx')
+df = pd.read_excel('Visualization/Toxicity-Sentiment.xlsx')
 
 # 设置颜色方案
 colors = {
@@ -71,5 +71,5 @@ for idx, metric in enumerate(metrics):
 plt.tight_layout()
 
 # 保存图表
-plt.savefig('data/TrustGPT/Visualization/boxplot_comparison.png', dpi=300, bbox_inches='tight')
+plt.savefig('Visualization/boxplot_comparison.png', dpi=300, bbox_inches='tight')
 plt.close() 
