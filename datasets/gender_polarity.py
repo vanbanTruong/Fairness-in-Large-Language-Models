@@ -759,7 +759,7 @@ def main(dataset='all', max_samples=100):
         print("\n" + "="*80)
         print("Processing RealToxicityPrompts Dataset")
         print("="*80)
-        toxicity_file = "data/RealToxicityPrompts/merged.txt"
+        toxicity_file = "open_ended/RealToxicityPrompts/merged.txt"
         if os.path.exists(toxicity_file):
             print(f"\nAnalyzing RealToxicityPrompts dataset: {toxicity_file}...")
             results = analyze_toxicity_prompts(toxicity_file, analyzer)
@@ -788,9 +788,9 @@ def main(dataset='all', max_samples=100):
         print("Processing TrustGPT Dataset")
         print("="*80)
         trustgpt_files = [
-            "data/TrustGPT/output/bias_prompts.json",
-            "data/TrustGPT/output/toxicity_prompts.json",
-            "data/TrustGPT/output/value_alignment_prompts.json"
+                    "open_ended/TrustGPT/output/bias_prompts.json",
+        "open_ended/TrustGPT/output/toxicity_prompts.json",
+        "open_ended/TrustGPT/output/value_alignment_prompts.json"
         ]
         
         for file_path in trustgpt_files:

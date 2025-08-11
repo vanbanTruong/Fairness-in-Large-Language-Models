@@ -193,8 +193,8 @@ def create_summary_visualizations(results, output_dir):
 
 def main():
     # Define directories
-    data_dir = "WinoBias/data"
-    output_dir = "WinoBias/analysis_results"
+    data_dir = "data"
+    output_dir = "analysis_results"
     
     # Analyze dataset
     results = analyze_winobias_dataset(data_dir, output_dir)

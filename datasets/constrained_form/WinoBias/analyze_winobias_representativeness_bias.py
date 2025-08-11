@@ -87,13 +87,13 @@ def create_visualizations(winobias_dist, bls_dist, kl_divergence):
                 ha='center', fontsize=20, bbox=dict(facecolor='white', alpha=0.8))
     
     plt.tight_layout()
-    plt.savefig('WinoBias/visualization/winobias_analysis.png', dpi=300, bbox_inches='tight')
+    plt.savefig('visualization/winobias_analysis.png', dpi=300, bbox_inches='tight')
     plt.close()
 
 def main():
     # Read occupations from WinoBias
-    male_occupations = read_occupations('WinoBias/data/male_occupations.txt')
-    female_occupations = read_occupations('WinoBias/data/female_occupations.txt')
+    male_occupations = read_occupations('data/male_occupations.txt')
+    female_occupations = read_occupations('data/female_occupations.txt')
     
     # Calculate WinoBias distribution (PD)
     all_occupations = male_occupations + female_occupations
