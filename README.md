@@ -4,23 +4,23 @@ This ongoing project aims to consolidate interesting efforts in the field of fai
 
 **Disclaimer: We may have missed some relevant papers in the list. If you have suggestions or want to add papers, please submit a pull request or email us—your contributions are greatly appreciated!**
 
-**Tutorial:** [Fairness in Large Language Models: A Tutorial](https://fairness-llms-tutorial.github.io)<br>
+**Tutorial:** [Fairness in Language Models: A Tutorial](https://fairness-llms-tutorial.github.io)<br>
 Zichong Wang, Avash Palikhe, Zhipeng Yin, Jiale Zhang and Wenbin Zhang<br>
 *The 34<sup>th</sup> International Joint Conference on Artificial Intelligence (IJCAI), Montreal, Canada, 2025*
 
-**Fairness in LLMs:** [Fairness in Large Language Models: A Taxonomic Survey](https://dl.acm.org/doi/abs/10.1145/3682112.3682117)<br>
+**Fairness in LMs:** [Fairness in Large Language Models: A Taxonomic Survey](https://dl.acm.org/doi/abs/10.1145/3682112.3682117)<br>
 Zhibo Chu, Zichong Wang and Wenbin Zhang<br>
 *ACM SIGKDD Explorations Newsletter, 2024*
 
-**Introduction to LLMs:** [History, Development, and Principles of Large Language Models-An Introductory Survey
+**Introduction to LMs:** [History, Development, and Principles of Large Language Models-An Introductory Survey
 ](https://arxiv.org/abs/2402.06853)<br>
 Zichong Wang, Zhibo Chu, Thang Viet Doan, Shiwen Ni, Min Yang and Wenbin Zhang<br>
 *AI and Ethics, 2024*
 
-**Fairness Definitions in LLMs:** [Fairness Definitions in Language Models Explained](https://arxiv.org/abs/2407.18454)<br>
+**Fairness Definitions in LMs:** [Fairness Definitions in Language Models Explained](https://arxiv.org/abs/2407.18454)<br>
 Avash Palikhe, Zichong Wang, Zhipeng Yin and Wenbin Zhang
 
-**Datasets for Fairness in LLMs:** [Datasets for Fairness in Language Models: An In-Depth Survey](https://arxiv.org/abs/2506.23411)<br>
+**Datasets for Fairness in LMs:** [Datasets for Fairness in Language Models: An In-Depth Survey](https://arxiv.org/abs/2506.23411)<br>
 Jiale Zhang, Zichong Wang, Avash Palikhe, Zhipeng Yin and Wenbin Zhang
 
 
