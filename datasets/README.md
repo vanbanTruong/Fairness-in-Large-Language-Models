@@ -4,7 +4,8 @@ This is the artifact for the paper **[Datasets for Fairness in Language Models: 
 
 ## Overview
 
-This project provides a robust framework for detecting and analyzing various types of bias in language models, including gender bias, racial bias, occupational bias, and other forms of social bias. It includes multiple analysis pipelines, visualization tools, and evaluation metrics to help researchers and practitioners understand and mitigate bias in their language models.
+This repository implements the dataset taxonomy, benchmarks, and evaluation pipelines described in the paper **Datasets for Fairness in Language Models: An In-Depth Survey** ([arXiv:2506.23411](https://arxiv.org/abs/2506.23411)). It provides tools to reproduce the paper’s dataset curation, run standardized fairness analyses, and inspect dataset properties across tasks and languages.
+
 
 ## Features
 
