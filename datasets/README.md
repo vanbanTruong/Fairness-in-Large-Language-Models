@@ -227,11 +227,11 @@ We welcome contributions to improve bias detection methods and add support for n
 If you use this toolkit in your research, please cite:
 
 ```bibtex
-@misc{fairness_llm_toolkit,
-  title={Fairness in Large Language Models: A Comprehensive Bias Analysis Toolkit},
-  author={Your Name},
-  year={2024},
-  url={https://github.com/yourusername/fairness-llm-toolkit}
+@article{zhang2025datasets,
+  title={Datasets for Fairness in Language Models: An In-Depth Survey},
+  author={Zhang, Jiale and Wang, Zichong and Palikhe, Avash and Yin, Zhipeng and Zhang, Wenbin},
+  journal={arXiv preprint arXiv:2506.23411},
+  year={2025}
 }
 ```
 
