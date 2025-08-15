@@ -1,6 +1,6 @@
 # Datasets for Fairness and Bias Evaluation in Language Models
 
-A comprehensive toolkit for analyzing and evaluating fairness, bias, and representativeness in Large Language Models (LLMs) across multiple datasets and evaluation metrics.
+This is the artifact for the paper **[Datasets for Fairness in Language Models: An In-Depth Survey](https://arxiv.org/abs/2506.23411)**. This artifact aggregates and systematizes benchmark datasets used to evaluate fairness and social bias in language models (LMs). It provides a unified taxonomy and rich metadata describing each dataset’s structure, provenance, language coverage, bias types, and accessibility, together with reproducible code and standardized evaluation pipelines to support transparent, comparable fairness audits across models and tasks.
 
 ## Overview
 
