@@ -4,7 +4,7 @@ This is the artifact for the paper **[Datasets for Fairness in Language Models: 
 
 ## Overview
 
-This repository implements the dataset taxonomy, benchmarks, and evaluation pipelines described in the paper **Datasets for Fairness in Language Models: An In-Depth Survey** ([arXiv:2506.23411](https://arxiv.org/abs/2506.23411)). It provides tools to reproduce the paper’s dataset curation, run standardized fairness analyses, and inspect dataset properties across tasks and languages.
+This repository implements the dataset taxonomy, benchmarks, and evaluation pipelines described in the paper **[Datasets for Fairness in Language Models: An In-Depth Survey](https://arxiv.org/abs/2506.23411)**. It provides tools to reproduce the paper’s dataset curation, run standardized fairness analyses, and inspect dataset properties across tasks and languages.
 
 
 ## Features
