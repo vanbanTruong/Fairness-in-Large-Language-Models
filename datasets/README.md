@@ -6,132 +6,114 @@ This is the artifact for the paper **[Datasets for Fairness in Language Models: 
 
 This repository implements the dataset taxonomy, benchmarks, and evaluation pipelines described in the paper **[Datasets for Fairness in Language Models: An In-Depth Survey](https://arxiv.org/abs/2506.23411)**. It provides tools to reproduce the paper’s dataset curation, run standardized fairness analyses, and inspect dataset properties across tasks and languages.
 
+## Research Contributions
 
-## Features
+This survey paper makes three key contributions to the field of language model fairness evaluation:
 
-- **Multi-Dataset Support**: Comprehensive coverage of bias evaluation datasets
-- **Multiple Analysis Methods**: Various bias detection and measurement techniques
-- **Visualization Tools**: Interactive charts and graphs for bias analysis results
-- **Pipeline Architecture**: Modular design for easy integration and extension
-- **Gender Polarity Analysis**: Advanced gender bias detection using word embeddings
-- **Sentiment and Toxicity Analysis**: Multi-dimensional text analysis capabilities
+1. **Systematic Organization of Fairness Benchmarks**: A two-way taxonomy distinguishing between constrained-form and open-ended evaluation datasets, clarifying how dataset format shapes fairness findings.
 
-## Dataset Categories
+2. **Unified Framework for Evaluating Dataset-Level Bias**: A comprehensive analysis pipeline enabling consistent, task-agnostic evaluation of dataset-level biases through standardized statistical estimators.
 
-The project organizes datasets into two main categories based on their evaluation approach:
+3. **Dataset-Specific Findings and Research Outlook**: Identification of both explicit and subtle forms of bias, revealing persistent identity-linked associations and highlighting key areas for advancement.
 
-### 📋 **Constrained Form Datasets**
-These datasets use structured, constrained evaluation methods with predefined prompts, questions, or sentence pairs for bias detection.
+## Dataset Taxonomy
 
-#### 🔍 **WinoBias**
-- **Purpose**: Gender bias detection in coreference resolution
-- **Analysis**: Differential bias metrics, representativeness bias, statistical analysis
-- **Files**: `analyze_winobias_differential_matric_bias.py`, `analyze_winobias_representativeness_bias.py`, `analyze_winobias_stats.py`
+Our taxonomy organizes fairness datasets along two primary dimensions:
 
-#### 🧠 **BBQ (Bias Benchmark for Question Answering)**
-- **Purpose**: Bias evaluation in question-answering systems
-- **Analysis**: Multi-dimensional bias detection across various demographic groups
-- **Status**: Code continuously updated
+### 1. Structural Families
 
-#### 🎯 **CrowS-Pairs**
-- **Purpose**: Stereotype detection in language models
-- **Analysis**: Stereotype identification and measurement
-- **Status**: Code continuously updated
+#### 📋 **Constrained-Form Evaluation Datasets**
+Datasets requiring models to select or rank from predefined outputs, enabling clear, quantifiable bias measures.
 
-#### 📊 **StereoSet**
-- **Purpose**: Stereotype detection and measurement
-- **Analysis**: Stereotype identification, bias quantification
-- **Status**: Code continuously updated
+**Coreference and Pronoun Resolution**
+- **WinoBias**: Gender bias detection in coreference resolution with minimally contrasted sentence pairs
+- **Winogender**: Gender-occupation association bias through template-based sentences
+- **GAP**: Gender bias in coreference resolution with natural text examples
 
-#### 🔄 **UnQover**
-- **Purpose**: Question generation bias analysis
-- **Analysis**: Bias detection in question generation systems
-- **Status**: Code continuously updated
+**Sentence-Likelihood Counterfactuals**
+- **StereoSet**: Stereotype measurement through sentence pair comparisons
+- **CrowS-Pairs**: Crowdsourced stereotype detection in natural language
+- **RedditBias**: Social media bias analysis across multiple demographic dimensions
+- **HolisticBias**: Comprehensive bias evaluation framework with controlled templates
 
-#### 🌐 **HolisticBias**
-- **Purpose**: Comprehensive bias evaluation framework
-- **Analysis**: Multi-dimensional bias assessment
-- **Status**: Code continuously updated
+**Classification-based Bias**
+- **EEC (Equity Evaluation Corpus)**: Multi-dimensional fairness metrics for classification tasks
+- **Bias-NLI**: Natural language inference bias detection and measurement
 
-#### 🔍 **Grep-BiasIR**
-- **Purpose**: Information retrieval bias analysis
-- **Analysis**: Search result bias detection
-- **Status**: Code continuously updated
+**Multiple-Choice Question Answering**
+- **BBQ (Bias Benchmark for Question Answering)**: Expert-annotated bias evaluation across nine demographic categories
+- **UnQover**: Question generation bias analysis through underspecified prompts
 
-#### 📝 **GAP**
-- **Purpose**: Gender bias in coreference resolution
-- **Analysis**: Gender-specific bias metrics
-- **Status**: Code continuously updated
+**Information Retrieval Bias**
+- **Grep-BiasIR**: Search result bias detection and ranking fairness evaluation
 
-#### 🌍 **EEC (Equity Evaluation Corpus)**
-- **Purpose**: Equity and fairness evaluation
-- **Analysis**: Multi-dimensional fairness metrics
-- **Status**: Code continuously updated
+#### 🚀 **Open-Ended Evaluation Datasets**
+Datasets requiring models to generate free-form text, capturing emergent biases in unconstrained content generation.
 
-#### 🎯 **Bias-NLI**
-- **Purpose**: Natural language inference bias detection
-- **Analysis**: Inference bias measurement
-- **Status**: Code continuously updated
+- **BOLD**: Bias in open-ended language generation across multiple demographic dimensions
+- **RealToxicityPrompts**: Toxicity detection and analysis in generated content
+- **HONEST**: Hate speech and offensive content detection in multiple languages
+- **TrustGPT**: Trustworthiness and safety evaluation in AI-generated responses
 
-#### 🎨 **BOLD**
-- **Purpose**: Bias in open-ended language generation
-- **Analysis**: Generation bias detection and measurement
-- **Status**: Code continuously updated
+### 2. Attribute Dimensions
 
-#### 🧮 **RedditBias**
-- **Purpose**: Social media bias analysis
-- **Analysis**: Platform-specific bias detection
-- **Status**: Code continuously updated
+Each dataset is characterized along four orthogonal axes:
 
-### 🚀 **Open-Ended Datasets**
-These datasets evaluate bias through open-ended generation tasks, allowing models to produce free-form text responses.
+- **Source**: Template-based, natural text, crowdsourced, or AI-generated
+- **Linguistic Coverage**: Monolingual (primarily English) vs. multilingual support
+- **Bias Typology**: Demographic characteristics (gender, race, religion, etc.) and dataset construction factors
+- **Accessibility**: Public availability and licensing terms
 
-#### 🎨 **BOLD**
-- **Purpose**: Bias in open-ended language generation
-- **Analysis**: Generation bias detection and measurement
-- **Status**: Code continuously updated
+## Bias Analysis Framework
 
-#### ⚠️ **RealToxicityPrompts**
-- **Purpose**: Toxicity detection and analysis
-- **Analysis**: Toxicity scoring, prompt analysis, safety evaluation
-- **Status**: Code continuously updated
+Our unified framework identifies and quantifies four types of dataset-level bias:
 
-#### 🎭 **HONEST**
-- **Purpose**: Hate speech and offensive content detection
-- **Analysis**: Content moderation, bias detection
-- **Status**: Code continuously updated
+### 1. **Representativeness Bias** (Brep)
+Measures divergence between dataset and population distributions using Kullback-Leibler divergence:
+```
+Brep = DKL(PD(A) || PP(A))
+```
 
-#### 🤖 **TrustGPT**
-- **Purpose**: Trustworthiness and safety evaluation
-- **Analysis**: Safety metrics, trust scoring, visualization tools
-- **Status**: Code continuously updated
+### 2. **Annotation Bias** (Bann)
+Quantifies systematic differences in labeling outcomes across demographic groups:
+```
+Bann = max |E[gθ(x) | A = a1] - E[gθ(x) | A = a2]|
+```
+
+### 3. **Stereotype Leakage**
+Uses information-theoretic measures (PMI and MI) to detect implicit associations between demographic descriptors and traits.
+
+### 4. **Differential Metric Bias**
+Identifies systematic performance disparities across protected attributes in evaluation metrics.
 
 ## Core Analysis Tools
 
 ### Gender Polarity Analyzer (`gender_polarity.py`)
+Advanced gender bias detection using multiple methodologies:
 - **Unigram Matching**: Count-based gender bias detection
 - **Gender-Max**: Maximum gender polarization analysis
 - **Gender-Wavg**: Weighted average gender polarity
 - **Word Embedding Integration**: Support for various embedding models
 
 ### Text Analysis Pipeline (`text_analysis_pipeline.py`)
+Comprehensive text analysis capabilities:
 - **Sentiment Analysis**: VADER-based sentiment scoring
 - **Toxicity Detection**: Google Perspective API integration
 - **Regard Analysis**: BERT-based regard classification
 - **Gender Bias Analysis**: Integrated gender polarity detection
 
-### Analysis Utilities
-- **Visualization Tools**: Matplotlib-based chart generation
-- **Data Export**: CSV and JSON output formats
-- **Batch Processing**: Efficient handling of large datasets
-- **Compatibility Fixes**: Cross-platform compatibility solutions
+### Dataset-Specific Analysis Scripts
+Each dataset includes specialized analysis tools:
+- **WinoBias**: `analyze_winobias_differential_matric_bias.py`, `analyze_winobias_representativeness_bias.py`
+- **BBQ**: Multi-dimensional bias detection across demographic groups
+- **TrustGPT**: Safety metrics and trust scoring with visualization tools
 
-## Installation
+## Installation and Setup
 
 ```bash
 # Clone the repository
-git clone <repository-url>
-cd Fairness-in-Large-Language-Models
+git clone https://github.com/vanbanTruong/Fairness-in-Large-Language-Models.git
+cd Fairness-in-Large-Language-Models/datasets
 
 # Install required dependencies
 pip install -r requirements.txt
@@ -140,7 +122,7 @@ pip install -r requirements.txt
 python -c "import nltk; nltk.download('punkt'); nltk.download('stopwords')"
 ```
 
-## Usage
+## Usage Examples
 
 ### Basic Gender Bias Analysis
 
@@ -150,7 +132,7 @@ from gender_polarity import GenderPolarityAnalyzer
 # Initialize analyzer
 analyzer = GenderPolarityAnalyzer()
 
-# Analyze text
+# Analyze text for gender bias
 text = "The doctor went to his office."
 results = analyzer.analyze_text(text)
 print(results)
@@ -172,32 +154,32 @@ print(results)
 
 ### Dataset-Specific Analysis
 
-```python
+```bash
 # WinoBias analysis
 python constrained_form/WinoBias/analyze_winobias_differential_matric_bias.py
 
-# BBQ analysis
+# BBQ bias evaluation
 python constrained_form/BBQ/analyze_bbq_bias.py
 
-# TrustGPT analysis
+# TrustGPT safety analysis
 python open_ended/TrustGPT/analyze_trustgpt.py
 ```
 
 ## Project Structure
 
 ```
-Fairness-in-Large-Language-Models/
+datasets/
 ├── constrained_form/           # Structured evaluation datasets
-│   ├── WinoBias/              # Gender bias analysis tools
-│   ├── Winogender/            # Gender bias detection
-│   ├── GAP/                   # Coreference bias
+│   ├── WinoBias/              # Gender bias in coreference resolution
+│   ├── Winogender/            # Gender-occupation associations
+│   ├── GAP/                   # Coreference bias evaluation
 │   ├── StereoSet/             # Stereotype measurement
-│   ├── CrowS-Pairs/           # Stereotype detection
-│   ├── RedditBias/            # Social media bias
+│   ├── CrowS-Pairs/           # Crowdsourced stereotype detection
+│   ├── RedditBias/            # Social media bias analysis
 │   ├── HolisticBias/          # Comprehensive bias framework
-│   ├── EEC/                   # Equity evaluation
+│   ├── EEC/                   # Equity evaluation corpus
 │   ├── Bias-NLI/              # Natural language inference bias
-│   ├── BBQ/                   # Question answering bias evaluation
+│   ├── BBQ/                   # Question answering bias benchmark
 │   ├── UnQover/               # Question generation bias
 │   ├── Grep-BiasIR/           # Information retrieval bias
 │   └── BOLD/                  # Generation bias (constrained)
@@ -212,16 +194,28 @@ Fairness-in-Large-Language-Models/
 └── README.md                   # This file
 ```
 
+## Key Findings
+
+Our analysis of 16 popular fairness datasets reveals:
+
+- **Persistent Identity-Linked Associations**: Even under controlled conditions, models exhibit systematic biases
+- **Annotation Inconsistencies**: Human and automated labeling functions show systematic demographic disparities
+- **Representation Gaps**: Significant underrepresentation of marginalized groups in benchmark datasets
+- **Cross-Dataset Patterns**: Consistent bias patterns emerge across different evaluation approaches
+
+## Future Research Directions
+
+The survey identifies critical areas for advancement:
+
+1. **Multilingual Expansion**: Broader coverage beyond English-centric evaluations
+2. **Intersectional Analysis**: Moving beyond single-attribute bias detection
+3. **Community-Informed Governance**: Incorporating diverse perspectives in dataset design
+4. **Low-Resource Settings**: Improving fairness metrics for underrepresented languages and cultures
+
 ## Contributing
 
-We welcome contributions to improve bias detection methods and add support for new datasets. Please note that **all dataset analysis code is continuously updated** to maintain accuracy and incorporate the latest research findings.
+We welcome contributions to improve bias detection methods and add support for new datasets. Please note that **all dataset analysis code is currently being continuously updated** to maintain accuracy and incorporate the latest research findings.
 
-### Areas for Contribution
-- New bias detection algorithms
-- Additional dataset support
-- Improved visualization tools
-- Performance optimizations
-- Documentation improvements
 
 ## Citation
 
@@ -238,19 +232,8 @@ If you use this toolkit in your research, please cite:
 
 ## License
 
-This project is licensed under the MIT License - see the LICENSE file in each dataset directory for specific licensing information.
-
-## Acknowledgments
-
-- Dataset creators and maintainers
-- Research community contributions
-- Open-source bias detection tools
-- Academic institutions supporting fairness research
-
-## Contact
-
-For questions, suggestions, or contributions, please open an issue on GitHub or contact the maintainers.
+This project is licensed under the MIT License. See the LICENSE file in each dataset directory for specific licensing information.
 
 ---
 
-**Note**: This toolkit is actively maintained with **continuous updates** to all dataset analysis code to ensure accuracy, performance, and compatibility with the latest research in bias detection and fairness evaluation.
+**Note**: This toolkit is actively maintained with **continuous updates** to all dataset analysis code to ensure accuracy, performance, and compatibility with the latest research in bias detection and fairness evaluation. The unified taxonomy and analysis framework presented here enables researchers to conduct more systematic, comparable, and responsible fairness audits across language models and tasks.
