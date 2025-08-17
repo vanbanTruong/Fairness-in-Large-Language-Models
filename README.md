@@ -44,6 +44,11 @@ Email: ziwang@fiu.edu - Zichong Wang<br>
 ![Fairness in Large Language Models](https://github.com/super-hash/Fairness-in-Large-Language-Models/blob/main/tutorial/images/Fairness%20in%20Large%20Language%20Models.png)
 
 ## Quantifying Bias in LMs ([Link](https://arxiv.org/pdf/2407.18454) to the paper)
+> <div align="justify">
+> 
+> This repository systematizes fairness definitions and bias quantification methods for language models across different transformer architectures. It provides a comprehensive taxonomy that categorizes fairness notions based on encoder-only, decoder-only, and encoder-decoder model types, together with clear mathematical formulations, empirical demonstrations, and practical implementation guidelines to support consistent and architecture-appropriate fairness evaluations in language model research.
+> 
+> </div>
 <!-- ![Fairness Definitions in LMs](https://github.com/user-attachments/assets/884f134c-ee31-4c03-9487-2907738b77f8) -->
 ![Fairness Definitions in LMs](tutorial/images/Fairness%20definitions%20for%20LMs.jpg)
 
