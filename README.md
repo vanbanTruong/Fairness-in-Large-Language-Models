@@ -22,7 +22,7 @@ Zhibo Chu, Zichong Wang and Wenbin Zhang<br>
 **Datasets for Fairness in LMs:** [Datasets for Fairness in Language Models: An In-Depth Survey](https://arxiv.org/abs/2506.23411)<br>
 Jiale Zhang, Zichong Wang, Avash Palikhe, Zhipeng Yin and Wenbin Zhang
 
-**Fairness in Language Model Papers Collection:** [This repository systematically collects and organizes research papers across all aspects of fairness in language models, providing a comprehensive bibliography that spans bias detection, quantification, mitigation, and evaluation methodologies to support researchers in navigating the rapidly expanding literature in this field.](https://github.com/vanbanTruong/Fairness-in-Large-Language-Models/tree/main/papers)
+**Fairness in Language Model Papers Collection:** This [repository](https://github.com/vanbanTruong/Fairness-in-Large-Language-Models/tree/main/papers) systematically collects and organizes research papers across all aspects of fairness in language models, providing a comprehensive bibliography that spans bias detection, quantification, mitigation, and evaluation methodologies to support researchers in navigating the rapidly expanding literature in this field.
 
 Email: ziwang@fiu.edu - Zichong Wang<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;wenbinzhang2008@gmail.com - Wenbin Zhang<br>
