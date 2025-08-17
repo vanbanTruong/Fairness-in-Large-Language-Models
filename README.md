@@ -39,7 +39,7 @@ Email: ziwang@fiu.edu - Zichong Wang<br>
 
 ---
 
-## Introduction to LMs ([Link](https://link.springer.com/article/10.1007/s43681-024-00583-7) to the paper)
+## Introduction to LMs ([Link](https://link.springer.com/article/10.1007/s43681-024-00583-7) to the repository)
 > <div align="justify">
 > 
 > This repository provides a comprehensive and accessible introduction to language models, tracing their evolution from statistical language models to contemporary large language models across different transformer architectures. It offers clear explanations of fundamental principles, mathematical foundations, and key developmental milestones, with particular focus on encoder-only, decoder-only, and encoder-decoder architectures that define modern language modeling. The resource includes historical context, theoretical background, and practical insights designed to help practitioners and researchers understand the progression from N-grams and Word2vec to transformer-based architectures like BERT, GPT, and modern LLMs, together with educational materials and code examples to support learning and implementation across all major architectural paradigms.
@@ -48,7 +48,12 @@ Email: ziwang@fiu.edu - Zichong Wang<br>
 ![Fairness in Large Language Models](https://github.com/vanbanTruong/Fairness-in-Large-Language-Models/blob/main/tutorial/images/Introduction_to_LMs.png)
 
 
-## Fairness in LMs ([Link](https://dl.acm.org/doi/abs/10.1145/3682112.3682117) to the paper)
+## Fairness in LMs ([Link](https://dl.acm.org/doi/abs/10.1145/3682112.3682117) to the repository)
+> <div align="justify">
+> 
+> This repository presents a comprehensive framework for understanding and addressing fairness in large language models across the entire machine learning pipeline. It systematizes bias quantification methods, mitigation techniques, and evaluation resources, covering approaches from pre-processing data augmentation and prompt tuning to post-processing methods like chain of thought and rewriting. The resource includes detailed taxonomies of fairness metrics spanning embedding-based, probability-based, and generation-based approaches, together with practical toolkits, benchmark datasets, and implementation guidelines to support researchers and practitioners in developing more equitable language model systems throughout all stages of model development and deployment.
+> 
+> </div>
 ![Fairness in Large Language Models](https://github.com/super-hash/Fairness-in-Large-Language-Models/blob/main/tutorial/images/Fairness%20in%20Large%20Language%20Models.png)
 
 ## Quantifying Bias in LMs ([Link](https://github.com/vanbanTruong/Fairness-in-Large-Language-Models/tree/main/definitions) to the repository)
