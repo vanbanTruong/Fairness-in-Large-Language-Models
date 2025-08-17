@@ -53,7 +53,7 @@ Email: ziwang@fiu.edu - Zichong Wang<br>
 
 > <div align="justify">
 > 
-> The datasets examined in this survey represent the most widely used fairness evaluation resources in current language model research. We systematically analyze these benchmarks along multiple dimensions, including their construction methodology, demographic coverage, and evaluation scope. Our analysis reveals significant variation in how these datasets operationalize fairness concepts and measure bias across different social groups. The complete taxonomy and detailed characterization of all examined datasets can be found in our comprehensive analysis linked above, which provides researchers with the necessary context to make informed decisions about dataset selection and interpretation. This systematic review highlights both the strengths and limitations of existing fairness evaluation resources, offering guidance for more robust and meaningful fairness assessments in language model research.
+> This artifact aggregates and systematizes benchmark datasets used to evaluate fairness and social bias in language models (LMs). It provides a unified taxonomy and rich metadata describing each dataset’s structure, provenance, language coverage, bias types, and accessibility, together with reproducible code and standardized evaluation pipelines to support transparent, comparable fairness audits across models and tasks.
 > 
 > </div>
 
