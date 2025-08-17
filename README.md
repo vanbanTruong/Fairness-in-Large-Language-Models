@@ -79,21 +79,6 @@ Email: ziwang@fiu.edu - Zichong Wang<br>
 
 
 ## Citation
-### Fairness in Large Language Models: A Taxonomic Survey [![PDF](https://img.shields.io/badge/PDF-Download-red)](https://dl.acm.org/doi/abs/10.1145/3682112.3682117)
-
-If you find that our taxonomic survey helps your research, we would appreciate citations to the following paper:
-```
-@article{chu2024fairness,
-  title={Fairness in Large Language Models: A Taxonomic Survey},
-  author={Chu, Zhibo and Wang, Zichong and Zhang, Wenbin},
-  journal={ACM SIGKDD Explorations Newsletter},
-  volume={26},
-  number={1},
-  pages={34--48},
-  year={2024},
-  publisher={ACM New York, NY, USA}
-}
-```
 
 ### History, Development, and Principles of Large Language Models-An Introductory Survey [![PDF](https://img.shields.io/badge/PDF-Download-red)](https://arxiv.org/pdf/2402.06853)
 
@@ -121,6 +106,23 @@ If you find that our definition survey helps your research, we would appreciate 
 }
 
 ```
+
+### Fairness in Large Language Models: A Taxonomic Survey [![PDF](https://img.shields.io/badge/PDF-Download-red)](https://dl.acm.org/doi/abs/10.1145/3682112.3682117)
+
+If you find that our taxonomic survey helps your research, we would appreciate citations to the following paper:
+```
+@article{chu2024fairness,
+  title={Fairness in Large Language Models: A Taxonomic Survey},
+  author={Chu, Zhibo and Wang, Zichong and Zhang, Wenbin},
+  journal={ACM SIGKDD Explorations Newsletter},
+  volume={26},
+  number={1},
+  pages={34--48},
+  year={2024},
+  publisher={ACM New York, NY, USA}
+}
+```
+
 
 ### Datasets for Fairness in Language Models: An In-Depth Survey [![PDF](https://img.shields.io/badge/PDF-Download-red)](https://arxiv.org/abs/2506.23411)
 
