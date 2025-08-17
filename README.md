@@ -8,7 +8,7 @@ This ongoing project aims to consolidate interesting efforts in the field of fai
 Zichong Wang, Avash Palikhe, Zhipeng Yin, Jiale Zhang and Wenbin Zhang<br>
 *The 34<sup>th</sup> International Joint Conference on Artificial Intelligence (IJCAI), Montreal, Canada, 2025*
 
-**Introduction to LMs:** [History, Development, and Principles of Large Language Models-An Introductory Survey
+**Introduction for LMs:** [History, Development, and Principles of Large Language Models-An Introductory Survey
 ](https://arxiv.org/abs/2402.06853)<br>
 Zichong Wang, Zhibo Chu, Thang Viet Doan, Shiwen Ni, Min Yang and Wenbin Zhang<br>
 *AI and Ethics, 2025*
@@ -30,7 +30,7 @@ Email: ziwang@fiu.edu - Zichong Wang<br>
 ---
 ### 📚 **Contents**
 
-- [Introduction LMs](#introduction-lms-link-to-the-repository)
+- [Introduction for LMs](#introduction-for-lms-link-to-the-repository)
 - [Bias Quantification in LMs](#bias-quantification-in-lms-link-to-the-repository)
 - [Bias Mitigation in LMs](#bias-mitigation-in-lms-link-to-the-repository)
 - [Datasets for Fairness in LMs](#datasets-for-Fairness-in-lMs-link-to-the-repository)
@@ -39,7 +39,7 @@ Email: ziwang@fiu.edu - Zichong Wang<br>
 
 ---
 
-## Introduction LMs ([Link](https://link.springer.com/article/10.1007/s43681-024-00583-7) to the repository)
+## Introduction for LMs ([Link](https://link.springer.com/article/10.1007/s43681-024-00583-7) to the repository)
 > <div align="justify">
 > 
 > This repository provides a comprehensive and accessible introduction to language models, tracing their evolution from statistical language models to contemporary large language models across different transformer architectures. It offers clear explanations of fundamental principles, mathematical foundations, and key developmental milestones, with particular focus on encoder-only, decoder-only, and encoder-decoder architectures that define modern language modeling. The resource includes historical context, theoretical background, and practical insights designed to help practitioners and researchers understand the progression from N-grams and Word2vec to transformer-based architectures like BERT, GPT, and modern LLMs, together with educational materials and code examples to support learning and implementation across all major architectural paradigms.
