@@ -39,8 +39,11 @@ Email: ziwang@fiu.edu - Zichong Wang<br>
 
 ---
 
+## Introduction to LMs ([Link](https://link.springer.com/article/10.1007/s43681-024-00583-7) to the paper)
+![Fairness in Large Language Models](https://github.com/super-hash/Fairness-in-Large-Language-Models/blob/main/tutorial/images/Fairness%20in%20Large%20Language%20Models.png)
 
-## Mitigating Bias in LMs ([Link](https://dl.acm.org/doi/abs/10.1145/3682112.3682117) to the paper)
+
+## Fairness in LMs ([Link](https://dl.acm.org/doi/abs/10.1145/3682112.3682117) to the paper)
 ![Fairness in Large Language Models](https://github.com/super-hash/Fairness-in-Large-Language-Models/blob/main/tutorial/images/Fairness%20in%20Large%20Language%20Models.png)
 
 ## Quantifying Bias in LMs ([Link](https://github.com/vanbanTruong/Fairness-in-Large-Language-Models/tree/main/definitions) to the repository)
