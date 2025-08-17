@@ -39,6 +39,17 @@ Email: ziwang@fiu.edu - Zichong Wang<br>
 
 ---
 
+### 📚 **Fairness in Language papers**
+
+- [Mitigating Bias in LMs](#mitigating-bias-in-lms-link-to-the-paper)
+  - [By Year](#by-year)
+  - [By Category](#by-category)
+- [Quantifying Bias in LMs](#quantifying-bias-in-lms-link-to-the-paper)
+- [Datasets](#datasets)
+- [Citation](#citation)
+
+---
+
 ## Introduction to LMs ([Link](https://link.springer.com/article/10.1007/s43681-024-00583-7) to the repository)
 > <div align="justify">
 > 
