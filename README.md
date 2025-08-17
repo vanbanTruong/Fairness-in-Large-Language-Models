@@ -101,7 +101,7 @@ Email: ziwang@fiu.edu - Zichong Wang<br>
 ## Fairness in Language Model Papers ([Link](https://github.com/vanbanTruong/Fairness-in-Large-Language-Models/tree/main/papers) to the repository)
 > <div align="justify">
 > 
-> This repository aggregates and systematizes benchmark datasets used to evaluate fairness and social bias in language models (LMs). It provides a unified taxonomy and rich metadata describing each dataset’s structure, provenance, language coverage, bias types, and accessibility, together with reproducible code and standardized evaluation pipelines to support transparent, comparable fairness audits across models and tasks.
+> This repository provides a comprehensive collection and systematic organization of research papers focused on fairness in language models. It aggregates academic literature spanning bias detection, fairness evaluation, and mitigation techniques across different model architectures and application domains. The collection includes structured metadata, categorization by research themes, and regular updates to track the evolving landscape of fairness research in natural language processing, serving as a centralized resource for researchers, practitioners, and policymakers working on equitable language model development and deployment.
 > 
 > </div>
 
