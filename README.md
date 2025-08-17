@@ -48,10 +48,10 @@ Email: ziwang@fiu.edu - Zichong Wang<br>
 ![Fairness Definitions in LMs](tutorial/images/Fairness%20definitions%20for%20LMs.jpg)
 
 
-## Datasets ([Link](https://arxiv.org/abs/2506.23411) to the report)
+## Datasets ([Link](https://arxiv.org/abs/2506.23411) to the repository)
 > <div align="justify">
 > 
-> This artifact aggregates and systematizes benchmark datasets used to evaluate fairness and social bias in language models (LMs). It provides a unified taxonomy and rich metadata describing each dataset’s structure, provenance, language coverage, bias types, and accessibility, together with reproducible code and standardized evaluation pipelines to support transparent, comparable fairness audits across models and tasks.
+> This repository aggregates and systematizes benchmark datasets used to evaluate fairness and social bias in language models (LMs). It provides a unified taxonomy and rich metadata describing each dataset’s structure, provenance, language coverage, bias types, and accessibility, together with reproducible code and standardized evaluation pipelines to support transparent, comparable fairness audits across models and tasks.
 > 
 > </div>
 ![Screenshot 2024-10-07 at 1 52 35 PM](https://github.com/vanbanTruong/Fairness-in-Large-Language-Models/blob/main/tutorial/images/datasets_taxonomy.png)
