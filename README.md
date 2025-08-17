@@ -226,28 +226,6 @@ Fairness in these models is evaluated using specific strategies designed to quan
 ## Datasets ([Link](https://arxiv.org/abs/2506.23411) to the report)
 ![Screenshot 2024-10-07 at 1 52 35 PM](https://github.com/vanbanTruong/Fairness-in-Large-Language-Models/blob/main/tutorial/images/datasets_taxonomy.png)
 
-+ [WinoBias](https://github.com/uclanlp/corefBias)
-+ [WinoBias+](https://github.com/vnmssnhv/NeuTralRewriter)
-+ [WinoGender](https://github.com/rudinger/winogender-schemas)
-+ [WinoQueer](https://github.com/katyfelkner/winoqueer)
-+ [BEC-Pro](https://github.com/marionbartl/gender-bias-BERT)
-+ [BUG](https://github.com/SLAB-NLP/BUG)
-+ [GAP](https://github.com/google-research-datasets/gap-coreference)
-+ [StereoSet](https://github.com/moinnadeem/stereoset)
-+ [HONEST](https://github.com/MilaNLProc/honest)
-+ [Bias-NLI](https://github.com/sunipa/On-Measuring-and-Mitigating-Biased-Inferences-of-Word-Embeddings)
-+ [CrowS-Pairs](https://github.com/nyu-mll/crows-pairs/)
-+ [EEC](https://www.svkir.com/resources.html#EEC)
-+ [PANDA](https://github.com/facebookresearch/ResponsibleNLP)
-+ [RedditBias](https://github.com/umanlp/RedditBias)
-+ [TrustGPT](https://github.com/HowieHwong/TrustGPT)
-+ [FairPrism](https://github.com/microsoft/FairPrism)
-+ [BOLD](https://github.com/amazon-science/bold)
-+ [RealToxicityPrompts](https://allenai.org/data/real-toxicity-prompts)
-+ [HolisticBias](https://github.com/facebookresearch/ResponsibleNLP)
-+ [BBQ](https://github.com/nyu-mll/BBQ)
-+ [UnQover](https://github.com/allenai/unqover)
-+ [CEB](https://github.com/SongW-SW/CEB)
 
 
 ## Citation
