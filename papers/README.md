@@ -1,3 +1,15 @@
+**Disclaimer: We may have missed some relevant papers in the list. If you have suggestions or want to add papers, please submit a pull request or email us—your contributions are greatly appreciated!**
+
+---
+### 📚 **Contents**
+- [Fairness in Language Model Papers Collection](#fairness-in-language-model-papers-collection)
+- [By Year](#by-year)
+- [By Category](#by-category)
+
+---
+
+## Fairness in Language Model Papers Collection
+
 ## By Year
 ### 2025
 + Is Your Model Fairly Certain? Uncertainty-Aware Fairness Evaluation for LLMs [[ICML]](https://icml.cc/virtual/2025/poster/44735)
