@@ -224,7 +224,7 @@ Fairness in these models is evaluated using specific strategies designed to quan
   * Is chatgpt fair for recommendation? evaluating fairness in large language model recommendation [[ACM]](https://arxiv.org/pdf/2305.07609) -->
 
 ## Datasets
-![Screenshot 2024-10-07 at 1 52 35 PM](https://github.com/user-attachments/assets/37895985-ccf6-4183-a035-d3238d5eac47)
+![Screenshot 2024-10-07 at 1 52 35 PM](https://github.com/vanbanTruong/Fairness-in-Large-Language-Models/blob/main/tutorial/images/datasets_taxonomy.png)
 
 + [WinoBias](https://github.com/uclanlp/corefBias)
 + [WinoBias+](https://github.com/vnmssnhv/NeuTralRewriter)
