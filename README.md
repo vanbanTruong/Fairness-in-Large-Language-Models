@@ -34,7 +34,7 @@ Email: ziwang@fiu.edu - Zichong Wang<br>
 - [Bias Quantification in LMs](#bias-quantification-in-lms-link-to-the-repository)
 - [Bias Mitigation in LMs](#bias-mitigation-in-lms-link-to-the-repository)
 - [Datasets for Fairness in LMs](#datasets-for-Fairness-in-lMs-link-to-the-repository)
-- [Fairness in Language Model Papers](#fairnessin-language-model-papers-link-to-the-repository)
+- [Fairness in Language Model Papers](#fairness-in-language-model-papers-link-to-the-repository)
 - [Citation](#citation)
 
 ---
