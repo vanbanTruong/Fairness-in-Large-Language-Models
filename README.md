@@ -223,7 +223,7 @@ Fairness in these models is evaluated using specific strategies designed to quan
   * Biasasker: Measuring the bias in conversational ai system [[ACM]](https://arxiv.org/pdf/2305.12434)
   * Is chatgpt fair for recommendation? evaluating fairness in large language model recommendation [[ACM]](https://arxiv.org/pdf/2305.07609) -->
 
-## Datasets
+## Datasets ([Link](https://arxiv.org/abs/2506.23411) to the report)
 ![Screenshot 2024-10-07 at 1 52 35 PM](https://github.com/vanbanTruong/Fairness-in-Large-Language-Models/blob/main/tutorial/images/datasets_taxonomy.png)
 
 + [WinoBias](https://github.com/uclanlp/corefBias)
