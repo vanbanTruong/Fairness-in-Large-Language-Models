@@ -3,8 +3,8 @@
 ---
 ### 📚 **Contents**
 - [Fairness in Language Model Papers Collection](#fairness-in-language-model-papers-collection)
-- [By Year](#by-year)
-- [By Category](#by-category)
+  - [By Year](#by-year)
+  - [By Category](#by-category)
 
 ---
 
