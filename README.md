@@ -43,7 +43,7 @@ Email: ziwang@fiu.edu - Zichong Wang<br>
 ## Mitigating Bias in LMs ([Link](https://dl.acm.org/doi/abs/10.1145/3682112.3682117) to the paper)
 ![Fairness in Large Language Models](https://github.com/super-hash/Fairness-in-Large-Language-Models/blob/main/tutorial/images/Fairness%20in%20Large%20Language%20Models.png)
 
-## Quantifying Bias in LMs ([Link](https://arxiv.org/pdf/2407.18454) to the paper)
+## Quantifying Bias in LMs ([Link](https://github.com/vanbanTruong/Fairness-in-Large-Language-Models/tree/main/definitions) to the repository)
 > <div align="justify">
 > 
 > This repository systematizes fairness definitions and bias quantification methods for language models across different transformer architectures. It provides a comprehensive taxonomy that categorizes fairness notions based on encoder-only, decoder-only, and encoder-decoder model types, together with clear mathematical formulations, empirical demonstrations, and practical implementation guidelines to support consistent and architecture-appropriate fairness evaluations in language model research.
@@ -53,7 +53,7 @@ Email: ziwang@fiu.edu - Zichong Wang<br>
 ![Fairness Definitions in LMs](tutorial/images/Fairness%20definitions%20for%20LMs.jpg)
 
 
-## Datasets ([Link](https://arxiv.org/abs/2506.23411) to the repository)
+## Datasets ([Link](https://github.com/vanbanTruong/Fairness-in-Large-Language-Models/tree/main/datasets) to the repository)
 > <div align="justify">
 > 
 > This repository aggregates and systematizes benchmark datasets used to evaluate fairness and social bias in language models (LMs). It provides a unified taxonomy and rich metadata describing each dataset’s structure, provenance, language coverage, bias types, and accessibility, together with reproducible code and standardized evaluation pipelines to support transparent, comparable fairness audits across models and tasks.
