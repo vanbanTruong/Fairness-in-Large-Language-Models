@@ -2,7 +2,6 @@
 
 This ongoing project aims to consolidate interesting efforts in the field of fairness in Language Models (LMs), drawing on the proposed taxonomy and surveys dedicated to various aspects of fairness in LMs.
 
-**Disclaimer: We may have missed some relevant papers in the list. If you have suggestions or want to add papers, please submit a pull request or email us—your contributions are greatly appreciated!**
 
 **Tutorial:** [Fairness in Language Models: A Tutorial](https://fairness-llms-tutorial.github.io)<br>
 Zichong Wang, Avash Palikhe, Zhipeng Yin, Jiale Zhang and Wenbin Zhang<br>
@@ -23,6 +22,7 @@ Zhibo Chu, Zichong Wang and Wenbin Zhang<br>
 **Datasets for Fairness in LMs:** [Datasets for Fairness in Language Models: An In-Depth Survey](https://arxiv.org/abs/2506.23411)<br>
 Jiale Zhang, Zichong Wang, Avash Palikhe, Zhipeng Yin and Wenbin Zhang
 
+**Fairness in Language Model Papers Collection:** [This repository systematically collects and organizes research papers across all aspects of fairness in language models, providing a comprehensive bibliography that spans bias detection, quantification, mitigation, and evaluation methodologies to support researchers in navigating the rapidly expanding literature in this field.](https://github.com/vanbanTruong/Fairness-in-Large-Language-Models/tree/main/papers)
 
 Email: ziwang@fiu.edu - Zichong Wang<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;wenbinzhang2008@gmail.com - Wenbin Zhang<br>
