@@ -40,6 +40,11 @@ Email: ziwang@fiu.edu - Zichong Wang<br>
 ---
 
 ## Introduction to LMs ([Link](https://link.springer.com/article/10.1007/s43681-024-00583-7) to the paper)
+> <div align="justify">
+> 
+> This repository provides a comprehensive and accessible introduction to language models, tracing their evolution from statistical language models to contemporary large language models across different transformer architectures. It offers clear explanations of fundamental principles, mathematical foundations, and key developmental milestones, with particular focus on encoder-only, decoder-only, and encoder-decoder architectures that define modern language modeling. The resource includes historical context, theoretical background, and practical insights designed to help practitioners and researchers understand the progression from N-grams and Word2vec to transformer-based architectures like BERT, GPT, and modern LLMs, together with educational materials and code examples to support learning and implementation across all major architectural paradigms.
+> 
+> </div>
 ![Fairness in Large Language Models](https://github.com/vanbanTruong/Fairness-in-Large-Language-Models/blob/main/tutorial/images/Introduction_to_LMs.png)
 
 
