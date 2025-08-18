@@ -1,10 +1,8 @@
 # Fairness in Language Model Papers Collection
 
-> <div align="justify">
-> 
-> This repository systematically collects and organizes research papers across all aspects of fairness in language models, providing a comprehensive bibliography that spans bias detection, quantification, mitigation, and evaluation methodologies to support researchers in navigating the rapidly expanding literature in this field.
-> 
-> </div>
+<div align="justify">
+This repository systematically collects and organizes research papers across all aspects of fairness in language models, providing a comprehensive bibliography that spans bias detection, quantification, mitigation, and evaluation methodologies to support researchers in navigating the rapidly expanding literature in this field. 
+</div>
 
 **Disclaimer: We may have missed some relevant papers in the list. If you have suggestions or want to add papers, please submit a pull request or email us, your contributions are greatly appreciated!**
 
