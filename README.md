@@ -84,7 +84,7 @@ Email: ziwang@fiu.edu - Zichong Wang<br>
 > </div>
 
 
-<br><br><br>
+<br><br>
 
 ## Citations
 
@@ -99,7 +99,6 @@ If you find that our introduction survey helps your research, we would appreciat
   year={2024},
   publisher={Springer}
 }
-
 ```
 
 ### Fairness Definitions in Language Models Explained [![PDF](https://img.shields.io/badge/PDF-Download-red)](https://arxiv.org/abs/2407.18454)
@@ -112,7 +111,6 @@ If you find that our definition survey helps your research, we would appreciate 
   journal={arXiv preprint arXiv:2407.18454},
   year={2024}
 }
-
 ```
 
 ### Fairness in Large Language Models: A Taxonomic Survey [![PDF](https://img.shields.io/badge/PDF-Download-red)](https://dl.acm.org/doi/abs/10.1145/3682112.3682117)
