@@ -56,7 +56,7 @@ Email: ziwang@fiu.edu - Zichong Wang<br>
 > </div>
 <!-- ![Fairness Definitions in LMs](https://github.com/user-attachments/assets/884f134c-ee31-4c03-9487-2907738b77f8) -->
 ![Fairness Definitions in LMs](tutorial/images/Fairness%20definitions%20for%20LMs.jpg)
-<br>
+<br><br>
 
 ## Bias Mitigation in LMs ([Link](https://dl.acm.org/doi/abs/10.1145/3682112.3682117) to the repository)
 > <div align="justify">
