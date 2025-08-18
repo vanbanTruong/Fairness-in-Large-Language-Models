@@ -35,7 +35,7 @@ Email: ziwang@fiu.edu - Zichong Wang<br>
 - [Bias Mitigation in LMs](#bias-mitigation-in-lms-link-to-the-repository)
 - [Datasets for Fairness in LMs](#datasets-for-Fairness-in-lMs-link-to-the-repository)
 - [Fairness in Language Model Papers Collection](#fairness-in-language-model-papers-collection-link-to-the-repository)
-- [Citation](#citation)
+- [Citations](#citations)
 
 ---
 
@@ -84,7 +84,7 @@ Email: ziwang@fiu.edu - Zichong Wang<br>
 > </div>
 
 
-## Citation
+## Citations
 
 ### History, Development, and Principles of Large Language Models-An Introductory Survey [![PDF](https://img.shields.io/badge/PDF-Download-red)](https://arxiv.org/pdf/2402.06853)
 
