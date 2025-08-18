@@ -34,7 +34,7 @@ Email: ziwang@fiu.edu - Zichong Wang<br>
 - [Bias Quantification in LMs](#bias-quantification-in-lms-link-to-the-repository)
 - [Bias Mitigation in LMs](#bias-mitigation-in-lms-link-to-the-repository)
 - [Datasets for Fairness in LMs](#datasets-for-Fairness-in-lMs-link-to-the-repository)
-- [Fairness in Language Model Papers Collection](#fairness-in-language-model-papers-collection-link-to-the-repository)
+- [FairLMs Papers Collection](#fairlms-papers-collection-link-to-the-repository)
 - [Citations](#citations)
 
 ---
@@ -76,7 +76,7 @@ Email: ziwang@fiu.edu - Zichong Wang<br>
 ![Screenshot 2024-10-07 at 1 52 35 PM](https://github.com/vanbanTruong/Fairness-in-Large-Language-Models/blob/main/tutorial/images/datasets_taxonomy.png)
 
 
-## Fairness in Language Model Papers Collection ([Link](https://github.com/vanbanTruong/Fairness-in-Large-Language-Models/tree/main/papers) to the repository)
+## FairLMs Papers Collection ([Link](https://github.com/vanbanTruong/Fairness-in-Large-Language-Models/tree/main/papers) to the repository)
 > <div align="justify">
 > 
 > This repository provides a comprehensive collection and systematic organization of research papers focused on fairness in language models. It aggregates academic literature spanning bias detection, fairness evaluation, and mitigation techniques across different model architectures and application domains. The collection includes structured metadata, categorization by research themes, and regular updates to track the evolving landscape of fairness research in natural language processing, serving as a centralized resource for researchers, practitioners, and policymakers working on equitable language model development and deployment.
