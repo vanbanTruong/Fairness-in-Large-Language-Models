@@ -22,7 +22,7 @@ Zhibo Chu, Zichong Wang and Wenbin Zhang<br>
 **Datasets for Fairness in LMs:** [Datasets for Fairness in Language Models: An In-Depth Survey](https://arxiv.org/abs/2506.23411)<br>
 Jiale Zhang, Zichong Wang, Avash Palikhe, Zhipeng Yin and Wenbin Zhang
 
-**FairLMs Papers Collection:** This [repository](https://github.com/vanbanTruong/Fairness-in-Large-Language-Models/tree/main/papers) collects and organizes curated papers on fairness in language models.
+**FairLMs Papers Collection:** This [repository](https://github.com/vanbanTruong/Fairness-in-Large-Language-Models/tree/main/paperCollection) collects and organizes curated papers on fairness in language models.
 
 Email: ziwang@fiu.edu - Zichong Wang<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;wenbinzhang2008@gmail.com - Wenbin Zhang<br>
@@ -76,7 +76,7 @@ Email: ziwang@fiu.edu - Zichong Wang<br>
 ![Screenshot 2024-10-07 at 1 52 35 PM](https://github.com/vanbanTruong/Fairness-in-Large-Language-Models/blob/main/tutorial/images/datasets_taxonomy.png)
 <br><br><br><br>
 
-## FairLMs Papers Collection ([Link](https://github.com/vanbanTruong/Fairness-in-Large-Language-Models/tree/main/papers) to the repository)
+## FairLMs Papers Collection ([Link](https://github.com/vanbanTruong/Fairness-in-Large-Language-Models/tree/main/paperCollection) to the repository)
 > <div align="justify">
 > 
 > This repository provides a comprehensive collection and systematic organization of research papers focused on fairness in language models. It aggregates academic literature spanning bias detection, fairness evaluation, and mitigation techniques across different model architectures and application domains. The collection includes structured metadata, categorization by research themes, and regular updates to track the evolving landscape of fairness research in natural language processing, serving as a centralized resource for researchers, practitioners, and policymakers working on equitable language model development and deployment.
