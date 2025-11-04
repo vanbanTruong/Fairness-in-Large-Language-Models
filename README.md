@@ -5,7 +5,7 @@ This ongoing project aims to consolidate interesting efforts in the field of fai
 
 **Tutorial:** [Fairness in Language Models: A Tutorial](https://fairness-llms-tutorial.github.io)<br>
 Zichong Wang, Avash Palikhe, Zhipeng Yin, Jiale Zhang and Wenbin Zhang<br>
-*The IEEE International Conference on Data Mining (ICDM), Washington D.C., United States, 2025*<br>
+*The 25<sup>th</sup> IEEE International Conference on Data Mining (ICDM), Washington D.C., United States, 2025*<br>
 *The 34<sup>th</sup> ACM International Conference on Information and Knowledge Management (CIKM), Seoul, Korea, 2025*<br>
 *The 34<sup>th</sup> International Joint Conference on Artificial Intelligence (IJCAI), Montreal, Canada, 2025*
 
