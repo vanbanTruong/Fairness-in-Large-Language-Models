@@ -108,11 +108,11 @@ If you find that our introduction survey helps your research, we would appreciat
 
 If you find that our definition survey helps your research, we would appreciate citations to the following paper:
 ```
-@article{palikhe2024fairness,
+@article{zhipeng2025fairness,
   title={Fairness definitions in language models explained},
-  author={Palikhe, Avash and Wang, Zichong and Yin, Zhipeng and Zhang, Wenbin},
-  journal={arXiv preprint arXiv:2407.18454},
-  year={2024}
+  author={Yin, Zhipeng and Wang, Zichong and Palikhe, Avash and Zhang, Wenbin},
+  journal={Data Mining And Knowledge Discovery},
+  year={2025}
 }
 ```
 
