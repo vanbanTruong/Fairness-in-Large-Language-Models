@@ -15,7 +15,7 @@ Zichong Wang, Zhibo Chu, Thang Viet Doan, Shiwen Ni, Min Yang and Wenbin Zhang<b
 *AI and Ethics, 2025*
 
 **Bias Quantification in LMs:** [Fairness Definitions in Language Models Explained](https://arxiv.org/abs/2407.18454)<br>
-Zhipeng Yin, Zichong Wang, Avash Palikhe and Wenbin Zhang
+Zhipeng Yin, Zichong Wang, Avash Palikhe and Wenbin Zhang<br>
 *Data Mining And Knowledge Discovery*
 
 **Bias Mitigation in LMs:** [Fairness in Large Language Models: A Taxonomic Survey](https://dl.acm.org/doi/abs/10.1145/3682112.3682117)<br>
