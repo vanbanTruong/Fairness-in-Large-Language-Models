@@ -27,7 +27,8 @@ Jiale Zhang, Zichong Wang, Avash Palikhe, Zhipeng Yin and Wenbin Zhang
 
 **FairLMs Papers Collection:** This [repository](https://github.com/vanbanTruong/Fairness-in-Large-Language-Models/tree/main/paperCollection) collects and organizes curated papers on fairness in language models.
 
-Email: ziwang@fiu.edu - Zichong Wang<br>
+Email: zhip.y7@gmail.com - Zhipeng Yin<br>
+ziwang@fiu.edu - Zichong Wang<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;wenbinzhang2008@gmail.com - Wenbin Zhang<br>
 
 ---
