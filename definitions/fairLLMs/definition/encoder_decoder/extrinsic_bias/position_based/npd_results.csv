@@ -1,0 +1,4 @@
+dataset,npd_score
+WinoMT,0.4852
+XSum,0.3811
+XNLI,0.4598

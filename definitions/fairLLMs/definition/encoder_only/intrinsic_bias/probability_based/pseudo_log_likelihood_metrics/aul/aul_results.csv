@@ -1,0 +1,4 @@
+dataset,n_pairs,aul_score,aul_std,aul_ci_low,aul_ci_high,aul_sig,acc_mean,acc_std,acc_ci_low,acc_ci_high,acc_sig
+CrowS-Pairs,1508,48.49,0.85,47.13,50.16,,92.34,0.06,92.24,92.46,*
+StereoSet,2123,49.33,0.55,48.26,50.06,,90.97,0.07,90.84,91.07,*
+XNLI,319,50.45,1.23,48.22,52.36,,93.44,0.23,93.04,93.85,*

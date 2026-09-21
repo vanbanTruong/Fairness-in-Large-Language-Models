@@ -1,0 +1,4 @@
+dataset,sva_score
+WinoMT,0.3449
+Europarl,0.3303
+WinoBias,0.3153
