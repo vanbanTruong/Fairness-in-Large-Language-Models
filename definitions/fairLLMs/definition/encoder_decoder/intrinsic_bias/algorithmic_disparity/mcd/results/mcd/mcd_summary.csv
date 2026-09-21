@@ -1,0 +1,4 @@
+Dataset,Sensitive Attr.,Lemmas,H (Shannon Entropy),D (Simpson's Index)
+Europarl corpus,linguistic-complexity,33,0.0786738904331916,1.120654560920806
+WinoMT,linguistic-complexity,99,0.03919330065473979,1.0571315821230263
+XNLI,linguistic-complexity,432,0.36922995630295924,1.5514325300192997

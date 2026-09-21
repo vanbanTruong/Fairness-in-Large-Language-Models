@@ -1,0 +1,4 @@
+dataset,NV,CV,IV
+Bias-in-Bios,0.1412,0.5038,0.4993
+BBQ,0.0642,0.1945,0.1163
+Natural Questions,0.0431,0.3248,0.7053

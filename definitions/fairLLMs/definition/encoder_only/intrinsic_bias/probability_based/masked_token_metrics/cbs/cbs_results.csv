@@ -1,0 +1,4 @@
+dataset,cbs
+WinoBias (Nationality),50.0
+Bias-in-Bios (Nationality),31.25
+XNLI (Religion),56.25

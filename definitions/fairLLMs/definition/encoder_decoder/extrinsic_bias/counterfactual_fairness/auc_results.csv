@@ -1,0 +1,4 @@
+dataset,auc_score
+WinoMT,0.2120
+XSum,0.5279
+XNLI,0.8270
