@@ -14,16 +14,12 @@ Zichong Wang, Avash Palikhe, Zhipeng Yin, Jiale Zhang and Wenbin Zhang<br>
 Zichong Wang, Zhibo Chu, Thang Viet Doan, Shiwen Ni, Min Yang and Wenbin Zhang<br>
 *AI and Ethics, 2025*
 
-**Bias Quantification in LMs:** [Fairness Definitions in Language Models Explained](https://arxiv.org/abs/2407.18454)<br>
-Zhipeng Yin, Zichong Wang, Avash Palikhe and Wenbin Zhang<br>
-*WIREs Data Mining And Knowledge Discovery, 2026*
-
 **Bias Mitigation in LMs:** [Fairness in Large Language Models: A Taxonomic Survey](https://dl.acm.org/doi/abs/10.1145/3682112.3682117)<br>
 Zhibo Chu, Zichong Wang and Wenbin Zhang<br>
 *ACM SIGKDD Explorations Newsletter, 2024*
 
 **Datasets for Fairness in LMs:** [Datasets for Fairness in Language Models: An In-Depth Survey](https://arxiv.org/abs/2506.23411)<br>
-Jiale Zhang, Zichong Wang, Avash Palikhe, Zhipeng Yin and Wenbin Zhang
+Jiale Zhang, Zichong Wang, Zhipeng Yin and Wenbin Zhang
 
 **FairLMs Papers Collection:** This [repository](https://github.com/vanbanTruong/Fairness-in-Large-Language-Models/tree/main/paperCollection) collects and organizes curated papers on fairness in language models.
 
