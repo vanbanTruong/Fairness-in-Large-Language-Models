@@ -101,22 +101,6 @@ If you find that our introduction survey helps your research, we would appreciat
 }
 ```
 
-### Fairness Definitions in Language Models Explained [![PDF](https://img.shields.io/badge/PDF-Download-red)](https://arxiv.org/abs/2407.18454)
-
-If you find that our definition survey helps your research, we would appreciate citations to the following paper:
-```
-@article{https://doi.org/10.1002/widm.70063,
-author = {Yin, Zhipeng and Wang, Zichong and Palikhe, Avash and Zhang, Wenbin},
-title = {Fairness Definitions in Language Models Explained},
-journal = {WIREs Data Mining and Knowledge Discovery},
-volume = {16},
-number = {1},
-pages = {e70063},
-keywords = {fairness, fairness definitions, language models},
-doi = {https://doi.org/10.1002/widm.70063},
-year = {2026}
-}
-```
 
 ### Fairness in Large Language Models: A Taxonomic Survey [![PDF](https://img.shields.io/badge/PDF-Download-red)](https://dl.acm.org/doi/abs/10.1145/3682112.3682117)
 
@@ -141,7 +125,7 @@ If you find that our dataset survey helps your research, we would appreciate cit
 ```
 @misc{zhang2025datasetsfairnesslanguagemodels,
       title={Datasets for Fairness in Language Models: An In-Depth Survey}, 
-      author={Jiale Zhang and Zichong Wang and Avash Palikhe and Zhipeng Yin and Wenbin Zhang},
+      author={Jiale Zhang and Zichong Wang and Zhipeng Yin and Wenbin Zhang},
       year={2025},
       eprint={2506.23411},
       archivePrefix={arXiv},
