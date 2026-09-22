@@ -31,7 +31,6 @@ Email: zhip.y7@gmail.com - Zhipeng Yin<br>
 ### 📚 **Contents**
 
 - [Introduction for LMs](#introduction-for-lms-link-to-the-repository)
-- [Bias Quantification in LMs](#bias-quantification-in-lms-link-to-the-repository)
 - [Bias Mitigation in LMs](#bias-mitigation-in-lms-link-to-the-repository)
 - [Datasets for Fairness in LMs](#datasets-for-Fairness-in-lMs-link-to-the-repository)
 - [FairLMs Papers Collection](#fairlms-papers-collection-link-to-the-repository)
@@ -47,16 +46,6 @@ Email: zhip.y7@gmail.com - Zhipeng Yin<br>
 > </div>
 ![Fairness in Large Language Models](https://github.com/vanbanTruong/Fairness-in-Large-Language-Models/blob/main/tutorial/images/Introduction_to_LMs.png)
 
-
-## Bias Quantification in LMs ([Link](https://github.com/vanbanTruong/Fairness-in-Large-Language-Models/tree/main/definitions) to the repository)
-> <div align="justify">
-> 
-> This repository systematizes fairness definitions and bias quantification methods for language models across different transformer architectures. It provides a comprehensive taxonomy that categorizes fairness notions based on encoder-only, decoder-only, and encoder-decoder model types, together with clear mathematical formulations, empirical demonstrations, and practical implementation guidelines to support consistent and architecture-appropriate fairness evaluations in language model research.
-> 
-> </div>
-<!-- ![Fairness Definitions in LMs](https://github.com/user-attachments/assets/884f134c-ee31-4c03-9487-2907738b77f8) -->
-![Fairness Definitions in LMs](tutorial/images/Fairness%20definitions%20for%20LMs.jpg)
-<br><br><br><br>
 
 ## Bias Mitigation in LMs ([Link](https://dl.acm.org/doi/abs/10.1145/3682112.3682117) to the repository)
 > <div align="justify">
