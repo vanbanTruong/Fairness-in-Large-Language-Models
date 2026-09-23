@@ -59,7 +59,7 @@ Requires Python ≥ 3.9.
 
 ```bash
 git clone https://github.com/vanbanTruong/Fairness-in-Large-Language-Models.git
-cd "Fairness-in-Large-Language-Models/FairLMs/Definitions"
+cd "Fairness-in-Large-Language-Models/fairLMs/definitions"
 pip install -e .
 # Install the fuller dependency set used by many runners:
 pip install -r requirements.txt

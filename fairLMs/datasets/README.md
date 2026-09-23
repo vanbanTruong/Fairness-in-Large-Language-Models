@@ -113,7 +113,7 @@ Each dataset includes specialized analysis tools:
 ```bash
 # Clone the repository
 git clone https://github.com/vanbanTruong/Fairness-in-Large-Language-Models.git
-cd "Fairness-in-Large-Language-Models/FairLMs/Dataset"
+cd "Fairness-in-Large-Language-Models/fairLMs/datasets"
 
 # Install required dependencies
 pip install -r requirements.txt
