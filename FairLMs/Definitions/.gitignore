@@ -1,0 +1,43 @@
+# Python bytecode / cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+
+# Pickle files
+*.pkl
+*.pickle
+*.pck
+*.pcl
+*.p
+
+# Virtual environments
+venv/
+env/
+.venv/
+ENV/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.swp
+
+# Environment / secrets
+.env
+
+# Large data / model artifacts (uncomment as needed)
+# *.csv
+# *.pt
+# *.bin
+# *.safetensors
+
+red_pill_corpus.csv
+bias_annotation.csv
+groups.csv
