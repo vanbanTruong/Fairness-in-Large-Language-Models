@@ -1,0 +1,185 @@
+{
+  "fixture_schema_version": "1",
+  "fixture_id": "synthetic_gender_reference_mixed_v1",
+  "dataset": "synthetic-gender-reference-suite",
+  "axis": "gender-reference",
+  "design_stance": "stress_test",
+  "evidence": {
+    "paired_texts": {
+      "source": "synthetic minimal-pair fixture",
+      "pairing_basis": "one declared gender-term substitution per pair",
+      "condition_roles": ["stereotype", "anti_stereotype"],
+      "rows": [
+        ["mp-001", "stereotype", "he is a nurse who works nights"],
+        ["mp-001", "anti_stereotype", "she is a nurse who works nights"],
+        ["mp-002", "stereotype", "he is a brilliant engineer"],
+        ["mp-002", "anti_stereotype", "she is an engineer"],
+        ["mp-003", "stereotype", "his colleagues call him the janitor"],
+        ["mp-003", "anti_stereotype", "her colleagues call her the janitor"],
+        ["mp-004", "stereotype", "he is a brilliant surgeon"],
+        ["mp-004", "anti_stereotype", "she is an experienced surgeon"]
+      ]
+    },
+    "grouped_texts": {
+      "source": "synthetic grouped-text fixture",
+      "declared_groups": ["feminine", "masculine"],
+      "rows": [
+        ["feminine", "as a nurse"],
+        ["feminine", "as a teacher"],
+        ["feminine", "she cooks dinner"],
+        ["feminine", "she reads books"],
+        ["feminine", "her shift ended"],
+        ["feminine", "the nurse arrived"],
+        ["feminine", "quiet office hours"],
+        ["feminine", "another short line"],
+        ["masculine", "i am the engineer who signs off on every structural drawing each week"],
+        ["masculine", "the engineer reviewed thirteen separate load calculations before the final report went out"]
+      ]
+    },
+    "template_groups": {
+      "source": "synthetic template fixture",
+      "declared_groups": ["feminine", "masculine"],
+      "template_identity_rule": "exact normalized template string",
+      "rows": [
+        ["feminine", "tpl-a"],
+        ["feminine", "tpl-a"],
+        ["feminine", "tpl-b"],
+        ["feminine", "tpl-c"],
+        ["masculine", "tpl-a"],
+        ["masculine", "tpl-a"]
+      ]
+    },
+    "option_items": null
+  },
+  "parameters": {
+    "identity_terms": ["he", "her", "him", "his", "she"],
+    "frame_predicate": "SELF_IDENTIFICATION_FRAME",
+    "frame_patterns": ["i am", "i'm", "as a", "as an"],
+    "b_diff_len_tokenization": {"mode": "regex", "pattern": "\\b[\\w_]+\\b"},
+    "b_opt_tokenization": {"mode": "whitespace", "pattern": null},
+    "ratio_min_count": 1
+  },
+  "expected": {
+    "report_status": "partial",
+    "slot_order": [
+      "b_min",
+      "b_equiv",
+      "b_gram",
+      "b_diff_len",
+      "b_diff_dep",
+      "b_frame",
+      "b_opt",
+      "b_temp"
+    ],
+    "components": {
+      "b_min": {
+        "status": "ready",
+        "value": 0.2,
+        "reason_code": null,
+        "details": {
+          "pair_count": 4,
+          "non_zero_ratio": 0.5,
+          "minimum_normalized_edit_distance": 0.0,
+          "maximum_normalized_edit_distance": 0.4,
+          "mean_masked_token_count": 5.625,
+          "estimator": "uniform_mass_per_pair",
+          "unit": "normalized_token_edit_distance"
+        },
+        "cross_check": {
+          "per_pair_normalized_edit_distances": [0.0, 0.4, 0.0, 0.4]
+        }
+      },
+      "b_equiv": {
+        "status": "blocked",
+        "value": null,
+        "reason_code": "embedding_backend_unavailable",
+        "details": {
+          "required_backend": "sentence_embedding",
+          "required_protocol": "EmbeddingBackend"
+        }
+      },
+      "b_gram": {
+        "status": "blocked",
+        "value": null,
+        "reason_code": "grammar_backend_unavailable",
+        "details": {
+          "required_backend": "grammar_checker",
+          "required_protocol": "GrammarCheckerBackend"
+        }
+      },
+      "b_diff_len": {
+        "status": "ready",
+        "value": 2.0,
+        "reason_code": null,
+        "details": {
+          "group_mean_lengths": {"feminine": 3.0, "masculine": 13.0},
+          "group_sample_counts": {"feminine": 8, "masculine": 2},
+          "group_token_totals": {"feminine": 24, "masculine": 26},
+          "max_absolute_gap": 10.0,
+          "pooled_mean_length": 5.0,
+          "total_token_count": 50,
+          "sample_count": 10,
+          "denominator_rule": "sample_weighted_pooled_mean",
+          "widest_pair": ["feminine", "masculine"]
+        },
+        "cross_check": {
+          "unweighted_mean_of_group_means": 8.0,
+          "value_under_unweighted_denominator": 1.25
+        }
+      },
+      "b_diff_dep": {
+        "status": "blocked",
+        "value": null,
+        "reason_code": "dependency_parser_backend_unavailable",
+        "details": {
+          "required_backend": "dependency_parser",
+          "required_protocol": "DependencyParserBackend"
+        }
+      },
+      "b_frame": {
+        "status": "ready",
+        "value": 0.25,
+        "reason_code": null,
+        "details": {
+          "frame_name": "self_identification",
+          "predicate_kind": "declared_patterns",
+          "replayable": true,
+          "group_frame_counts": {"feminine": 2, "masculine": 1},
+          "group_frame_rates": {"feminine": 0.25, "masculine": 0.5},
+          "overall_frame_rate": 0.3,
+          "widest_pair": ["feminine", "masculine"]
+        }
+      },
+      "b_opt": {
+        "status": "not_applicable",
+        "value": null,
+        "reason_code": "evidence_view_not_supplied",
+        "details": {
+          "required_view": "option_items"
+        }
+      },
+      "b_temp": {
+        "status": "ready",
+        "value": 2.0,
+        "reason_code": null,
+        "details": {
+          "group_unique_template_counts": {"feminine": 3, "masculine": 1},
+          "group_instance_counts": {"feminine": 4, "masculine": 2},
+          "group_duplication_rates": {"feminine": 0.25, "masculine": 0.5},
+          "max_unique_count": 3,
+          "min_unique_count": 1,
+          "coverage_ratio": 3.0,
+          "coverage_denominator_group": "masculine"
+        }
+      }
+    },
+    "warning_count": 4,
+    "backend_blocked_slots": ["b_equiv", "b_gram", "b_diff_dep"]
+  },
+  "oracle": {
+    "kind": "closed_form_lightweight_kernel_regression",
+    "replayable_in_ci": true,
+    "verification_note": "Every ready value is hand-derivable from the frozen inputs and is recomputed independently by the test: b_min is the mean of (0, 2/5, 0, 2/5) normalized token edit distances after masking the declared identity terms; b_diff_len is the maximum pairwise group mean-length gap (13 - 3) over the sample-weighted pooled mean length (50 tokens / 10 texts), which differs from the unweighted mean of group means (8.0); b_frame is |0.5 - 0.25|; b_temp is the unique-template count difference (3 - 1) with coverage ratio 3 / 1.",
+    "divergence_note": "b_diff_len counts declared surface tokens, not the paper's spaCy parser tokens (DIV010), so this value is not comparable to a published B_diff_len; the three backend slots are frozen as blocked payloads that P2C-06 must reproduce byte-for-byte."
+  }
+}

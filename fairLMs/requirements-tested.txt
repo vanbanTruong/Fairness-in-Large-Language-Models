@@ -1,0 +1,22 @@
+# Verification environment: Python 3.12, Linux CPU. Constraints, not universal minima.
+# CPU torch may need --extra-index-url https://download.pytorch.org/whl/cpu
+numpy==2.3.5
+pandas==2.2.3
+scipy==1.17.0
+torch==2.14.0+cpu
+transformers==4.57.1
+datasets==3.6.0
+scikit-learn==1.8.0
+wordfreq==3.1.1
+nltk==3.10.3
+openai==3.13.0
+pytest==9.1.1
+pytest-cov==7.1.0
+setuptools==84.0.0
+build==1.6.1
+mkdocs==1.6.1
+mkdocs-material==9.7.7
+mkdocstrings==1.0.6
+mkdocstrings-python==2.0.8
+mkdocs-jupyter==0.26.3
+black==26.5.1

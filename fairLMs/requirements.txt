@@ -1,0 +1,26 @@
+# Core ML / model loading
+torch>=2.1
+transformers>=4.40
+accelerate>=0.30
+sentencepiece      # required for Llama-2's tokenizer
+safetensors
+
+# Datasets
+datasets>=2.19
+huggingface_hub>=0.23
+hf_transfer         # optional fast-download accelerator; set HF_HUB_ENABLE_HF_TRANSFER=1
+
+# Data handling / analysis
+numpy
+pandas
+scipy
+scikit-learn        # fetch_openml (German Credit, Heart Disease)
+
+# API-based metrics (GPT-3 / GPT-3.5)
+openai>=1.0
+
+# Demographic inference (name-based gender heuristic; MTV / NQ loaders)
+gender-guesser
+
+# Utilities
+tqdm

@@ -1,0 +1,43 @@
+# Byte-compiled / cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.eggs/
+dist/
+build/
+
+# Virtual envs / tooling
+.venv/
+venv/
+.env
+.python-version
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+.DS_Store
+
+# Metric run artifacts (prefer artifacts/)
+/artifacts/*
+!/artifacts/.gitkeep
+# mkdocs build output
+site/
+
+# mkdocs-jupyter render cache
+.cache/
+
+# Local repair delivery materials
+/FIXES.md
+/validation/
+/data-cleanup.json
+/legacy-results/
+
+# Local secrets
+.env.*
+!.env.example
+
+# Notebook checkpoints
+.ipynb_checkpoints/

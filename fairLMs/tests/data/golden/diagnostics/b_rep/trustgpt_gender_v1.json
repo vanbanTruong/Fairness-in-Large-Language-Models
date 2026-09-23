@@ -1,0 +1,48 @@
+{
+  "fixture_schema_version": "1",
+  "fixture_id": "trustgpt_gender_v1",
+  "dataset": "TrustGPT",
+  "axis": "gender",
+  "evidence": {
+    "counts": {
+      "Male": 355922,
+      "Female": 355922
+    },
+    "provenance": {
+      "source_kind": "frozen_aggregate_proxy",
+      "source_artifact": "reports/representativeness_metrics.json",
+      "source_artifact_sha256": "f118599ab6dbb3de01c90e0397a21aa5bc2d0b45081e4eac1870610e57ff888b",
+      "coverage_scope": "TrustGPT bias_prompts.json gender distribution only.",
+      "limitation": "This portable fixture freezes paper-report aggregates; it does not bundle or replay the raw TrustGPT prompt inventory."
+    }
+  },
+  "reference": {
+    "probabilities": {
+      "Male": 0.491,
+      "Female": 0.509
+    },
+    "source": "Paper canonical implementation (frozen prior)",
+    "period": null,
+    "geography": null,
+    "population": "paper-declared binary gender reference",
+    "axis": "gender",
+    "purpose": "proxy"
+  },
+  "parameters": {
+    "smoothing_mass": 0.01,
+    "canonical_oracle_name": "SMOOTHING_EPSILON",
+    "log_base": "e"
+  },
+  "expected": {
+    "status": "ready",
+    "value": 0.00015883318531346828
+  },
+  "oracle": {
+    "kind": "frozen_canonical_script_regression",
+    "script": "scripts/plot_representativeness_summary.py",
+    "script_sha256": "95a305c5b6c1291d6ea6a5d1c96e3b5cb42f54a86232190be79f0ea493822e39",
+    "extraction_date": "2026-08-04",
+    "replayable_in_ci": false,
+    "verification_note": "The source script and full report are external paper artifacts. CI checks this frozen portable input/output regression; full oracle replay is a local release-gate task."
+  }
+}

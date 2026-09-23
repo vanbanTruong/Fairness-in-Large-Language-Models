@@ -1,0 +1,7 @@
+include README.md LICENSE CITATION.cff CONVERSION.md mkdocs.yml requirements.txt
+recursive-include tests *.py *.json
+recursive-include scripts *.py
+recursive-include docs *.md *.ipynb
+recursive-include examples *.md *.py
+include requirements-tested.txt
+recursive-include data *.md *.json

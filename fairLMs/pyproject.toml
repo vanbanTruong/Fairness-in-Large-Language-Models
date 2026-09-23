@@ -1,0 +1,225 @@
+[build-system]
+# setuptools>=77 for PEP 639 SPDX license metadata.
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "fairLMs"
+# Single-sourced from fairLMs/_version.py — see [tool.setuptools.dynamic] below.
+dynamic = ["version"]
+description = "Fairness definitions and bias metrics for large language models"
+readme = "README.md"
+# 3.10 is the real floor: torch, transformers and datasets all require >=3.10.
+requires-python = ">=3.10"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [
+    { name = "Michael Larionov", email = "mlariono@andrew.cmu.edu" },
+    { name = "Jiale Zhang", email = "jz106@iu.edu" },
+    { name = "Zhipeng Yin", email = "zyin007@fiu.edu" },
+    { name = "Zichong Wang", email = "zwang114@fiu.edu" },
+    { name = "Wenbin Zhang", email = "wenbin.zhang@fiu.edu" },
+]
+keywords = [
+    "fairness",
+    "bias",
+    "large-language-models",
+    "nlp",
+    "evaluation",
+    "metrics",
+    "responsible-ai",
+]
+# No "License ::" classifier: PEP 639 supersedes it with the SPDX `license` field
+# above, and setuptools rejects declaring both.
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Science/Research",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Text Processing :: Linguistic",
+]
+
+dependencies = [
+    "numpy>=1.24",
+    "pandas>=2.0",
+    "scipy>=1.11",
+    "torch>=2.0",
+    "transformers>=4.38",
+    "datasets>=2.19",
+    # Used directly by fairLMs/datasets/_sources.py. It already arrives as a
+    # transitive dependency of transformers and datasets; declared here because
+    # the loaders import it themselves rather than going through load_dataset.
+    "huggingface-hub>=0.23",
+    # These three are imported at module scope inside fairLMs/definition/, and
+    # fairLMs.metrics eagerly imports every family, so `import fairLMs` fails
+    # without them. They are requirements, not extras:
+    #   scikit-learn -> counterfactual_auc, normalized_position_distance
+    #   wordfreq     -> lexical_frequency_proportion
+    #   nltk         -> morphological_choice_divergence (bundled SnowballStemmer,
+    #                   no corpus download needed)
+    # Making those imports lazy would let these move back to extras.
+    "scikit-learn>=1.3",
+    "wordfreq>=3.0",
+    "nltk>=3.8",
+]
+
+# Keep table sections below all bare `[project]` keys — a bare key placed after a
+# `[table]` header is parsed as belonging to that table, not to [project].
+[project.urls]
+Homepage = "https://github.com/vanbanTruong/Fairness-in-Large-Language-Models"
+Repository = "https://github.com/vanbanTruong/Fairness-in-Large-Language-Models"
+Issues = "https://github.com/vanbanTruong/Fairness-in-Large-Language-Models/issues"
+
+[project.optional-dependencies]
+openai = [
+    "openai>=1.0",
+]
+grammar = [
+    "language-tool-python>=2.7",
+]
+parse = [
+    "spacy>=3.5",
+]
+nlp = [
+    "fairLMs[grammar,parse]",
+]
+dev = [
+    "pytest>=7.0",
+    "pytest-cov",
+    "tomli>=2.0; python_version < '3.11'",
+    "fairLMs[openai]",
+]
+all = [
+    "fairLMs[openai,dev,nlp]",
+    "accelerate>=0.30",
+    "sentencepiece",
+    "gender-guesser",
+    "tqdm",
+]
+docs = [
+  "mkdocs-material>=9.5",
+  "mkdocstrings[python]>=0.24",
+  "mkdocs-jupyter>=0.24",
+  # mkdocstrings needs a formatter to render `separate_signature: true`
+  # signatures; without one it logs "Formatting signatures requires either
+  # Black or Ruff to be installed" and emits them unformatted.
+  "black>=24.1",
+]
+
+[tool.setuptools]
+package-dir = { fairLMs = "." }
+packages = [
+    "fairLMs",
+    "fairLMs.metrics",
+    "fairLMs.artifacts",
+    "fairLMs.datasets",
+    "fairLMs.utils",
+    "fairLMs.models",
+    "fairLMs.definition",
+    "fairLMs.diagnostics",
+    "fairLMs.mitigation",
+    "fairLMs.data",
+    "fairLMs.definition.encoder_only",
+    "fairLMs.definition.encoder_decoder",
+    "fairLMs.definition.decoder_only",
+    "fairLMs.definition.encoder_only.extrinsic_bias",
+    "fairLMs.definition.encoder_only.intrinsic_bias",
+    "fairLMs.definition.encoder_only.extrinsic_bias.context_based_disparity",
+    "fairLMs.definition.encoder_only.extrinsic_bias.fair_inference",
+    "fairLMs.definition.encoder_only.extrinsic_bias.equal_opportunity",
+    "fairLMs.definition.encoder_only.extrinsic_bias.context_based_disparity.data",
+    "fairLMs.definition.encoder_only.extrinsic_bias.fair_inference.data",
+    "fairLMs.definition.encoder_only.extrinsic_bias.equal_opportunity.data",
+    "fairLMs.definition.encoder_only.intrinsic_bias.similarity_based",
+    "fairLMs.definition.encoder_only.intrinsic_bias.probability_based",
+    "fairLMs.definition.encoder_only.intrinsic_bias.similarity_based.ceat",
+    "fairLMs.definition.encoder_only.intrinsic_bias.similarity_based.weat",
+    "fairLMs.definition.encoder_only.intrinsic_bias.similarity_based.seat",
+    "fairLMs.definition.encoder_only.intrinsic_bias.probability_based.pseudo_log_likelihood_metrics",
+    "fairLMs.definition.encoder_only.intrinsic_bias.probability_based.masked_token_metrics",
+    "fairLMs.definition.encoder_only.intrinsic_bias.probability_based.pseudo_log_likelihood_metrics.cat",
+    "fairLMs.definition.encoder_only.intrinsic_bias.probability_based.pseudo_log_likelihood_metrics.pll",
+    "fairLMs.definition.encoder_only.intrinsic_bias.probability_based.pseudo_log_likelihood_metrics.cps",
+    "fairLMs.definition.encoder_only.intrinsic_bias.probability_based.pseudo_log_likelihood_metrics.aula",
+    "fairLMs.definition.encoder_only.intrinsic_bias.probability_based.pseudo_log_likelihood_metrics.aul",
+    "fairLMs.definition.encoder_only.intrinsic_bias.probability_based.masked_token_metrics.cbs",
+    "fairLMs.definition.encoder_only.intrinsic_bias.probability_based.masked_token_metrics.disco",
+    "fairLMs.definition.encoder_only.intrinsic_bias.probability_based.masked_token_metrics.lpbs",
+    "fairLMs.definition.encoder_decoder.extrinsic_bias",
+    "fairLMs.definition.encoder_decoder.intrinsic_bias",
+    "fairLMs.definition.encoder_decoder.extrinsic_bias.position_based",
+    "fairLMs.definition.encoder_decoder.extrinsic_bias.individual_fairness",
+    "fairLMs.definition.encoder_decoder.extrinsic_bias.fair_inference",
+    "fairLMs.definition.encoder_decoder.extrinsic_bias.counterfactual_fairness",
+    "fairLMs.definition.encoder_decoder.intrinsic_bias.algorithmic_disparity",
+    "fairLMs.definition.encoder_decoder.intrinsic_bias.stereotypical_association",
+    "fairLMs.definition.encoder_decoder.intrinsic_bias.algorithmic_disparity.lfp",
+    "fairLMs.definition.encoder_decoder.intrinsic_bias.algorithmic_disparity.mcd",
+    "fairLMs.definition.encoder_decoder.intrinsic_bias.stereotypical_association.sd",
+    "fairLMs.definition.encoder_decoder.intrinsic_bias.stereotypical_association.sva",
+    "fairLMs.definition.decoder_only.extrinsic_bias",
+    "fairLMs.definition.decoder_only.intrinsic_bias",
+    "fairLMs.definition.decoder_only.extrinsic_bias.demographic_representation",
+    "fairLMs.definition.decoder_only.extrinsic_bias.counterfactual_fairness",
+    "fairLMs.definition.decoder_only.extrinsic_bias.performance_disparity",
+    "fairLMs.definition.decoder_only.extrinsic_bias.demographic_representation.drd",
+    "fairLMs.definition.decoder_only.extrinsic_bias.demographic_representation.dnp",
+    "fairLMs.definition.decoder_only.extrinsic_bias.counterfactual_fairness.cr",
+    "fairLMs.definition.decoder_only.extrinsic_bias.counterfactual_fairness.ctf",
+    "fairLMs.definition.decoder_only.extrinsic_bias.performance_disparity.ad",
+    "fairLMs.definition.decoder_only.extrinsic_bias.performance_disparity.sns",
+    "fairLMs.definition.decoder_only.extrinsic_bias.performance_disparity.ba",
+    "fairLMs.definition.decoder_only.intrinsic_bias.attention_head_based_disparity",
+    "fairLMs.definition.decoder_only.intrinsic_bias.stereotypical_association",
+    "fairLMs.definition.decoder_only.intrinsic_bias.attention_head_based_disparity.nie",
+    "fairLMs.definition.decoder_only.intrinsic_bias.attention_head_based_disparity.gbe",
+    "fairLMs.definition.decoder_only.intrinsic_bias.stereotypical_association.sll",
+    "fairLMs.definition.decoder_only.intrinsic_bias.stereotypical_association.ca",
+    "fairLMs.definition.decoder_only.intrinsic_bias.stereotypical_association.sll.data",
+    "fairLMs.definition.decoder_only.intrinsic_bias.stereotypical_association.ca.data",
+    "fairLMs.mitigation.intraprocessing",
+    "fairLMs.mitigation.inprocessing",
+    "fairLMs.mitigation.postprocessing",
+    "fairLMs.mitigation.preprocessing",
+    "fairLMs.data.crows_pairs",
+    "fairLMs.data.bbq",
+]
+
+[tool.setuptools.dynamic]
+version = { attr = "fairLMs._version.__version__" }
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+# `fairLMs/definition/` holds 33 `main.py` and 25 `stimuli.py` files in sibling
+# directories. Under the default "prepend" import mode pytest names a module by
+# its basename, so collecting the package -- `pytest --doctest-modules fairLMs/`
+# -- aborts with 56 "import file mismatch" errors and every doctest in the
+# library goes unrun. importlib mode derives the module name from the full path
+# instead, so the duplicate basenames stop colliding.
+addopts = ["--import-mode=importlib"]
+filterwarnings = [
+    # Surface accidental use of the deprecated keyword API inside the library
+    # itself; tests that exercise it opt in with pytest.warns.
+    "ignore::DeprecationWarning:importlib._bootstrap",
+]
+
+[tool.black]
+target-version = ["py310"]
+
+[tool.setuptools.package-data]
+# fairLMs/data/ has an __init__.py (it exports the bundled WEAT/SEAT word sets),
+# so it is a package in its own right and owns these files. Keyed on
+# `fairLMs.data` for that reason. The older `fairLMs = ["data/bbq/*.jsonl"]`
+# form still resolves on setuptools>=77, so this is correctness, not a fix.
+"fairLMs.data" = [
+    "README.md",
+    "NOTICE.md",
+    "checksums.json",
+    "crows_pairs/*.csv",
+    "bbq/*.jsonl",
+]

@@ -1,0 +1,51 @@
+cff-version: 1.2.0
+title: "FairLMs: A Turnkey Library for Fairness in Language Models"
+message: "If you use this software, please cite it using these metadata."
+type: software
+authors:
+  - family-names: Larionov
+    given-names: Michael
+    email: mlariono@andrew.cmu.edu
+    affiliation: >-
+      Department of Statistics and Data Science, Carnegie Mellon University,
+      Pittsburgh, PA, United States
+  - family-names: Zhang
+    given-names: Jiale
+    email: jz106@iu.edu
+    affiliation: >-
+      Department of Biostatistics and Health Data Science, Indiana University,
+      Indianapolis, IN, United States
+  - family-names: Yin
+    given-names: Zhipeng
+    email: zyin007@fiu.edu
+    affiliation: >-
+      Knight Foundation School of Computing and Information Sciences, Florida
+      International University, Miami, FL, United States
+  - family-names: Wang
+    given-names: Zichong
+    email: zwang114@fiu.edu
+    affiliation: >-
+      Knight Foundation School of Computing and Information Sciences, Florida
+      International University, Miami, FL, United States
+  - family-names: Zhang
+    given-names: Wenbin
+    email: wenbin.zhang@fiu.edu
+    affiliation: >-
+      Knight Foundation School of Computing and Information Sciences, Florida
+      International University, Miami, FL, United States
+repository-code: "https://github.com/michaellarionov/FairLMs"
+url: "https://michaellarionov.github.io/FairLMs/"
+abstract: >-
+  FairLMs provides 33 published bias and fairness metrics for encoder-only,
+  decoder-only and encoder-decoder language models behind a single
+  scikit-learn-style interface, together with a dataset-first diagnostics layer
+  that reports the applicability of a measurement as a first-class outcome
+  rather than collapsing missing evidence into a score of zero.
+keywords:
+  - Fairness
+  - Social Bias
+  - Language Model
+  - Fairness Metrics
+  - Dataset Diagnostics
+license: MIT
+version: 0.5.0.dev0

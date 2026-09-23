@@ -1,0 +1,101 @@
+{
+  "fixture_schema_version": 1,
+  "fixture_id": "synthetic_gender_backend_slots_v1",
+  "dataset": "synthetic-backend-fixture",
+  "axis": "gender",
+  "design_stance": "population_proxy",
+  "evidence": {
+    "paired_texts": {
+      "condition_roles": ["masculine", "feminine"],
+      "pairing_basis": "pronoun swap",
+      "source": "synthetic backend fixture",
+      "rows": [
+        ["p1", "masculine", "he is a nurse"],
+        ["p1", "feminine", "she is a nurse"],
+        ["p2", "masculine", "he is a brilliant engineer ERR"],
+        ["p2", "feminine", "she is an engineer"],
+        ["p3", "masculine", "his desk is tidy"],
+        ["p3", "feminine", "her desk is tidy ERR ERR"]
+      ]
+    },
+    "grouped_texts": {
+      "declared_groups": ["masculine", "feminine"],
+      "source": "synthetic backend fixture",
+      "rows": [
+        ["masculine", "one two three four"],
+        ["masculine", "one two"],
+        ["feminine", "a b c d e f"],
+        ["feminine", "a b"]
+      ]
+    }
+  },
+  "parameters": {
+    "requested_components": ["b_equiv", "b_gram", "b_diff_dep"],
+    "identity_terms": ["he", "she", "his", "her"],
+    "backends": {
+      "b_equiv": "fake-bag-of-words@1",
+      "b_gram": "fake-err-token-counter@1",
+      "b_diff_dep": "fake-halving-parser@1"
+    }
+  },
+  "expected": {
+    "report_status": "partial",
+    "components": {
+      "b_equiv": {
+        "status": "ready",
+        "value": 0.22684026103921928,
+        "reason_code": null,
+        "details": {
+          "pair_count": 3,
+          "mean_cosine_similarity": 0.7731597389607807,
+          "embedding_width": 10,
+          "pairs_with_distance_above_0_10": 2,
+          "pairs_with_distance_above_0_20": 2,
+          "unit": "one_minus_mean_cosine_similarity",
+          "paper_alignment": "paper_exact_given_backend"
+        }
+      },
+      "b_gram": {
+        "status": "ready",
+        "value": 1.0,
+        "reason_code": null,
+        "details": {
+          "pair_count": 3,
+          "mean_absolute_error_difference": 1.0,
+          "pairs_with_difference": 2,
+          "maximum_absolute_error_difference": 2,
+          "mean_error_count": 0.5,
+          "mean_error_count_by_condition": {"feminine": 0.6666666666666666, "masculine": 0.3333333333333333},
+          "unit": "grammar_error_count_difference"
+        }
+      },
+      "b_diff_dep": {
+        "status": "ready",
+        "value": 0.18181818181818182,
+        "reason_code": null,
+        "details": {
+          "group_mean_depths": {"feminine": 3.0, "masculine": 2.5},
+          "group_sample_counts": {"feminine": 2, "masculine": 2},
+          "total_depth": 11,
+          "pooled_mean_depth": 2.75,
+          "max_absolute_gap": 0.5,
+          "widest_pair": ["feminine", "masculine"],
+          "denominator_rule": "sample_weighted_pooled_mean",
+          "unit": "ratio_to_pooled_mean_depth"
+        }
+      }
+    },
+    "warning_count": 1
+  },
+  "oracle": {
+    "kind": "closed_form_fake_backend_regression",
+    "replayable_in_ci": true,
+    "backends": {
+      "fake-bag-of-words@1": "encode(texts): one vector per text over the sorted vocabulary of whitespace tokens across the call; component = count of that token in the text",
+      "fake-err-token-counter@1": "count_errors(texts): number of whitespace tokens equal to ERR in the unmasked text",
+      "fake-halving-parser@1": "depths(texts): number of whitespace tokens // 2 + 1"
+    },
+    "verification_note": "b_equiv: after masking the declared identity terms to the [ID] placeholder (the mask lowercases tokens), the three pair cosines are 1.0, 0.6123724356957946 and 0.7071067811865475, so 1 - mean = 0.22684026103921928; the vocabulary of the masked sides has 10 tokens. b_gram: per-pair absolute error-count differences are 0, 1 and 2 on the unmasked sides, mean 1.0; masculine sides carry 1 error in total over 3 texts, feminine sides 2. b_diff_dep: depths are masculine [3, 2] (mean 2.5) and feminine [4, 2] (mean 3.0); the gap 0.5 is divided by the sample-weighted pooled mean 11 / 4 = 2.75. The five lightweight slots are not requested and report not_applicable / component_not_requested, so the report is partial with only the construction-vector warning.",
+    "divergence_note": "The values are exact for these fake backends only. A real embedding model, grammar checker or parser produces different numbers; the component provenance records the backend revision so that two audits are comparable only when it matches."
+  }
+}
