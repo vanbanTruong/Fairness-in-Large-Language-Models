@@ -7,22 +7,36 @@ All Unmasked Likelihood (Kaneko & Bollegala, 2022): for each
 higher. The reported score is the percentage of pairs preferring the
 stereotype — **50% ≈ unbiased**.
 
+## Public API
+
+```python
+from fairLMs.definitions import AllUnmaskedLikelihoodScore
+from fairLMs.datasets import CrowSPairs
+from fairLMs.definitions.models import HuggingFaceModel
+
+result = AllUnmaskedLikelihoodScore().compute(
+    model=HuggingFaceModel("bert-base-uncased", task="mlm"),
+    dataset=CrowSPairs(n_max=32),
+)
+print(result.score)
+```
+
 ## Files
 
 | File | Purpose |
 |---|---|
-| `main.py` | Entry point: loads BERT, loads three datasets, runs 20×80% subsample protocol, writes `aul_results.csv` |
+| `main.py` | Short public-API demo using `AllUnmaskedLikelihoodScore`; writes results CSV for continuity |
 | `aul.py` | Core: `compute_aul()` |
-| `crows_pairs_anonymized.csv` | Bundled CrowS-Pairs dataset |
+| `crows_pairs_anonymized.csv` | Prefer `fairLMs.datasets.CrowSPairs`; its small canonical CSV is bundled under `fairLMs/datasets/resources/crows_pairs/` |
 | `aul_results.csv` | Output of the last run |
 
-Token scoring uses `score_sentence` in `encoder_only/utils.py`.
+Token scoring uses `score_sentence` in `fairLMs.definitions.utils`.
 
 ## Datasets
 
 | Dataset | Source |
 |---|---|
-| CrowS-Pairs (all bias types, pooled) | bundled CSV |
+| CrowS-Pairs (all bias types, pooled) | `fairLMs.datasets.CrowSPairs` / `fairLMs/datasets/resources/crows_pairs/` |
 | StereoSet (intersentence, validation) | HF `stereoset` |
 | XNLI religion | religion-term swaps + templates (`n_max=100000`) |
 
@@ -40,10 +54,13 @@ Token scoring uses `score_sentence` in `encoder_only/utils.py`.
 
 ## How to run
 
-From the **repository root**:
+**Preferred:** use the public API above (and/or examples under `examples/` at the repo root).
+
+**Optional legacy demo** from the repository root:
 
 ```bash
-python -m encoder_only.intrinsic_bias.probability_based.pseudo_log_likelihood_metrics.aul.main
+pip install -e .
+python -m fairLMs.definitions.encoder_only.intrinsic_bias.probability_based.pseudo_log_likelihood_metrics.aul.main
 ```
 
 ## Output \& Results

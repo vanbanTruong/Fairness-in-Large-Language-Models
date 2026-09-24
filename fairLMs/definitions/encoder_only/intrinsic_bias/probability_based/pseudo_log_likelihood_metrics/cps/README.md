@@ -12,23 +12,37 @@ Masking only the shared tokens is what distinguishes CPS from the naive
 full-sentence PLL comparison (see `../pll/`): it avoids directly scoring the
 swapped words themselves, whose corpus frequencies differ.
 
+## Public API
+
+```python
+from fairLMs.definitions import CrowSPairsScore
+from fairLMs.datasets import CrowSPairs
+from fairLMs.definitions.models import HuggingFaceModel
+
+result = CrowSPairsScore().compute(
+    model=HuggingFaceModel("bert-base-uncased", task="mlm"),
+    dataset=CrowSPairs(n_max=32),
+)
+print(result.score)
+```
+
 ## Files
 
 | File | Purpose |
 |---|---|
-| `main.py` | Entry point: loads BERT, loads the three datasets, runs CPS, writes `cps_results.csv` |
+| `main.py` | Short public-API demo using `CrowSPairsScore`; writes results CSV for continuity |
 | `cps.py` | Core metric: shared-token alignment + `score_sentence_cps()` + `compute_cps()` |
-| `crows_pairs_anonymized.csv` | Bundled CrowS-Pairs dataset (1,508 pairs) |
+| `crows_pairs_anonymized.csv` | Prefer `fairLMs.datasets.CrowSPairs`; its small canonical CSV is bundled under `fairLMs/datasets/resources/crows_pairs/` |
 | `cps_results.csv` | Output of the last run |
 
 The token alignment helper `get_span()` (difflib over the two token-id
-sequences) lives in `encoder_only/utils.py`.
+sequences) lives in `fairLMs.definitions.utils`.
 
 ## Datasets
 
 | Dataset | Source |
 |---|---|
-| CrowS-Pairs (all 9 bias categories, pooled) | bundled CSV in this directory |
+| CrowS-Pairs (all 9 bias categories, pooled) | `fairLMs.datasets.CrowSPairs` / `fairLMs/datasets/resources/crows_pairs/` |
 | StereoSet (intersentence, validation, pooled) | HuggingFace `stereoset` / `intersentence` |
 | XNLI religion | religion-term swaps + templates (`n_max=100000`) |
 
@@ -37,7 +51,7 @@ sequences) lives in `encoder_only/utils.py`.
 | Parameter | Value | Where |
 |---|---|---|
 | Model | `bert-base-uncased` (`BertForMaskedLM`) | `main.py` → `load_bert()` |
-| Token alignment | `difflib.SequenceMatcher` over token ids; positions marked `equal` are the shared span; `[CLS]`/`[SEP]` excluded | `cps.py`, `utils.py` → `get_span()` |
+| Token alignment | `difflib.SequenceMatcher` over token ids; positions marked `equal` are the shared span; `[CLS]`/`[SEP]` excluded | `cps.py`, `fairLMs.definitions.utils` → `get_span()` |
 | Sentence score | Sum of log P(shared token) with each shared token masked one at a time | `score_sentence_cps()` |
 | Pair decision | stereo counts iff `pro_score > anti_score` (scores rounded to 3 decimals; ties count as non-stereo) | `cps.py` |
 | Protocol | single full-data pass (no multi-seed subsample) | `main.py` |
@@ -52,10 +66,13 @@ pip install "datasets<3"  # for script datasets where needed
 
 ## How to run
 
-From the **repository root**:
+**Preferred:** use the public API above (and/or examples under `examples/` at the repo root).
+
+**Optional legacy demo** from the repository root:
 
 ```bash
-python -m encoder_only.intrinsic_bias.probability_based.pseudo_log_likelihood_metrics.cps.main
+pip install -e .
+python -m fairLMs.definitions.encoder_only.intrinsic_bias.probability_based.pseudo_log_likelihood_metrics.cps.main
 ```
 
 ## Output \& Results

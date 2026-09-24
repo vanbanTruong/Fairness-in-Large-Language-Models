@@ -1,18 +1,13 @@
 # The taxonomy
 
-FairLMs has two layers, and knowing which one you are looking at explains most
-of the repository's shape.
-
-`fairLMs/metrics/` is the **public surface**: 33 metric classes grouped by
-family, each exposing `compute(model, data) -> MetricResult`. This is what you
-import, and it is what the versioning promise covers.
-
-`fairLMs/definition/` holds the **implementations**, arranged not by software
-convenience but along the two axes the literature actually organises bias
-measurement by, namely model architecture and where the bias is measured:
+`fairLMs/definitions/` is both the public surface and the single implementation
+tree. Its root exports 33 metric classes grouped by family, each exposing
+`compute(model, data) -> MetricResult`. The architecture directories below it
+organise the low-level calculations along the two axes used in the literature:
+model architecture and where the bias is measured.
 
 ```text
-fairLMs/definition/
+fairLMs/definitions/
 ├── encoder_only/
 │   ├── intrinsic_bias/
 │   │   ├── similarity_based/            weat, seat, ceat
@@ -72,33 +67,34 @@ Each cell has a walkthrough: [intrinsic × encoder-only](guides/intrinsic-encode
 [extrinsic × decoder-only](guides/extrinsic-decoder.md),
 [extrinsic × encoder-decoder](guides/extrinsic-encdec.md).
 
-## Why the split exists
+## Why both layers share one package
 
-Keeping `definition/` separate from `metrics/` buys three things:
+Keeping the public and low-level layers under `definitions/` provides three
+things:
 
 1. **A stable public surface.** Internals can be reorganised, optimised or
-   corrected without breaking user code, because nothing outside the library
-   imports from `definition/`.
+   corrected without changing the root-level classes users import.
 2. **One canonical implementation per published metric**, findable by its place
    in the taxonomy rather than by guessing a module name.
 3. **Runnable references.** Every leaf carries a `main.py` demonstrating the
    public API on real data, plus its own README:
 
    ```bash
-   python -m fairLMs.definition.encoder_only.intrinsic_bias.probability_based.pseudo_log_likelihood_metrics.cps.main
+   python -m fairLMs.definitions.encoder_only.intrinsic_bias.probability_based.pseudo_log_likelihood_metrics.cps.main
    ```
 
 !!! warning "Leaf runners are repo-only"
     Some leaves read data files that sit beside them and are **not** shipped in
-    the wheel; only `fairLMs/data/` (CrowS-Pairs and BBQ) is packaged. The
+    the wheel; only the small CrowS-Pairs resource under
+    `fairLMs/datasets/resources/` is packaged. The
     performance-disparity and attention-head leaves in particular need a source
     checkout, and several encoder-decoder leaves download XSum, Europarl,
-    WinoBias or XNLI at runtime. The public metrics in `fairLMs.metrics` have no
+    WinoBias or XNLI at runtime. The public metrics in `fairLMs.definitions` have no
     such dependency.
 
 ## Where the diagnostics sit
 
-`fairLMs/diagnostics/` is deliberately outside this taxonomy. It audits datasets
+`fairLMs/datasets/diagnostics/` is deliberately outside the model-definition taxonomy. It audits datasets
 and score tables rather than models, so neither axis applies: there is no
 architecture, and the intrinsic/extrinsic distinction is about models, not
 evidence. See [Auditing a dataset](guides/dataset-audit.md).

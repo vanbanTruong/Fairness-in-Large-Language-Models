@@ -42,7 +42,7 @@ class IterativeNullspaceProjection(Mitigator):
     --------
     >>> from fairLMs.mitigation import (
     ...     AttributeLabeledVectors, IterativeNullspaceProjection)
-    >>> from fairLMs.models.base import ModelAdapter
+    >>> from fairLMs.definitions.models.base import ModelAdapter
     >>> class Stub(ModelAdapter):
     ...     name = "stub"
     ...     task = "encoder"

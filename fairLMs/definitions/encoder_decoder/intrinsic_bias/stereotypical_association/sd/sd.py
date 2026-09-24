@@ -63,6 +63,37 @@ _PREDICT_FOR = {
     "age_accuracy":     predict_age,
 }
 
+#: Label domain each built-in scorer can actually score. A gold label outside
+#: its domain scores 0.5 (chance) rather than raising, so callers need this to
+#: tell "the model was undecided" from "I passed the wrong label vocabulary".
+LABEL_DOMAIN_FOR = {
+    "pronoun_accuracy": ("male", "female"),
+    "age_accuracy":     ("young", "old"),
+}
+
+
+def resolve_predict_fn(metric_fn, predict_fn=None):
+    """Pair a scorer with the prediction routine that produces its labels.
+
+    Each built-in scorer is meaningful only alongside a specific prediction
+    routine — ``pronoun_accuracy`` grades French gender cues, ``age_accuracy``
+    grades French age cues — so the two are looked up together. A custom
+    ``metric_fn`` is therefore accepted only with an explicit ``predict_fn``,
+    rather than silently mis-paired with a built-in predictor.
+    """
+    if predict_fn is not None:
+        return predict_fn
+    try:
+        return _PREDICT_FOR[metric_fn.__name__]
+    except (AttributeError, KeyError):
+        raise ValueError(
+            f"No prediction routine is paired with metric_fn="
+            f"{getattr(metric_fn, '__name__', metric_fn)!r}. Either use a "
+            f"built-in scorer ({', '.join(sorted(_PREDICT_FOR))}), or pass "
+            f"predict_fn=<callable(model, tokenizer, sentence) -> str> "
+            f"alongside your own metric_fn."
+        ) from None
+
 
 def compute_sd(
     model: AutoModelForSeq2SeqLM,
@@ -73,9 +104,10 @@ def compute_sd(
     anti_labels:       List[str],
     max_new_tokens:    int = 128,
     metric_fn=pronoun_accuracy,
+    predict_fn=None,
 ) -> Tuple[float, float, float, list]:
 
-    predict_fn = _PREDICT_FOR[metric_fn.__name__]
+    predict_fn = resolve_predict_fn(metric_fn, predict_fn)
 
     stereo_scores, anti_scores, rows = [], [], []
 

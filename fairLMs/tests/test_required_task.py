@@ -11,9 +11,9 @@ where a head was randomly initialized, as plausible numbers from noise.
 import pytest
 import torch
 
-from fairLMs.metrics import METRIC_REGISTRY, CrowSPairsScore, WEAT
-from fairLMs.metrics.resolve import check_task, get_tokenizer_model
-from fairLMs.models.base import LoadedModel
+from fairLMs.definitions import METRIC_REGISTRY, CrowSPairsScore, WEAT
+from fairLMs.definitions.resolve import check_task, get_tokenizer_model
+from fairLMs.definitions.models.base import LoadedModel
 
 
 def _loaded(task):

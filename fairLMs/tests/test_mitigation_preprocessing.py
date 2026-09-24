@@ -254,14 +254,14 @@ class TestDebiasingPrompt:
             DebiasingPrompt().apply(None, PromptSpec(templates=["A: {query}"]))
 
     def test_an_encoder_only_model_is_refused_as_non_generative(self):
-        from fairLMs.applicability import TASK_PROFILES
+        from fairLMs.definitions.core.applicability import TASK_PROFILES
 
         spec = PromptSpec(templates=["A: {query}"], queries=["x"])
         with pytest.raises(TypeError, match="decoder_only"):
             DebiasingPrompt().apply(TASK_PROFILES["mlm"], spec)
 
     def test_a_generative_model_is_accepted(self):
-        from fairLMs.applicability import TASK_PROFILES
+        from fairLMs.definitions.core.applicability import TASK_PROFILES
 
         spec = PromptSpec(templates=["A: {query}"], queries=["x"])
         assert DebiasingPrompt().apply(TASK_PROFILES["causal"], spec).category == "pre"

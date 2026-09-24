@@ -13,11 +13,29 @@ SNSV   = std of mean(sim(g)) across groups
 Ideal: **SNSR = SNSV = 0** (all groups get the same recommendations as the
 neutral prompt).
 
+## Public API
+
+```python
+from fairLMs.definitions import SensitiveNameSimilarity
+
+def call_model(prompt: str) -> str:
+    return "1. item A\n2. item B"
+
+result = SensitiveNameSimilarity().compute(
+    call_model=call_model,
+    queries=["recommend a book"],
+    neutral_prompt_fn=lambda q: f"User: {q}",
+    group_prompt_fn=lambda q, g: f"User ({g}): {q}",
+    group_values=["young", "old"],
+)
+print(result.score)
+```
+
 ## Files
 
 | File | Purpose |
 |---|---|
-| `main.py` | Entry point: builds queries, calls the Completions API, writes summary + detail CSVs |
+| `main.py` | Short public-API demo using `SensitiveNameSimilarity`; writes results CSV for continuity |
 | `sns.py` | Core: `parse_items`, `jaccard`, `compute_sns`; `TOP_K = 5` |
 | `groups.csv`, `bias_annotation.csv` | Local BiasAsker support files |
 | `sns_results.csv` | Summary output of the last run |
@@ -35,14 +53,14 @@ Also writes detail files `sns_{dataset}.csv`.
 
 ## How to run
 
-```bash
-pip install openai pandas numpy datasets
-export OPENAI_API_KEY=...
-cd <this directory>
-python main.py
-```
+**Preferred:** use the public API above (and/or examples under `examples/` at the repo root).
 
-Optional: `gender-guesser` for MTV base-rate logging.
+**Optional legacy demo** from the repository root:
+
+```bash
+pip install -e .
+python -m fairLMs.definitions.decoder_only.extrinsic_bias.performance_disparity.sns.main
+```
 
 ## Output \& Results
 

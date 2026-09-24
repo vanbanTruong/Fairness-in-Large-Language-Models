@@ -6,14 +6,14 @@
 
 Each benchmark retains its own license, and where it comes from differs. Some are redistributed with the package, some are pulled from the Hugging Face Hub the first time you load them, and some are only distributed from their own project page, so their loader needs a `root=` pointing at your copy and will not download anything:
 
-- **Hugging Face Hub, downloaded at first use**: `BOLD`, `BiasInBios`, `EquityEvaluationCorpus`, `GAP`, `HONEST`, `HolisticBias`, `RealToxicityPrompts`, `StereoSet`, `WinoBias`, `Winogender`, `XNLIReligionPairs`
+- **Hugging Face Hub, downloaded at first use**: `BBQ`, `BOLD`, `BiasInBios`, `EquityEvaluationCorpus`, `GAP`, `HONEST`, `HolisticBias`, `RealToxicityPrompts`, `StereoSet`, `WinoBias`, `Winogender`, `XNLIReligionPairs`
 - **built from bundled templates; norms supplied by the caller**: `TrustGPT`
-- **bundled with the package**: `BBQ`, `CrowSPairs`
+- **bundled with the package**: `CrowSPairs`
 - **local copy required (`root=`)**: `BiasNLI`, `GrepBiasIR`, `RedditBias`, `UnQover`
 
 | Loader | Alias | Description | Data origin | Constructor arguments |
 |---|---|---|---|---|
-| `BBQ` | n/a | Load BBQ examples from bundled (or legacy) jsonl category files. | bundled with the package | `data_dir`, `categories`, `context_condition`, `n_max` |
+| `BBQ` | n/a | Load BBQ examples from the Hub cache or a local JSONL directory. | Hugging Face Hub, downloaded at first use | `data_dir`, `categories`, `context_condition`, `n_max`, `hf_path`, `revision` |
 | `BOLD` | n/a | Load BOLD open-ended generation prompts, one example per prompt. | Hugging Face Hub, downloaded at first use | `domains`, `root`, `include_wikipedia`, `n_max`, `hf_path`, `revision` |
 | `BiasInBios` | n/a | Load the Hugging Face ``LabHC/bias_in_bios`` dataset. | Hugging Face Hub, downloaded at first use | `split`, `n_max`, `hf_path`, `revision` |
 | `BiasNLI` | n/a | Load the retained Bias-NLI release as premise/hypothesis pairs. | local copy required (`root=`) | `root`, `split`, `n_max` |

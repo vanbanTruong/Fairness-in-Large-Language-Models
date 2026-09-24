@@ -1,6 +1,6 @@
 """Rate-gap audit for an unfamiliar row-level score schema."""
 
-from fairLMs.diagnostics import (
+from fairLMs.datasets.diagnostics import (
     DatasetAuditSpec,
     ScoredGroups,
     ScoreRateTransform,

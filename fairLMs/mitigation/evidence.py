@@ -1,15 +1,15 @@
 """Evidence containers introduced by the mitigation layer.
 
 **Reuse before inventing.** Most mitigators consume a container that already
-exists: :class:`~fairLMs.metrics.PromptPairs`,
-:class:`~fairLMs.metrics.GroupWordPairs`,
-:class:`~fairLMs.metrics.DemographicPrompts` and the rest of
-:mod:`fairLMs.metrics.data`, or
-:class:`~fairLMs.diagnostics.LabeledScoredGroups` for the group-fairness
+exists: :class:`~fairLMs.definitions.PromptPairs`,
+:class:`~fairLMs.definitions.GroupWordPairs`,
+:class:`~fairLMs.definitions.DemographicPrompts` and the rest of
+:mod:`fairLMs.definitions.data`, or
+:class:`~fairLMs.datasets.diagnostics.LabeledScoredGroups` for the group-fairness
 post-processing methods. Only the shapes with no existing home are defined here.
 
 ``LabeledScoredGroups`` is deliberately **not** here: it composes
-:class:`~fairLMs.diagnostics.ScoredGroups`, and the diagnostics layer uses it
+:class:`~fairLMs.datasets.diagnostics.ScoredGroups`, and the diagnostics layer uses it
 too, so it lives next to the type it composes and is re-exported from
 :mod:`fairLMs.mitigation` for convenience.
 
@@ -24,7 +24,7 @@ from dataclasses import dataclass, field
 from numbers import Real
 from typing import Any, Callable, Mapping, Optional, Sequence, Tuple
 
-from fairLMs.diagnostics._utils import (
+from fairLMs.datasets.diagnostics._utils import (
     freeze_json_mapping,
     normalize_string_sequence,
     require_nonempty_string,
@@ -62,7 +62,7 @@ def _check_texts(value: Any, field_name: str) -> Tuple[str, ...]:
 class TextRecords:
     """Free-text rows with an explicit field mapping, for corpus transforms.
 
-    Follows the convention of :mod:`fairLMs.diagnostics.evidence`: the caller
+    Follows the convention of :mod:`fairLMs.datasets.diagnostics.evidence`: the caller
     declares which field carries the text, rather than the container guessing a
     column name.
     """

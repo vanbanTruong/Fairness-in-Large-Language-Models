@@ -1,6 +1,6 @@
 # diagnostics
 
-::: fairLMs.diagnostics
+::: fairLMs.datasets.diagnostics
     options:
       show_root_heading: true
       show_source: true

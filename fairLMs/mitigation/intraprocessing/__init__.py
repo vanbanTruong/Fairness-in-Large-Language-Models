@@ -1,6 +1,6 @@
 """Intra-processing mitigators: gray-box edits to a loaded model.
 
-Every mitigator here returns a :class:`~fairLMs.models.base.ModelAdapter`, so supported metrics can evaluate the edited behavior through the same API.
+Every mitigator here returns a :class:`~fairLMs.definitions.models.base.ModelAdapter`, so supported metrics can evaluate the edited behavior through the same API.
 Capabilities describe the edited outputs, not capabilities of the base model.
 
 .. warning::

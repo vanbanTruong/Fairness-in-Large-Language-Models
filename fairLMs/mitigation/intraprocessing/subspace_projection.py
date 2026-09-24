@@ -6,7 +6,7 @@ from typing import Any, Optional
 
 import numpy as np
 
-from fairLMs.metrics.data import GroupWordPairs, PromptPairs
+from fairLMs.definitions.data import GroupWordPairs, PromptPairs
 from fairLMs.mitigation.base import MitigationResult, Mitigator
 from fairLMs.mitigation.evidence import AttributeLabeledVectors
 from fairLMs.mitigation.intraprocessing._projection import (
@@ -39,9 +39,9 @@ class SubspaceProjection(Mitigator):
     Examples
     --------
     >>> import numpy as np
-    >>> from fairLMs.applicability import AccessLevel, ModelProfile
+    >>> from fairLMs.definitions.core.applicability import AccessLevel, ModelProfile
     >>> from fairLMs.mitigation import AttributeLabeledVectors, SubspaceProjection
-    >>> from fairLMs.models.base import ModelAdapter
+    >>> from fairLMs.definitions.models.base import ModelAdapter
     >>> class Stub(ModelAdapter):
     ...     name = "stub"
     ...     task = "encoder"
@@ -56,7 +56,7 @@ class SubspaceProjection(Mitigator):
     >>> outcome = SubspaceProjection().apply(Stub(), evidence)
     >>> outcome.category
     'intra'
-    >>> from fairLMs.models.base import ModelAdapter
+    >>> from fairLMs.definitions.models.base import ModelAdapter
     >>> isinstance(outcome.result, ModelAdapter)      # re-usable by any metric
     True
     >>> np.round(outcome.result.projection, 6)        # first axis removed

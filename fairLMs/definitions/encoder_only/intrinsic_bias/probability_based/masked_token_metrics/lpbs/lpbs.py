@@ -1,7 +1,7 @@
 import math
 import numpy as np
 import torch
-from encoder_only.utils import get_mask_fill_probs, get_token_prob, build_masked_sentence
+from fairLMs.definitions.encoder_only.utils import get_mask_fill_probs, get_token_prob, build_masked_sentence
 
 def get_mask_fill_probs(sentence, tokenizer, model, mask_position=0):
     
@@ -32,7 +32,7 @@ def build_masked_sentence(template, term_placeholder, term, tokenizer):
     mask_str = " ".join([tokenizer.mask_token] * n_tokens)
     return template.replace(term_placeholder, mask_str)
 
-DEFAULT_TEMPLATE = "{Group} is a {Attribute}"
+DEFAULT_TEMPLATE = "GGG is a XXX"
 
 def _attribute_bias_score(attribute, gender_words, template, tokenizer, model,
                           gender_comes_first=True):

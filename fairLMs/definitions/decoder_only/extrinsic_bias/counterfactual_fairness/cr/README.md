@@ -9,11 +9,25 @@ changes.
 CR = (# pairs where top1(factual) ≠ top1(counterfactual)) / (# valid pairs)
 ```
 
+## Public API
+
+```python
+from fairLMs.definitions import CounterfactualRobustness
+from fairLMs.definitions.models import OpenAIModel
+
+result = CounterfactualRobustness().compute(
+    model=OpenAIModel(),
+    factual_prompts=["a male, age: 30, job: clerk"],
+    counterfactual_prompts=["a female, age: 30, job: clerk"],
+)
+print(result.score)
+```
+
 ## Files
 
 | File | Purpose |
 |---|---|
-| `main.py` | Entry point: builds factual/CF pairs, runs CR, writes `cr_results.csv` |
+| `main.py` | Short public-API demo using `CounterfactualRobustness`; writes results CSV for continuity |
 | `cr.py` | Core: OpenAI client, `_top1_token`, `compute_cr` |
 | `cr_results.csv` | Output of the last run |
 
@@ -28,14 +42,14 @@ CR = (# pairs where top1(factual) ≠ top1(counterfactual)) / (# valid pairs)
 
 ## How to run
 
-```bash
-pip install openai pandas numpy datasets scikit-learn
-cd <this directory>
-python main.py
-```
+**Preferred:** use the public API above (and/or examples under `examples/` at the repo root).
 
-Requires a working OpenAI API key. Note: `get_client()` currently sets
-`key = ""` and raises if empty (error message mentions `OPENAI_API_KEY`).
+**Optional legacy demo** from the repository root:
+
+```bash
+pip install -e .
+python -m fairLMs.definitions.decoder_only.extrinsic_bias.counterfactual_fairness.cr.main
+```
 
 ## Output \& Results
 

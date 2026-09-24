@@ -3,19 +3,19 @@
 import json
 import numpy as np
 import torch
-from fairLMs.models.base import LoadedModel, ModelAdapter
+from fairLMs.definitions.models.base import LoadedModel, ModelAdapter
 from fairLMs.mitigation.intraprocessing import ProjectedModelAdapter
 
 import pytest
 
-from fairLMs.metrics import GroupPredictions, ScorePair
+from fairLMs.definitions import GroupPredictions, ScorePair
 from fairLMs.mitigation import (
     ComparisonReport,
     MetricDelta,
     MetricEvaluation,
     compare_before_after,
 )
-from fairLMs.metrics import AccuracyDisparity, EqualOpportunityGap
+from fairLMs.definitions import AccuracyDisparity, EqualOpportunityGap
 
 
 class TestReporting:

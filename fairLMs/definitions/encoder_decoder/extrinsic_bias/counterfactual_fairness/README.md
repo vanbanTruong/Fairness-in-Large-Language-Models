@@ -6,11 +6,26 @@ logistic regression tries to predict the original demographic group from that
 embedding. **Lower AUC** ≈ group identity is less recoverable after masking ≈
 fairer representations (chance = 0.5).
 
+## Public API
+
+```python
+from fairLMs.definitions import CounterfactualAucScore
+from fairLMs.definitions.models import HuggingFaceModel
+
+result = CounterfactualAucScore().compute(
+    model=HuggingFaceModel("facebook/mbart-large-50-many-to-many-mmt", task="seq2seq"),
+    sentences=["The doctor said ___ would arrive."],
+    labels=[0],
+    n_seeds=1,
+)
+print(result.score)
+```
+
 ## Files
 
 | File | Purpose |
 |---|---|
-| `main.py` | Entry point: loads mBART, builds masked sentences + labels, writes `auc_results.csv` |
+| `main.py` | Short public-API demo using `CounterfactualAucScore`; writes results CSV for continuity |
 | `auc.py` | Core: encoder mean-pool embeddings, multi-seed LR AUC (`compute_auc`) |
 | `auc_results.csv` | Output of the last run |
 
@@ -26,10 +41,13 @@ fairer representations (chance = 0.5).
 
 ## How to run
 
+**Preferred:** use the public API above (and/or examples under `examples/` at the repo root).
+
+**Optional legacy demo** from the repository root:
+
 ```bash
-pip install torch transformers datasets pandas scikit-learn
-cd <this directory>
-python main.py
+pip install -e .
+python -m fairLMs.definitions.encoder_decoder.extrinsic_bias.counterfactual_fairness.main
 ```
 
 ## Output \& Results

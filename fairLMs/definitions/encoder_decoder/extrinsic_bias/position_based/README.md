@@ -16,11 +16,24 @@ NPD = W₁(p_ref, p_model) / (K − 1)
 0 = same positional profile; larger = the model systematically favors
 different parts of the document (e.g., lead bias).
 
+## Public API
+
+```python
+from fairLMs.definitions import NormalizedPositionDistance
+from fairLMs.definitions.models import HuggingFaceModel
+
+result = NormalizedPositionDistance().compute(
+    model=HuggingFaceModel("facebook/mbart-large-50-many-to-many-mmt", task="seq2seq"),
+    articles=["summarize: A short news article about an event."],
+)
+print(result.score)
+```
+
 ## Files
 
 | File | Purpose |
 |---|---|
-| `main.py` | Entry point: loads mBART, summarizes each dataset, writes `npd_results.csv` |
+| `main.py` | Short public-API demo using `NormalizedPositionDistance`; writes results CSV for continuity |
 | `npd.py` | Core: sentence splitting, TF-IDF position mapping, EMD (`compute_npd`, `generate_summary`) |
 | `npd_results.csv` | Output of the last run |
 
@@ -39,10 +52,13 @@ WinoMT and XNLI have no gold summaries → uniform reference distribution.
 
 ## How to run
 
+**Preferred:** use the public API above (and/or examples under `examples/` at the repo root).
+
+**Optional legacy demo** from the repository root:
+
 ```bash
-pip install torch transformers datasets scikit-learn scipy pandas
-cd <this directory>
-python main.py
+pip install -e .
+python -m fairLMs.definitions.encoder_decoder.extrinsic_bias.position_based.main
 ```
 
 ## Output \& Results

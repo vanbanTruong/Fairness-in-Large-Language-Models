@@ -36,7 +36,7 @@ class SelfDebiasedDecoder(torch.nn.Module):
 
     @property
     def device(self):
-        from fairLMs.utils.pll import _input_device
+        from fairLMs.definitions.utils.pll import _input_device
 
         return _input_device(self.original)
 

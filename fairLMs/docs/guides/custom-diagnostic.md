@@ -7,7 +7,7 @@ either produces a value or returns the same non-ready state.
 ```python
 from typing import Any
 
-from fairLMs.diagnostics import (
+from fairLMs.datasets.diagnostics import (
     ComponentPlan,
     ComponentResult,
     DatasetAuditSpec,
@@ -78,8 +78,9 @@ applicability, not outcomes.
 
 ## Registering
 
-Add the class to `DIAGNOSTIC_REGISTRY` in `fairLMs/diagnostics/registry.py`,
-keyed on its `name`, and export it from `fairLMs/diagnostics/__init__.py`.
+Add the class to `DIAGNOSTIC_REGISTRY` in
+`fairLMs/datasets/diagnostics/registry.py`, keyed on its `name`, and export it
+from `fairLMs/datasets/diagnostics/__init__.py`.
 Registration enrols it in the diagnostics contract suite:
 
 ```bash

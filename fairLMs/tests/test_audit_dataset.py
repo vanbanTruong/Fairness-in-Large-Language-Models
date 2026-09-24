@@ -1,4 +1,4 @@
-"""Contract tests for ``audit_dataset`` and the ``fairLMs.diagnostics`` surface.
+"""Contract tests for ``audit_dataset`` and the ``fairLMs.datasets.diagnostics`` surface.
 
 Everything asserted here is part of the published contract -- component status,
 reason code, serialized payload, numeric value -- never an implementation
@@ -20,9 +20,9 @@ from types import MappingProxyType
 
 import pytest
 
-import fairLMs.diagnostics as diagnostics_package
-from fairLMs.diagnostics import registry as registry_module
-from fairLMs.diagnostics import (
+import fairLMs.datasets.diagnostics as diagnostics_package
+from fairLMs.datasets.diagnostics import registry as registry_module
+from fairLMs.datasets.diagnostics import (
     BACKEND_CONSTRUCTION_SLOTS,
     CONSTRUCTION_SLOTS,
     DIAGNOSTIC_REGISTRY,
@@ -725,7 +725,7 @@ def test_every_public_symbol_named_in_all_actually_imports():
     assert exported == sorted(exported), "__all__ is not in sorted order"
 
     namespace: dict = {}
-    exec("from fairLMs.diagnostics import *", namespace)  # noqa: S102
+    exec("from fairLMs.datasets.diagnostics import *", namespace)  # noqa: S102
     assert [name for name in exported if name not in namespace] == []
 
     for name in exported:
@@ -823,7 +823,7 @@ _BACKEND_SLOT_DOC_SITES = (
     "docs/guides/dataset-audit.md",
     "docs/registry/diagnostics.md",
     "scripts/gen_registry_docs.py",
-    "diagnostics/registry.py",
+    "datasets/diagnostics/registry.py",
 )
 
 #: Sites that must name the authority for "which slots need a backend".
@@ -832,7 +832,7 @@ _BACKEND_SLOT_POINTER_SITES = (
     "docs/guides/dataset-audit.md",
     "docs/registry/diagnostics.md",
     "scripts/gen_registry_docs.py",
-    "diagnostics/registry.py",
+    "datasets/diagnostics/registry.py",
 )
 
 _ALWAYS_BLOCKED = re.compile(r"always[^.]{0,80}blocked", re.IGNORECASE)

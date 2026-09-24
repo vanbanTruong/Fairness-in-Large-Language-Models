@@ -14,11 +14,27 @@ averaged on stereo and anti sets:
 0 = equal accuracy; negative ΔS means the model does better on stereotypical
 inputs (stereotype reliance).
 
+## Public API
+
+```python
+from fairLMs.definitions import StereotypicalDivergence
+from fairLMs.definitions.models import HuggingFaceModel
+
+result = StereotypicalDivergence().compute(
+    model=HuggingFaceModel("t5-small", task="seq2seq"),
+    stereo_sentences=["translate English to French: The doctor is busy."],
+    stereo_labels=["Le médecin est occupé."],
+    anti_sentences=["translate English to French: The nurse is busy."],
+    anti_labels=["L'infirmière est occupée."],
+)
+print(result.score)
+```
+
 ## Files
 
 | File | Purpose |
 |---|---|
-| `main.py` | Entry point: loads mT5, builds stereo/anti sets, writes `sd_results.csv` |
+| `main.py` | Short public-API demo using `StereotypicalDivergence`; writes results CSV for continuity |
 | `sd.py` | Core: cue scoring (`predict_gender` / `predict_age`), accuracy, `compute_sd` |
 | `sd_results.csv` | Output of the last run |
 
@@ -36,10 +52,13 @@ inputs (stereotype reliance).
 
 ## How to run
 
+**Preferred:** use the public API above (and/or examples under `examples/` at the repo root).
+
+**Optional legacy demo** from the repository root:
+
 ```bash
-pip install torch transformers datasets pandas
-cd <this directory>
-python main.py
+pip install -e .
+python -m fairLMs.definitions.encoder_decoder.intrinsic_bias.stereotypical_association.sd.main
 ```
 
 ## Output \& Results

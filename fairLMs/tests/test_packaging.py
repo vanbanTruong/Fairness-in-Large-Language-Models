@@ -1,7 +1,7 @@
 """Packaging guards.
 
-`fairLMs.metrics` eagerly imports every metric family, so any third-party
-module imported at module scope under `fairLMs/definition/` becomes a hard
+`fairLMs.definitions` eagerly imports every metric family, so any third-party
+module imported at module scope under `fairLMs/definitions/` becomes a hard
 requirement of `import fairLMs`. A dependency that is only listed in an extra
 therefore breaks a plain `pip install fairLMs` — which is exactly what happened
 with `wordfreq`, `nltk` and `scikit-learn` before 0.2.0.
@@ -22,20 +22,13 @@ import pytest
 REPO_ROOT = pathlib.Path(__file__).resolve().parent.parent
 PACKAGE = REPO_ROOT
 RUNTIME_TREES = (
-    "data",
-    "definition",
-    "diagnostics",
-    "metrics",
+    "datasets",
+    "definitions",
     "mitigation",
-    "models",
-    "utils",
 )
 RUNTIME_MODULES = (
     "__init__.py",
     "_version.py",
-    "applicability.py",
-    "params.py",
-    "provenance.py",
 )
 
 # import name -> distribution name, where they differ
@@ -96,10 +89,7 @@ def _module_level_third_party_imports() -> dict[str, set[str]]:
         "xnli.py",
     ))
     for tree in RUNTIME_TREES:
-        if tree == "data":
-            paths.extend((PACKAGE / tree).glob("*.py"))
-        else:
-            paths.extend((PACKAGE / tree).rglob("*.py"))
+        paths.extend((PACKAGE / tree).rglob("*.py"))
 
     for path in paths:
         try:
@@ -168,6 +158,38 @@ def test_runtime_version_matches_version_module():
     from fairLMs import _version
 
     assert fairLMs.__version__ == _version.__version__
+
+
+def test_definitions_is_the_primary_metric_api():
+    import fairLMs
+    from fairLMs import definitions
+
+    assert fairLMs.definitions is definitions
+    assert len(definitions.list_metrics()) == 33
+
+
+def test_definitions_exports_metric_model_and_resource_apis():
+    from fairLMs.definitions import HuggingFaceModel, WEAT, weat_c1
+    from fairLMs.definitions.models import HuggingFaceModel as NestedModel
+    from fairLMs.definitions.resources import weat_c1 as nested_word_set
+
+    assert HuggingFaceModel is NestedModel
+    assert weat_c1 is nested_word_set
+    assert WEAT.name == "weat"
+
+
+def test_runtime_root_contains_only_the_two_package_modules():
+    root_modules = {path.name for path in PACKAGE.glob("*.py")}
+    assert root_modules == {"__init__.py", "_version.py"}
+
+
+def test_large_dataset_snapshots_are_not_vendored():
+    datasets = PACKAGE / "datasets"
+    for legacy in (".hidden", "constrained_form", "open_ended"):
+        assert not (datasets / legacy).exists()
+    bundled = [path for path in (datasets / "resources").rglob("*") if path.is_file()]
+    assert bundled
+    assert max(path.stat().st_size for path in bundled) < 5 * 1024 * 1024
 
 
 def test_version_helper_script_agrees_with_package():

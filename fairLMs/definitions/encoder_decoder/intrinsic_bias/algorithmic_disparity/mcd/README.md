@@ -8,11 +8,24 @@ and Simpson concentration **D** (higher = fewer forms dominate). Means of H
 and D are reported per dataset on a **pooled** sentence set (no demographic
 group split in the current runner).
 
+## Public API
+
+```python
+from fairLMs.definitions import MorphologicalChoiceDivergence
+from fairLMs.definitions.models import HuggingFaceModel
+
+result = MorphologicalChoiceDivergence().compute(
+    model=HuggingFaceModel("t5-small", task="seq2seq"),
+    sentences=["translate English to French: The doctor is busy."],
+)
+print(result.score)
+```
+
 ## Files
 
 | File | Purpose |
 |---|---|
-| `main.py` | Entry point: loads T5, translates sentences, writes `mcd_results.csv` |
+| `main.py` | Short public-API demo using `MorphologicalChoiceDivergence`; writes results CSV for continuity |
 | `mcd.py` | Core: translation, stemming, per-stem entropy/Simpson (`compute_mcd`) |
 | `mcd_results.csv` | Output of the last run |
 
@@ -28,10 +41,13 @@ group split in the current runner).
 
 ## How to run
 
+**Preferred:** use the public API above (and/or examples under `examples/` at the repo root).
+
+**Optional legacy demo** from the repository root:
+
 ```bash
-pip install torch transformers datasets nltk pandas
-cd <this directory>
-python main.py
+pip install -e .
+python -m fairLMs.definitions.encoder_decoder.intrinsic_bias.algorithmic_disparity.mcd.main
 ```
 
 ## Output \& Results

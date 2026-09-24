@@ -129,7 +129,7 @@ The following complete example deliberately has equal group means but different
 event rates:
 
 ```python
-from fairLMs.diagnostics import (
+from fairLMs.datasets.diagnostics import (
     DatasetAuditSpec,
     ScoreRateTransform,
     ScoredGroups,
@@ -214,7 +214,7 @@ This hand-checkable example has equal group means and equal event rates under
 the rule `score >= 0.5`, yet its distributions differ:
 
 ```python
-from fairLMs.diagnostics import (
+from fairLMs.datasets.diagnostics import (
     DatasetAuditSpec,
     ScoredGroups,
     ScorerWasserstein1Gap,
@@ -294,7 +294,7 @@ Unknown conditions, duplicate roles, incomplete pairs, non-finite scores, and
 out-of-range scores are evidence errors rather than zero sensitivity.
 
 ```python
-from fairLMs.diagnostics import (
+from fairLMs.datasets.diagnostics import (
     DatasetAuditSpec,
     PairedScores,
     ScorerCounterfactualSensitivity,

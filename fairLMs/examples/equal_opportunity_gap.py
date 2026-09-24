@@ -1,6 +1,6 @@
 """Equal Opportunity gap via the public fairLMs API (synthetic labels)."""
 
-from fairLMs.metrics import EqualOpportunityGap
+from fairLMs.definitions import EqualOpportunityGap
 
 
 def main():

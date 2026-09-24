@@ -3,14 +3,14 @@
 Short scripts that use the **public** fairLMs API:
 
 ```python
-from fairLMs.metrics import CrowSPairsScore
+from fairLMs.definitions import CrowSPairsScore
 ```
 
-Leaf demos under `fairLMs/definition/**/main.py` also call this API and remain
-runnable via `python -m fairLMs.definition....main`. Prefer these examples
+Leaf demos under `fairLMs/definitions/**/main.py` also call this API and remain
+runnable via `python -m fairLMs.definitions....main`. Prefer these examples
 (or the Public API sections in each metric README) for new code.
 
-Dataset-first diagnostics use the separate `fairLMs.diagnostics` API because
+Dataset-first diagnostics use the separate `fairLMs.datasets.diagnostics` API because
 their applicability states and multi-part reports are not scalar model metrics.
 
 ## Quick start

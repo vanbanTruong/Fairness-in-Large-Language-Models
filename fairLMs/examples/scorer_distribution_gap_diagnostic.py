@@ -1,6 +1,6 @@
 """Wasserstein-1 audit for an unfamiliar row-level score schema."""
 
-from fairLMs.diagnostics import (
+from fairLMs.datasets.diagnostics import (
     DatasetAuditSpec,
     ScoredGroups,
     ScorerWasserstein1Gap,

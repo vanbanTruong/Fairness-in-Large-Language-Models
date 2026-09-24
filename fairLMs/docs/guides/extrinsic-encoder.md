@@ -21,13 +21,13 @@ fine-tuned classifier: `task="sequence_classification"`.
 
 ```python
 import torch
-from fairLMs.metrics import (
+from fairLMs.definitions import (
     ContextBasedDisparityScore,
     EqualOpportunityGap,
     FairInferenceScore,
 )
-from fairLMs.metrics.data import GroupPredictions
-from fairLMs.models import HuggingFaceModel
+from fairLMs.definitions.data import GroupPredictions
+from fairLMs.definitions.models import HuggingFaceModel
 
 nli = HuggingFaceModel(
     "textattack/bert-base-uncased-MNLI", task="sequence_classification"
@@ -124,7 +124,8 @@ print(sorted(bbq_rows[0]))
 
 Map `context_condition` onto `cond`, take `expected` from `label` (indexing into
 `ans0`/`ans1`/`ans2`), and fill `output` with your model's chosen answer. The
-BBQ files are bundled, so this runs offline.
+The loader downloads the requested BBQ category into the Hugging Face cache on
+first use. Pass `data_dir=` to use an existing local JSONL copy offline.
 
 ## Choosing between the three
 

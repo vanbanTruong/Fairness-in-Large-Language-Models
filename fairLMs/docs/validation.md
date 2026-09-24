@@ -35,8 +35,8 @@ alike, exactly as the official `metric.py` counts it.
 
 ```python
 from fairLMs.datasets import CrowSPairs
-from fairLMs.metrics import CrowSPairsScore
-from fairLMs.models import HuggingFaceModel
+from fairLMs.definitions import CrowSPairsScore
+from fairLMs.definitions.models import HuggingFaceModel
 
 result = CrowSPairsScore().compute(HuggingFaceModel("bert-base-uncased", task="mlm"), CrowSPairs())
 print(result.score)          # 60.48

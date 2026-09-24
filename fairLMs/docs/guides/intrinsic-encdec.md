@@ -14,13 +14,13 @@ and analysing the *text the model chose to produce*:
 ## End to end
 
 ```python
-from fairLMs.metrics import (
+from fairLMs.definitions import (
     LexicalFrequencyProportion,
     MorphologicalChoiceDivergence,
     StereotypicalDivergence,
 )
-from fairLMs.metrics.data import LabeledSentences, StereotypeLabelled
-from fairLMs.models import HuggingFaceModel
+from fairLMs.definitions.data import LabeledSentences, StereotypeLabelled
+from fairLMs.definitions.models import HuggingFaceModel
 
 t5 = HuggingFaceModel("t5-small", task="seq2seq")
 
@@ -107,7 +107,7 @@ Each built-in scorer grades the output of a specific prediction routine, so the
 two travel together. Use `age_accuracy` for the age variant:
 
 ```python
-from fairLMs.definition.encoder_decoder.intrinsic_bias.stereotypical_association.sd.sd import (
+from fairLMs.definitions.encoder_decoder.intrinsic_bias.stereotypical_association.sd.sd import (
     age_accuracy,
 )
 
@@ -141,8 +141,8 @@ anti-stereotypical **sentences**, and the attribute roles are ignored, so pass t
 same sentences again if you have no attribute sets.
 
 ```python
-from fairLMs.metrics import StereotypicalValueAttribution
-from fairLMs.metrics.data import WordSets
+from fairLMs.definitions import StereotypicalValueAttribution
+from fairLMs.definitions.data import WordSets
 
 stereo = ["The nurse said she was tired."]
 anti = ["The nurse said he was tired."]
@@ -159,7 +159,7 @@ have a precomputed unit vector of length `d_model`.
 ## Data sources
 
 None of these four has a bundled dataset. The leaf runners under
-`fairLMs/definition/encoder_decoder/` pull sentences from XSum, Europarl,
+`fairLMs/definitions/encoder_decoder/` pull sentences from XSum, Europarl,
 WinoBias and XNLI at runtime via `datasets.load_dataset`, which is worth knowing
 if you are working offline. The corpora are not vendored; only CrowS-Pairs and
 BBQ are.

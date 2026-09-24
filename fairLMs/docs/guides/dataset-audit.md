@@ -25,7 +25,7 @@ requires an explicit reference distribution *and* its provenance; the package
 will not infer a population prior from a dataset's name.
 
 ```python
-from fairLMs.diagnostics import (
+from fairLMs.datasets.diagnostics import (
     DatasetAuditSpec,
     ReferenceDistribution,
     RepresentationEvidence,
@@ -82,7 +82,7 @@ configuration, so a count matrix and the corpus it came from can never disagree
 about the lexicon, the window or the tokenization:
 
 ```python
-from fairLMs.diagnostics import (
+from fairLMs.datasets.diagnostics import (
     DatasetAuditSpec,
     LeakageExtractionConfig,
     SurfaceCooccurrenceExtractor,
@@ -148,13 +148,13 @@ score:
 backend: a sentence embedding, a grammatical-error count and a dependency-tree
 depth. Each is a registered class (`SemanticEquivalence`, `GrammarConsistency`,
 `DependencyDepthDisparity`) that takes `backend=`, and
-`fairLMs.diagnostics.backends` ships one reference implementation per protocol:
+`fairLMs.datasets.diagnostics.backends` ships one reference implementation per protocol:
 
 ```python
-from fairLMs.diagnostics import (
+from fairLMs.datasets.diagnostics import (
     DependencyDepthDisparity, GrammarConsistency, IdentityMaskConfig, SemanticEquivalence,
 )
-from fairLMs.diagnostics.backends import (
+from fairLMs.datasets.diagnostics.backends import (
     HuggingFaceEmbeddingBackend,   # any Hugging Face encoder; core dependencies only
     LanguageToolGrammarBackend,    # pip install "fairLMs[grammar]" (needs Java)
     SpacyDependencyBackend,        # pip install "fairLMs[parse]"; python -m spacy download en_core_web_sm
@@ -195,7 +195,7 @@ appear in. And a declared group with no rows, or any normalized component with a
 zero denominator, is `blocked` rather than reported as `0.0`.
 
 ```python
-from fairLMs.diagnostics import (
+from fairLMs.datasets.diagnostics import (
     CONSTRUCTION_SLOTS,
     DatasetEvidence,
     GroupedTexts,
@@ -244,7 +244,7 @@ asks for: registry membership never causes anything to run, and no component is
 ever chosen from a dataset's name.
 
 ```python
-from fairLMs.diagnostics import audit_dataset
+from fairLMs.datasets.diagnostics import audit_dataset
 
 audit_spec = DatasetAuditSpec(
     target_name="my-benchmark",
@@ -290,7 +290,7 @@ a model or infers groups from raw text.
 | `score_counterfactual_sensitivity` | mean absolute score change within complete declared pairs | native score units |
 
 ```python
-from fairLMs.diagnostics import (
+from fairLMs.datasets.diagnostics import (
     DatasetAuditSpec,
     ScoreRateTransform,
     ScoredGroups,
@@ -341,7 +341,7 @@ Paired sensitivity needs its own evidence type, because group marginals do not
 record which rows are counterparts:
 
 ```python
-from fairLMs.diagnostics import PairedScores, ScorerCounterfactualSensitivity
+from fairLMs.datasets.diagnostics import PairedScores, ScorerCounterfactualSensitivity
 
 paired = PairedScores(
     axis="declared_identity_intervention",

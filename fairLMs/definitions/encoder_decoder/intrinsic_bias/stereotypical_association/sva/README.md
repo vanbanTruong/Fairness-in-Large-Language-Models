@@ -17,11 +17,29 @@ The checked-in values (≈0.31–0.35) are well above this, i.e., the metric doe
 carry information (unlike sign-counting approaches whose chance baseline sits
 at their observed value).
 
+## Public API
+
+```python
+import numpy as np
+from fairLMs.definitions import StereotypicalValueAttribution
+from fairLMs.definitions.models import HuggingFaceModel
+
+result = StereotypicalValueAttribution().compute(
+    model=HuggingFaceModel("t5-small", task="seq2seq"),
+    stereo_sents=["The doctor said he would arrive soon."],
+    anti_sents=["The doctor said she would arrive soon."],
+    direction=np.zeros(512),
+    n_layers=6,
+    n_heads=8,
+)
+print(result.score)
+```
+
 ## Files
 
 | File | Purpose |
 |---|---|
-| `main.py` | Entry point: loads mT5, builds sentence sets, runs MC-Shapley, writes `sva_results.csv` |
+| `main.py` | Short public-API demo using `StereotypicalValueAttribution`; writes results CSV for continuity |
 | `sva.py` | Core: head-masking hooks, bias direction, coalition score, MC Shapley (`compute_sva`) |
 | `sva_results.csv` | Output of the last run |
 
@@ -38,19 +56,18 @@ at their observed value).
 
 ## How to run
 
-```bash
-pip install torch transformers datasets pandas
-cd <this directory>
-python main.py
-```
+**Preferred:** use the public API above (and/or examples under `examples/` at the repo root).
 
-**Cost warning**: each permutation re-encodes every sentence 144 times →
-50 × 144 ≈ 7,200 coalition evaluations. This is by far the slowest metric in
-this group; plan for hours on CPU.
+**Optional legacy demo** from the repository root:
+
+```bash
+pip install -e .
+python -m fairLMs.definitions.encoder_decoder.intrinsic_bias.stereotypical_association.sva.main
+```
 
 ## Output \& Results
 
-[sva_results.csv](./sva_results.csv).
+[sva_results.csv](https://github.com/michaellarionov/FairnessDefinitionsLLMs/blob/main/fairLMs/definitions/encoder_decoder/intrinsic_bias/stereotypical_association/sva/sva_results.csv).
 
 ## Known issues / caveats
 

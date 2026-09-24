@@ -13,7 +13,7 @@ import warnings
 import numpy as np
 import pytest
 
-from fairLMs.metrics import CEAT, SEAT, WEAT, ContextSets, VectorSets, WordSets
+from fairLMs.definitions import CEAT, SEAT, WEAT, ContextSets, VectorSets, WordSets
 
 TERMS = (
     ["Adam", "Chip", "Harry", "Josh"],
@@ -190,7 +190,7 @@ class TestSeedIsDeclaredConfig:
         """Otherwise `seed` would be accepted and silently ignored."""
         import numpy as np
 
-        from fairLMs.utils import permutation_pval
+        from fairLMs.definitions.utils import permutation_pval
 
         rng = np.random.default_rng(42)
         s_t1 = rng.normal(1.0, size=12)
@@ -203,7 +203,7 @@ class TestSeedIsDeclaredConfig:
 
     def test_exact_branch_is_seed_invariant(self):
         """C(2n, n) <= n_samples enumerates every partition; the seed is moot."""
-        from fairLMs.utils import permutation_pval
+        from fairLMs.definitions.utils import permutation_pval
 
         s_t1 = [3.0, 2.0, 1.0, 0.0]
         s_t2 = [0.0, 1.0, 2.0, 3.0]

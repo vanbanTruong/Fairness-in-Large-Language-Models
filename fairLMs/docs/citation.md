@@ -57,7 +57,7 @@ Each metric's docstring names its source, visible in the
 [API reference](api/metrics.md) and via `help()`:
 
 ```python
-from fairLMs.metrics import CrowSPairsScore
+from fairLMs.definitions import CrowSPairsScore
 help(CrowSPairsScore)     # "Pseudo-log-likelihood CrowS-Pairs Score (Nangia et al., 2020)."
 ```
 
@@ -85,7 +85,7 @@ citation, report:
   the `seed` behind a permutation p-value, the `unit` on a diagnostic.
 
 ```python
-from fairLMs.metrics import WEAT
+from fairLMs.definitions import WEAT
 
 metric = WEAT(seed=0)
 result = metric.compute(model, data)

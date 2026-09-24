@@ -9,7 +9,7 @@ Two input styles work:
 1. **A sequence of mappings**, what the loaders return. Pair metrics want dicts
    with `stereotype` and `anti_stereotype` keys; a plain list of dicts is
    accepted directly.
-2. **A validated container** from `fairLMs.metrics.data`, for metrics that need
+2. **A validated container** from `fairLMs.definitions.data`, for metrics that need
    more structure than a flat sequence, such as the four role sets WEAT
    requires.
 
@@ -48,7 +48,7 @@ Containers validate their own structure when you build them, so malformed
 evidence fails at the point you created it rather than deep inside a metric:
 
 ```python
-from fairLMs.metrics.data import WordSets
+from fairLMs.definitions.data import WordSets
 
 WordSets(
     target_1=["nurse", "teacher"],
@@ -65,8 +65,8 @@ misspelled parameter raises `TypeError` instead of silently using a default.
 
 ```python
 import pandas as pd
-from fairLMs.metrics import CrowSPairsScore
-from fairLMs.models import HuggingFaceModel
+from fairLMs.definitions import CrowSPairsScore
+from fairLMs.definitions.models import HuggingFaceModel
 
 df = pd.read_csv("my_pairs.csv")     # columns: stereotype, anti_stereotype, bias_type
 
@@ -82,8 +82,8 @@ print(result.score, result.by_category)
 Five metrics need no model at all, so pass the predictions directly:
 
 ```python
-from fairLMs.metrics import EqualOpportunityGap
-from fairLMs.metrics.data import GroupPredictions
+from fairLMs.definitions import EqualOpportunityGap
+from fairLMs.definitions.data import GroupPredictions
 
 data = GroupPredictions(
     y_true=[1, 0, 1, 1],

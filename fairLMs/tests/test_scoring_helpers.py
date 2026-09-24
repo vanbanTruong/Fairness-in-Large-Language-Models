@@ -1,7 +1,7 @@
 """Tests for the two scoring helpers that five metrics each depend on.
 
-``fairLMs.utils.pll`` is shared by PLL, CPS, AUL, AULA and CAT;
-``fairLMs.utils.masking`` by DisCo, LPBS and CBS. A sign error or an off-by-one
+``fairLMs.definitions.utils.pll`` is shared by PLL, CPS, AUL, AULA and CAT;
+``fairLMs.definitions.utils.masking`` by DisCo, LPBS and CBS. A sign error or an off-by-one
 slice in either propagates to every metric above it while every one of those
 metrics still returns a plausible-looking float, so these are the two places
 where an independently derived expected value is worth the most.
@@ -17,14 +17,14 @@ import math
 import pytest
 import torch
 
-from fairLMs.utils.masking import (
+from fairLMs.definitions.utils.masking import (
     build_masked_sentence,
     get_mask_fill_probs,
     get_multitoken_log_prob,
     get_token_prob,
     get_top_k_predictions,
 )
-from fairLMs.utils.pll import get_span, get_token_ranks, score_sentence
+from fairLMs.definitions.utils.pll import get_span, get_token_ranks, score_sentence
 from .stubs import (
     CONTENT_TOKENS,
     VOCAB,
@@ -94,7 +94,7 @@ class TestStubIsWellFormed:
 
 
 # ---------------------------------------------------------------------------
-# fairLMs.utils.pll
+# fairLMs.definitions.utils.pll
 # ---------------------------------------------------------------------------
 class TestGetTokenRanks:
     def test_rank_is_one_based_and_descending(self):
@@ -210,7 +210,7 @@ class TestGetSpan:
 
 
 # ---------------------------------------------------------------------------
-# fairLMs.utils.masking
+# fairLMs.definitions.utils.masking
 # ---------------------------------------------------------------------------
 class TestGetMaskFillProbs:
     def test_probabilities_match_the_fixed_tables(self, stub_tokenizer, stub_mlm):

@@ -55,8 +55,8 @@ dependencies = [
     # transitive dependency of transformers and datasets; declared here because
     # the loaders import it themselves rather than going through load_dataset.
     "huggingface-hub>=0.23",
-    # These three are imported at module scope inside fairLMs/definition/, and
-    # fairLMs.metrics eagerly imports every family, so `import fairLMs` fails
+    # These three are imported at module scope inside fairLMs/definitions/, and
+    # fairLMs.definitions eagerly imports every family, so `import fairLMs` fails
     # without them. They are requirements, not extras:
     #   scikit-learn -> counterfactual_auc, normalized_position_distance
     #   wordfreq     -> lexical_frequency_proportion
@@ -115,79 +115,72 @@ docs = [
 package-dir = { fairLMs = "." }
 packages = [
     "fairLMs",
-    "fairLMs.metrics",
-    "fairLMs.artifacts",
+    "fairLMs.definitions",
     "fairLMs.datasets",
-    "fairLMs.utils",
-    "fairLMs.models",
-    "fairLMs.definition",
-    "fairLMs.diagnostics",
+    "fairLMs.datasets.resources",
+    "fairLMs.definitions.core",
+    "fairLMs.definitions.utils",
+    "fairLMs.definitions.models",
+    "fairLMs.datasets.diagnostics",
     "fairLMs.mitigation",
-    "fairLMs.data",
-    "fairLMs.definition.encoder_only",
-    "fairLMs.definition.encoder_decoder",
-    "fairLMs.definition.decoder_only",
-    "fairLMs.definition.encoder_only.extrinsic_bias",
-    "fairLMs.definition.encoder_only.intrinsic_bias",
-    "fairLMs.definition.encoder_only.extrinsic_bias.context_based_disparity",
-    "fairLMs.definition.encoder_only.extrinsic_bias.fair_inference",
-    "fairLMs.definition.encoder_only.extrinsic_bias.equal_opportunity",
-    "fairLMs.definition.encoder_only.extrinsic_bias.context_based_disparity.data",
-    "fairLMs.definition.encoder_only.extrinsic_bias.fair_inference.data",
-    "fairLMs.definition.encoder_only.extrinsic_bias.equal_opportunity.data",
-    "fairLMs.definition.encoder_only.intrinsic_bias.similarity_based",
-    "fairLMs.definition.encoder_only.intrinsic_bias.probability_based",
-    "fairLMs.definition.encoder_only.intrinsic_bias.similarity_based.ceat",
-    "fairLMs.definition.encoder_only.intrinsic_bias.similarity_based.weat",
-    "fairLMs.definition.encoder_only.intrinsic_bias.similarity_based.seat",
-    "fairLMs.definition.encoder_only.intrinsic_bias.probability_based.pseudo_log_likelihood_metrics",
-    "fairLMs.definition.encoder_only.intrinsic_bias.probability_based.masked_token_metrics",
-    "fairLMs.definition.encoder_only.intrinsic_bias.probability_based.pseudo_log_likelihood_metrics.cat",
-    "fairLMs.definition.encoder_only.intrinsic_bias.probability_based.pseudo_log_likelihood_metrics.pll",
-    "fairLMs.definition.encoder_only.intrinsic_bias.probability_based.pseudo_log_likelihood_metrics.cps",
-    "fairLMs.definition.encoder_only.intrinsic_bias.probability_based.pseudo_log_likelihood_metrics.aula",
-    "fairLMs.definition.encoder_only.intrinsic_bias.probability_based.pseudo_log_likelihood_metrics.aul",
-    "fairLMs.definition.encoder_only.intrinsic_bias.probability_based.masked_token_metrics.cbs",
-    "fairLMs.definition.encoder_only.intrinsic_bias.probability_based.masked_token_metrics.disco",
-    "fairLMs.definition.encoder_only.intrinsic_bias.probability_based.masked_token_metrics.lpbs",
-    "fairLMs.definition.encoder_decoder.extrinsic_bias",
-    "fairLMs.definition.encoder_decoder.intrinsic_bias",
-    "fairLMs.definition.encoder_decoder.extrinsic_bias.position_based",
-    "fairLMs.definition.encoder_decoder.extrinsic_bias.individual_fairness",
-    "fairLMs.definition.encoder_decoder.extrinsic_bias.fair_inference",
-    "fairLMs.definition.encoder_decoder.extrinsic_bias.counterfactual_fairness",
-    "fairLMs.definition.encoder_decoder.intrinsic_bias.algorithmic_disparity",
-    "fairLMs.definition.encoder_decoder.intrinsic_bias.stereotypical_association",
-    "fairLMs.definition.encoder_decoder.intrinsic_bias.algorithmic_disparity.lfp",
-    "fairLMs.definition.encoder_decoder.intrinsic_bias.algorithmic_disparity.mcd",
-    "fairLMs.definition.encoder_decoder.intrinsic_bias.stereotypical_association.sd",
-    "fairLMs.definition.encoder_decoder.intrinsic_bias.stereotypical_association.sva",
-    "fairLMs.definition.decoder_only.extrinsic_bias",
-    "fairLMs.definition.decoder_only.intrinsic_bias",
-    "fairLMs.definition.decoder_only.extrinsic_bias.demographic_representation",
-    "fairLMs.definition.decoder_only.extrinsic_bias.counterfactual_fairness",
-    "fairLMs.definition.decoder_only.extrinsic_bias.performance_disparity",
-    "fairLMs.definition.decoder_only.extrinsic_bias.demographic_representation.drd",
-    "fairLMs.definition.decoder_only.extrinsic_bias.demographic_representation.dnp",
-    "fairLMs.definition.decoder_only.extrinsic_bias.counterfactual_fairness.cr",
-    "fairLMs.definition.decoder_only.extrinsic_bias.counterfactual_fairness.ctf",
-    "fairLMs.definition.decoder_only.extrinsic_bias.performance_disparity.ad",
-    "fairLMs.definition.decoder_only.extrinsic_bias.performance_disparity.sns",
-    "fairLMs.definition.decoder_only.extrinsic_bias.performance_disparity.ba",
-    "fairLMs.definition.decoder_only.intrinsic_bias.attention_head_based_disparity",
-    "fairLMs.definition.decoder_only.intrinsic_bias.stereotypical_association",
-    "fairLMs.definition.decoder_only.intrinsic_bias.attention_head_based_disparity.nie",
-    "fairLMs.definition.decoder_only.intrinsic_bias.attention_head_based_disparity.gbe",
-    "fairLMs.definition.decoder_only.intrinsic_bias.stereotypical_association.sll",
-    "fairLMs.definition.decoder_only.intrinsic_bias.stereotypical_association.ca",
-    "fairLMs.definition.decoder_only.intrinsic_bias.stereotypical_association.sll.data",
-    "fairLMs.definition.decoder_only.intrinsic_bias.stereotypical_association.ca.data",
+    "fairLMs.definitions.resources",
+    "fairLMs.definitions.encoder_only",
+    "fairLMs.definitions.encoder_decoder",
+    "fairLMs.definitions.decoder_only",
+    "fairLMs.definitions.encoder_only.extrinsic_bias",
+    "fairLMs.definitions.encoder_only.intrinsic_bias",
+    "fairLMs.definitions.encoder_only.extrinsic_bias.context_based_disparity",
+    "fairLMs.definitions.encoder_only.extrinsic_bias.fair_inference",
+    "fairLMs.definitions.encoder_only.extrinsic_bias.equal_opportunity",
+    "fairLMs.definitions.encoder_only.intrinsic_bias.similarity_based",
+    "fairLMs.definitions.encoder_only.intrinsic_bias.probability_based",
+    "fairLMs.definitions.encoder_only.intrinsic_bias.similarity_based.ceat",
+    "fairLMs.definitions.encoder_only.intrinsic_bias.similarity_based.weat",
+    "fairLMs.definitions.encoder_only.intrinsic_bias.similarity_based.seat",
+    "fairLMs.definitions.encoder_only.intrinsic_bias.probability_based.pseudo_log_likelihood_metrics",
+    "fairLMs.definitions.encoder_only.intrinsic_bias.probability_based.masked_token_metrics",
+    "fairLMs.definitions.encoder_only.intrinsic_bias.probability_based.pseudo_log_likelihood_metrics.cat",
+    "fairLMs.definitions.encoder_only.intrinsic_bias.probability_based.pseudo_log_likelihood_metrics.pll",
+    "fairLMs.definitions.encoder_only.intrinsic_bias.probability_based.pseudo_log_likelihood_metrics.cps",
+    "fairLMs.definitions.encoder_only.intrinsic_bias.probability_based.pseudo_log_likelihood_metrics.aula",
+    "fairLMs.definitions.encoder_only.intrinsic_bias.probability_based.pseudo_log_likelihood_metrics.aul",
+    "fairLMs.definitions.encoder_only.intrinsic_bias.probability_based.masked_token_metrics.cbs",
+    "fairLMs.definitions.encoder_only.intrinsic_bias.probability_based.masked_token_metrics.disco",
+    "fairLMs.definitions.encoder_only.intrinsic_bias.probability_based.masked_token_metrics.lpbs",
+    "fairLMs.definitions.encoder_decoder.extrinsic_bias",
+    "fairLMs.definitions.encoder_decoder.intrinsic_bias",
+    "fairLMs.definitions.encoder_decoder.extrinsic_bias.position_based",
+    "fairLMs.definitions.encoder_decoder.extrinsic_bias.individual_fairness",
+    "fairLMs.definitions.encoder_decoder.extrinsic_bias.fair_inference",
+    "fairLMs.definitions.encoder_decoder.extrinsic_bias.counterfactual_fairness",
+    "fairLMs.definitions.encoder_decoder.intrinsic_bias.algorithmic_disparity",
+    "fairLMs.definitions.encoder_decoder.intrinsic_bias.stereotypical_association",
+    "fairLMs.definitions.encoder_decoder.intrinsic_bias.algorithmic_disparity.lfp",
+    "fairLMs.definitions.encoder_decoder.intrinsic_bias.algorithmic_disparity.mcd",
+    "fairLMs.definitions.encoder_decoder.intrinsic_bias.stereotypical_association.sd",
+    "fairLMs.definitions.encoder_decoder.intrinsic_bias.stereotypical_association.sva",
+    "fairLMs.definitions.decoder_only.extrinsic_bias",
+    "fairLMs.definitions.decoder_only.intrinsic_bias",
+    "fairLMs.definitions.decoder_only.extrinsic_bias.demographic_representation",
+    "fairLMs.definitions.decoder_only.extrinsic_bias.counterfactual_fairness",
+    "fairLMs.definitions.decoder_only.extrinsic_bias.performance_disparity",
+    "fairLMs.definitions.decoder_only.extrinsic_bias.demographic_representation.drd",
+    "fairLMs.definitions.decoder_only.extrinsic_bias.demographic_representation.dnp",
+    "fairLMs.definitions.decoder_only.extrinsic_bias.counterfactual_fairness.cr",
+    "fairLMs.definitions.decoder_only.extrinsic_bias.counterfactual_fairness.ctf",
+    "fairLMs.definitions.decoder_only.extrinsic_bias.performance_disparity.ad",
+    "fairLMs.definitions.decoder_only.extrinsic_bias.performance_disparity.sns",
+    "fairLMs.definitions.decoder_only.extrinsic_bias.performance_disparity.ba",
+    "fairLMs.definitions.decoder_only.intrinsic_bias.attention_head_based_disparity",
+    "fairLMs.definitions.decoder_only.intrinsic_bias.stereotypical_association",
+    "fairLMs.definitions.decoder_only.intrinsic_bias.attention_head_based_disparity.nie",
+    "fairLMs.definitions.decoder_only.intrinsic_bias.attention_head_based_disparity.gbe",
+    "fairLMs.definitions.decoder_only.intrinsic_bias.stereotypical_association.sll",
+    "fairLMs.definitions.decoder_only.intrinsic_bias.stereotypical_association.ca",
     "fairLMs.mitigation.intraprocessing",
     "fairLMs.mitigation.inprocessing",
     "fairLMs.mitigation.postprocessing",
     "fairLMs.mitigation.preprocessing",
-    "fairLMs.data.crows_pairs",
-    "fairLMs.data.bbq",
 ]
 
 [tool.setuptools.dynamic]
@@ -195,7 +188,7 @@ version = { attr = "fairLMs._version.__version__" }
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
-# `fairLMs/definition/` holds 33 `main.py` and 25 `stimuli.py` files in sibling
+# `fairLMs/definitions/` holds 33 `main.py` and 25 `stimuli.py` files in sibling
 # directories. Under the default "prepend" import mode pytest names a module by
 # its basename, so collecting the package -- `pytest --doctest-modules fairLMs/`
 # -- aborts with 56 "import file mismatch" errors and every doctest in the
@@ -212,14 +205,11 @@ filterwarnings = [
 target-version = ["py310"]
 
 [tool.setuptools.package-data]
-# fairLMs/data/ has an __init__.py (it exports the bundled WEAT/SEAT word sets),
-# so it is a package in its own right and owns these files. Keyed on
-# `fairLMs.data` for that reason. The older `fairLMs = ["data/bbq/*.jsonl"]`
-# form still resolves on setuptools>=77, so this is correctness, not a fix.
-"fairLMs.data" = [
+# Only the small CrowS-Pairs corpus is distributed. Large datasets are fetched
+# by their loaders into the user's Hugging Face cache.
+"fairLMs.datasets.resources" = [
     "README.md",
     "NOTICE.md",
     "checksums.json",
     "crows_pairs/*.csv",
-    "bbq/*.jsonl",
 ]

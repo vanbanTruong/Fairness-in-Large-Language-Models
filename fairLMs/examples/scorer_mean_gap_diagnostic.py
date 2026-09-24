@@ -1,6 +1,6 @@
 """Scoring-instrument audit for an unfamiliar row-level score schema."""
 
-from fairLMs.diagnostics import DatasetAuditSpec, ScoredGroups, audit_scores
+from fairLMs.datasets.diagnostics import DatasetAuditSpec, ScoredGroups, audit_scores
 
 
 def main() -> None:

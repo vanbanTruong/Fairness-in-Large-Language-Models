@@ -8,11 +8,24 @@ proportion of each band (pb1/pb2/pb3). Comparing profiles across datasets
 reveals whether the model produces systematically simpler (higher pb1)
 language for some inputs — an algorithmic-disparity signal.
 
+## Public API
+
+```python
+from fairLMs.definitions import LexicalFrequencyProportion
+from fairLMs.definitions.models import HuggingFaceModel
+
+result = LexicalFrequencyProportion().compute(
+    model=HuggingFaceModel("t5-small", task="seq2seq"),
+    sentences=["translate English to French: The doctor is busy."],
+)
+print(result.score)
+```
+
 ## Files
 
 | File | Purpose |
 |---|---|
-| `main.py` | Entry point: loads T5, translates each dataset, writes `lfp_results.csv` |
+| `main.py` | Short public-API demo using `LexicalFrequencyProportion`; writes results CSV for continuity |
 | `lfp.py` | Core: translation, word tokenization, frequency-band classification (`compute_lfp`) |
 | `lfp_results.csv` | Output of the last run |
 
@@ -31,10 +44,13 @@ Bootstrap CIs are computed for console output but **not** written to CSV.
 
 ## How to run
 
+**Preferred:** use the public API above (and/or examples under `examples/` at the repo root).
+
+**Optional legacy demo** from the repository root:
+
 ```bash
-pip install torch transformers datasets wordfreq pandas
-cd <this directory>
-python main.py
+pip install -e .
+python -m fairLMs.definitions.encoder_decoder.intrinsic_bias.algorithmic_disparity.lfp.main
 ```
 
 ## Output \& Results

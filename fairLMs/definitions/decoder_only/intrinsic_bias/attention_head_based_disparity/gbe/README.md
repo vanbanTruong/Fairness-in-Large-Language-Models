@@ -13,11 +13,27 @@ loss     = |d|
 GBE_mass = Σ max(m,0) / Σ |m|     over head-mask gradients m
 ```
 
+## Public API
+
+```python
+from fairLMs.definitions import GradientBasedBiasEstimation
+from fairLMs.definitions.models import HuggingFaceModel
+
+result = GradientBasedBiasEstimation().compute(
+    model=HuggingFaceModel("gpt2", task="causal"),
+    X=["John"],
+    Y=["Mary"],
+    A=["career"],
+    B=["family"],
+)
+print(result.score)
+```
+
 ## Files
 
 | File | Purpose |
 |---|---|
-| `main.py` | Entry point: loads GPT-2, builds word lists, runs GBE + null, writes `gbe_results.csv` |
+| `main.py` | Short public-API demo using `GradientBasedBiasEstimation`; writes results CSV for continuity |
 | `gbe.py` | Core: `install_head_masks`, `seat_effect_size`, `compute_gbe_matrix`, `compute_gbe`, `compute_gbe_mass`, `gbe_permutation_null` |
 | `red_pill_corpus.csv` | Optional Red Pill vocabulary source |
 | `gbe_results.csv` | Output of the last run |
@@ -33,15 +49,14 @@ GBE_mass = Σ max(m,0) / Σ |m|     over head-mask gradients m
 
 ## How to run
 
-```bash
-pip install torch transformers pandas numpy
-cd <this directory>
-python main.py
-```
+**Preferred:** use the public API above (and/or examples under `examples/` at the repo root).
 
-**Path caveat:** `_MAIN_DIR` is hard-coded to `/content/drive/MyDrive` (Colab).
-For local runs, point it at this directory so `red_pill_corpus.csv` and
-`gbe_results.csv` resolve correctly.
+**Optional legacy demo** from the repository root:
+
+```bash
+pip install -e .
+python -m fairLMs.definitions.decoder_only.intrinsic_bias.attention_head_based_disparity.gbe.main
+```
 
 ## Output \& Results
 

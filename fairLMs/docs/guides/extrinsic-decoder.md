@@ -21,13 +21,13 @@ with `task="causal"`.
 ## End to end
 
 ```python
-from fairLMs.metrics import (
+from fairLMs.definitions import (
     AccuracyDisparity,
     DemographicNextTokenProportion,
     DemographicRepresentationDivergence,
 )
-from fairLMs.metrics.data import DemographicPrompts, ScorePair
-from fairLMs.models import HuggingFaceModel
+from fairLMs.definitions.data import DemographicPrompts, ScorePair
+from fairLMs.definitions.models import HuggingFaceModel
 
 gpt2 = HuggingFaceModel("gpt2", task="causal")
 
@@ -82,9 +82,9 @@ Report `n_prompts` and `max_new_tokens` with any DRD number.
 call OpenAI completions endpoints:
 
 ```python
-from fairLMs.metrics import CounterfactualRobustness
-from fairLMs.metrics.data import PromptPairs
-from fairLMs.models import OpenAIModel
+from fairLMs.definitions import CounterfactualRobustness
+from fairLMs.definitions.data import PromptPairs
+from fairLMs.definitions.models import OpenAIModel
 
 pairs = PromptPairs(
     factual=["The nurse said that"],
@@ -107,8 +107,8 @@ mapping a prompt string to a response string, so you can point it at any
 backend.
 
 ```python
-from fairLMs.metrics import SensitiveNameSimilarity
-from fairLMs.metrics.data import QuerySpec
+from fairLMs.definitions import SensitiveNameSimilarity
+from fairLMs.definitions.data import QuerySpec
 
 def respond(prompt: str) -> str:
     ...        # your backend

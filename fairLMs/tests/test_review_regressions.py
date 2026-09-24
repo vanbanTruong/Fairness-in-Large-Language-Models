@@ -7,9 +7,9 @@ import numpy as np
 import pytest
 import torch
 
-from fairLMs.applicability import check_applicability
+from fairLMs.definitions.core.applicability import check_applicability
 from fairLMs.datasets import StereoSet, XNLIReligionPairs
-from fairLMs.metrics import (
+from fairLMs.definitions import (
     CrowSPairsScore,
     PseudoLogLikelihoodScore,
     CounterfactualRobustness,
@@ -26,9 +26,9 @@ from fairLMs.metrics import (
     WEAT,
     VectorSets,
 )
-from fairLMs.models import HuggingFaceModel
-from fairLMs.models.base import ModelAdapter, LoadedModel
-from fairLMs.models.openai import OpenAILoadedModel
+from fairLMs.definitions.models import HuggingFaceModel
+from fairLMs.definitions.models.base import ModelAdapter, LoadedModel
+from fairLMs.definitions.models.openai import OpenAILoadedModel
 from fairLMs.mitigation import (
     SubspaceProjection,
     IterativeNullspaceProjection,
@@ -232,7 +232,7 @@ def test_api_explicit_override_and_transport_refusal():
 
 
 def test_cr_retries_transient_errors_and_exits_on_success(monkeypatch):
-    from fairLMs.definition.decoder_only.extrinsic_bias.counterfactual_fairness.cr import (
+    from fairLMs.definitions.decoder_only.extrinsic_bias.counterfactual_fairness.cr import (
         cr,
     )
 
@@ -560,7 +560,7 @@ def test_metric_provenance_records_seed_and_input_hash():
 
 
 def test_cat_counts_both_meaningful_alternatives(monkeypatch):
-    from fairLMs.definition.encoder_only.intrinsic_bias.probability_based.pseudo_log_likelihood_metrics.cat import (
+    from fairLMs.definitions.encoder_only.intrinsic_bias.probability_based.pseudo_log_likelihood_metrics.cat import (
         cat,
     )
 

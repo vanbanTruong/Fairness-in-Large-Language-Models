@@ -6,7 +6,7 @@ silently repairing it. These tests are mostly refusals, which is the point.
 
 import pytest
 
-from fairLMs.diagnostics import LabeledScoredGroups, ScoredGroups
+from fairLMs.datasets.diagnostics import LabeledScoredGroups, ScoredGroups
 from fairLMs.mitigation import (
     AttributeLabeledVectors,
     CandidateSets,

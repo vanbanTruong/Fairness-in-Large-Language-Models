@@ -14,16 +14,31 @@ percentage of cells it wins. `main.py` reports the **maximum** per-group win
 rate across groups (exploratory top win-rate). Baseline under uniform winners
 is `100/k %` where `k` is the number of group terms.
 
+## Public API
+
+```python
+from fairLMs.definitions import ContrastBasedScore
+from fairLMs.definitions.models import HuggingFaceModel
+
+result = ContrastBasedScore().compute(
+    model=HuggingFaceModel("bert-base-uncased", task="mlm"),
+    group_terms={"male": ["he"], "female": ["she"]},
+    contrast_pairs=[("doctor", "nurse")],
+    templates=["{N} is a {A}."],
+)
+print(result.score)
+```
+
 ## Files
 
 | File | Purpose |
 |---|---|
-| `main.py` | Entry point: loads BERT MLM, term/template/contrast grids, writes `cbs_results.csv` |
+| `main.py` | Short public-API demo using `ContrastBasedScore`; writes results CSV for continuity |
 | `cbs.py` | Core: `compute_cbs()` (contrast win-rates + bootstrap/permutation diagnostics), `compute_favorites()` |
 | `cbs_results.csv` | Output of the last run |
 
 Masked-token helpers (`build_masked_sentence`, `get_multitoken_log_prob`) live
-in `encoder_only/utils.py`.
+in `fairLMs.definitions.utils`.
 
 ## Configurations
 
@@ -60,10 +75,13 @@ pip install "datasets<3"    # script datasets removed in datasets>=3
 
 ## How to run
 
-From the **repository root**:
+**Preferred:** use the public API above (and/or examples under `examples/` at the repo root).
+
+**Optional legacy demo** from the repository root:
 
 ```bash
-python -m encoder_only.intrinsic_bias.probability_based.masked_token_metrics.cbs.main
+pip install -e .
+python -m fairLMs.definitions.encoder_only.intrinsic_bias.probability_based.masked_token_metrics.cbs.main
 ```
 
 ## Output \& Results

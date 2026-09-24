@@ -1,6 +1,6 @@
 """Representativeness diagnostic for an unregistered synthetic benchmark."""
 
-from fairLMs.diagnostics import (
+from fairLMs.datasets.diagnostics import (
     DatasetAuditSpec,
     ReferenceDistribution,
     RepresentationEvidence,

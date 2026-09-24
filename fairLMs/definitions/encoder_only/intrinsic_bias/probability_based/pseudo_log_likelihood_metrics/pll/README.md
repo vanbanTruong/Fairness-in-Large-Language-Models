@@ -9,20 +9,34 @@ of pairs preferring the stereotype — **50% ≈ unbiased**.
 Unlike CPS (`../cps/`), PLL scores **all** interior tokens (including the
 differing demographic words), not only the shared span.
 
+## Public API
+
+```python
+from fairLMs.definitions import PseudoLogLikelihoodScore
+from fairLMs.datasets import CrowSPairs
+from fairLMs.definitions.models import HuggingFaceModel
+
+result = PseudoLogLikelihoodScore().compute(
+    model=HuggingFaceModel("bert-base-uncased", task="mlm"),
+    dataset=CrowSPairs(n_max=32),
+)
+print(result.score)
+```
+
 ## Files
 
 | File | Purpose |
 |---|---|
-| `main.py` | Entry point: loads BERT, loads three datasets, runs PLL, writes `pll_results.csv` |
+| `main.py` | Short public-API demo using `PseudoLogLikelihoodScore`; writes results CSV for continuity |
 | `pll.py` | Core: `score_sentence_pll()`, `compute_pll()` |
-| `crows_pairs_anonymized.csv` | Bundled CrowS-Pairs dataset |
+| `crows_pairs_anonymized.csv` | Prefer `fairLMs.datasets.CrowSPairs`; its small canonical CSV is bundled under `fairLMs/datasets/resources/crows_pairs/` |
 | `pll_results.csv` | Output of the last run |
 
 ## Datasets
 
 | Dataset | Source |
 |---|---|
-| CrowS-Pairs (pooled) | bundled CSV |
+| CrowS-Pairs (pooled) | `fairLMs.datasets.CrowSPairs` / `fairLMs/datasets/resources/crows_pairs/` |
 | StereoSet (intersentence, validation) | HF `stereoset` |
 | XNLI religion | religion-term swaps + templates (`n_max=100000`) |
 
@@ -38,10 +52,13 @@ differing demographic words), not only the shared span.
 
 ## How to run
 
-From the **repository root**:
+**Preferred:** use the public API above (and/or examples under `examples/` at the repo root).
+
+**Optional legacy demo** from the repository root:
 
 ```bash
-python -m encoder_only.intrinsic_bias.probability_based.pseudo_log_likelihood_metrics.pll.main
+pip install -e .
+python -m fairLMs.definitions.encoder_only.intrinsic_bias.probability_based.pseudo_log_likelihood_metrics.pll.main
 ```
 
 ## Output \& Results

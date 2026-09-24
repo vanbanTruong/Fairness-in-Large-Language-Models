@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from typing import Any
 
-from fairLMs.metrics.data import PromptPairs
+from fairLMs.definitions.data import PromptPairs
 from fairLMs.mitigation.base import MitigationResult, Mitigator
 
 __all__ = ["CounterfactualInvarianceLoss"]
@@ -27,7 +27,7 @@ class CounterfactualInvarianceLoss(Mitigator):
     Examples
     --------
     >>> import torch
-    >>> from fairLMs.metrics import PromptPairs
+    >>> from fairLMs.definitions import PromptPairs
     >>> from fairLMs.mitigation import CounterfactualInvarianceLoss
     >>> pairs = PromptPairs(["he is a nurse"], ["she is a nurse"])
     >>> loss_term = CounterfactualInvarianceLoss().apply(None, pairs).result

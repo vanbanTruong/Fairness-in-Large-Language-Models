@@ -1,7 +1,7 @@
 import numpy as np
 import torch
 from scipy import stats
-from encoder_only.utils import association_vectorized, cohens_d, encode_in_context
+from fairLMs.definitions.encoder_only.utils import association_vectorized, cohens_d, encode_in_context
 
 
 def dersimonian_laird(effects, variances):

@@ -9,7 +9,7 @@ import inspect
 
 import pytest
 
-from fairLMs.applicability import (
+from fairLMs.definitions.core.applicability import (
     ACCESS_LEVELS,
     CAPABILITIES,
     AccessLevel,

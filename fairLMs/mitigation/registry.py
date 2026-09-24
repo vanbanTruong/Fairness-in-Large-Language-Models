@@ -1,6 +1,6 @@
 """Registry of the shipped bias mitigators.
 
-Mirrors :mod:`fairLMs.diagnostics.registry`. Membership here is the library's
+Mirrors :mod:`fairLMs.datasets.diagnostics.registry`. Membership here is the library's
 statement that a method is *available*: the extension points named in the paper
 but not implemented - RLHF, DPO, Constitutional AI, UniDetox, the
 influence-estimation half of IF-Guide, GeDi, RAD, DExperts, FairSteer, ARGRE,

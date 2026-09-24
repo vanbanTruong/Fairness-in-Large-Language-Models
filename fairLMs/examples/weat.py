@@ -4,9 +4,9 @@ Shows the preferred shape: configuration in the constructor, data as a
 validated container passed positionally to ``compute``.
 """
 
-from fairLMs.data import weat_c1
-from fairLMs.metrics import WEAT
-from fairLMs.models import HuggingFaceModel
+from fairLMs.definitions.resources import weat_c1
+from fairLMs.definitions import WEAT
+from fairLMs.definitions.models import HuggingFaceModel
 
 
 def main():

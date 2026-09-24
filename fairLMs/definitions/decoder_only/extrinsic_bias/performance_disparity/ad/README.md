@@ -10,12 +10,24 @@ AD = |Acc_s − Acc_s'|
 Lower is more equitable. Scoring differs by dataset (stereotype “No”
 preference, forced-choice genre accuracy, or token F1 on QA).
 
+## Public API
+
+```python
+from fairLMs.definitions import AccuracyDisparity
+
+result = AccuracyDisparity().compute(
+    scores_s=[0.9, 0.8, 0.7],
+    scores_sp=[0.6, 0.5, 0.4],
+)
+print(result.score)
+```
+
 ## Files
 
 | File | Purpose |
 |---|---|
-| `main.py` | Entry point: BiasAsker / MTV / NQ runners, writes `ad_summary.csv` |
-| `ad.py` | OpenAI helpers + `compute_ad` |
+| `main.py` | Short public-API demo using `AccuracyDisparity`; writes results CSV for continuity |
+| `ad.py` | Core metric math (called by the public API): OpenAI helpers + `compute_ad` |
 | `groups.csv`, `bias_annotation.csv` | Local BiasAsker support files |
 | `ad_summary.csv` | Output written by the current runner |
 
@@ -30,14 +42,14 @@ preference, forced-choice genre accuracy, or token F1 on QA).
 
 ## How to run
 
-```bash
-pip install openai pandas numpy datasets gender-guesser
-export OPENAI_API_KEY=...
-cd <this directory>
-python main.py
-```
+**Preferred:** use the public API above (and/or examples under `examples/` at the repo root).
 
-MTV loading requires network access to the gist URL.
+**Optional legacy demo** from the repository root:
+
+```bash
+pip install -e .
+python -m fairLMs.definitions.decoder_only.extrinsic_bias.performance_disparity.ad.main
+```
 
 ## Output \& Results
 

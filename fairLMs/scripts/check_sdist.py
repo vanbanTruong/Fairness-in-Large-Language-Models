@@ -26,19 +26,20 @@ def main():
     )
     env.pop("PYTHONPATH", None)
     with tempfile.TemporaryDirectory(prefix="fairLMs-sdist-") as tmp:
+        destination = Path(tmp).resolve()
         with tarfile.open(archive) as bundle:
             # Extract only regular files/directories inside the destination;
             # compatible with Python 3.10 (no reliance on tar filter='data').
             for member in bundle.getmembers():
-                target = (Path(tmp) / member.name).resolve()
-                if not target.is_relative_to(Path(tmp)) or not (
+                target = (destination / member.name).resolve()
+                if not target.is_relative_to(destination) or not (
                     member.isfile() or member.isdir()
                 ):
                     raise ValueError(
                         f"Unsupported source archive member: {member.name}"
                     )
-            bundle.extractall(tmp)
-        roots = list(Path(tmp).iterdir())
+            bundle.extractall(destination)
+        roots = list(destination.iterdir())
         if len(roots) != 1 or not roots[0].is_dir():
             raise ValueError("Source archive must contain a single project directory.")
         root = roots[0]
@@ -50,8 +51,8 @@ def main():
             "scripts/gen_registry_docs.py",
             "mkdocs.yml",
             "docs/notebooks/tour.ipynb",
-            "fairLMs/data/NOTICE.md",
-            "fairLMs/data/checksums.json",
+            "datasets/resources/NOTICE.md",
+            "datasets/resources/checksums.json",
         ]
         for name in required:
             if not (root / name).is_file():
@@ -71,7 +72,7 @@ def main():
         )
         run(
             "-c",
-            "import fairLMs, pathlib; assert pathlib.Path(fairLMs.__file__).is_relative_to(pathlib.Path.cwd()); print('Testing extracted source:', fairLMs.__file__)",
+            "import fairLMs, pathlib; path = pathlib.Path(fairLMs.__file__).resolve(); assert not path.is_relative_to(pathlib.Path.cwd()); print('Testing installed source:', path)",
         )
         run("-m", "pytest", "-q", "-ra")
         run("scripts/gen_registry_docs.py", "--check")

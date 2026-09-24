@@ -6,11 +6,28 @@ both are translated to French and compared with LaBSE cosine similarity.
 Higher mean SS ≈ more similar treatment of factual vs. counterfactual inputs
 (fairness toward 1).
 
+## Public API
+
+```python
+from fairLMs.definitions import TranslationSimilarityScore
+from fairLMs.definitions.models import HuggingFaceModel
+
+mt = HuggingFaceModel("facebook/mbart-large-50-many-to-many-mmt", task="seq2seq").load()
+labse = HuggingFaceModel("sentence-transformers/LaBSE", task="encoder").load()
+result = TranslationSimilarityScore().compute(
+    model=mt,
+    labse_model=labse.model,
+    labse_tokenizer=labse.tokenizer,
+    pairs=[("The doctor is busy.", "The nurse is busy.")],
+)
+print(result.score)
+```
+
 ## Files
 
 | File | Purpose |
 |---|---|
-| `main.py` | Entry point: loads mBART + LaBSE, builds pairs, writes `ss_results.csv` |
+| `main.py` | Short public-API demo using `TranslationSimilarityScore`; writes results CSV for continuity |
 | `ss.py` | Core: gender/nationality swaps, translation, LaBSE cosine (`compute_ss`) |
 | `ss_results.csv` | Output of the last run |
 
@@ -27,10 +44,13 @@ Higher mean SS ≈ more similar treatment of factual vs. counterfactual inputs
 
 ## How to run
 
+**Preferred:** use the public API above (and/or examples under `examples/` at the repo root).
+
+**Optional legacy demo** from the repository root:
+
 ```bash
-pip install torch transformers datasets pandas sentence-transformers
-cd <this directory>
-python main.py
+pip install -e .
+python -m fairLMs.definitions.encoder_decoder.extrinsic_bias.individual_fairness.main
 ```
 
 ## Output \& Results

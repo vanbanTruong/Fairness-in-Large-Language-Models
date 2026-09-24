@@ -5,7 +5,7 @@ and
 :class:`~fairLMs.mitigation.intraprocessing.iterative_nullspace_projection.IterativeNullspaceProjection`
 differ in how they *estimate* a direction to remove; everything about applying
 one - resolving the intervention site, building the orthogonal projector, and
-wrapping the result as a :class:`~fairLMs.models.base.ModelAdapter` - is common
+wrapping the result as a :class:`~fairLMs.definitions.models.base.ModelAdapter` - is common
 and lives here.
 """
 
@@ -15,7 +15,7 @@ from typing import Any, Optional
 
 import numpy as np
 
-from fairLMs.models.base import LoadedModel, ModelAdapter
+from fairLMs.definitions.models.base import LoadedModel, ModelAdapter
 
 __all__ = [
     "ProjectedModelAdapter",

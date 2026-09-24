@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from typing import Any, Dict, List, Optional, Sequence, Tuple
 
-from fairLMs.diagnostics.evidence import LabeledScoredGroups
+from fairLMs.datasets.diagnostics.evidence import LabeledScoredGroups
 from fairLMs.mitigation.base import MitigationResult, Mitigator
 from fairLMs.mitigation.postprocessing._shared import (
     _ALL_ARCHITECTURES,
@@ -68,7 +68,7 @@ class GroupAwareThresholding(Mitigator):
 
     Examples
     --------
-    >>> from fairLMs.diagnostics import LabeledScoredGroups, ScoredGroups
+    >>> from fairLMs.datasets.diagnostics import LabeledScoredGroups, ScoredGroups
     >>> from fairLMs.mitigation import GroupAwareThresholding
     >>> evidence = LabeledScoredGroups(
     ...     scored=ScoredGroups(

@@ -1,16 +1,16 @@
 # Converting fairLMs to a sklearn-style library
 
-**Where we are:** Phases 1, 2, 4, 6, 7 and 8 are done; Phase 5 is in progress.
-Phase 3 (book-taxonomy `definitions/` aliases) was **skipped** — users import
-from `fairLMs.metrics` only.
+**Where we are:** Phases 1, 2, 3, 4, 6, 7 and 8 are done; Phase 5 is in progress.
+The public metric API and book taxonomy now share the single
+`fairLMs.definitions` package.
 
 **Goal:** Researchers import a metric and call one method — without knowing
 the folder path.
 
 ```python
-from fairLMs.metrics import CrowSPairsScore
+from fairLMs.definitions import CrowSPairsScore
 from fairLMs.datasets import CrowSPairs
-from fairLMs.models import HuggingFaceModel
+from fairLMs.definitions.models import HuggingFaceModel
 
 result = CrowSPairsScore().compute(
     model=HuggingFaceModel("bert-base-uncased", task="mlm"),
@@ -26,25 +26,27 @@ print(result.score)
 | Piece | Location |
 |-------|----------|
 | Dataset loaders | `fairLMs/datasets/` |
-| Model adapters | `fairLMs/models/` |
-| Shared helpers | `fairLMs/utils/` |
-| Metric API | `fairLMs/metrics/` (33 classes, all expose `compute`) |
-| Leaf demos | `fairLMs/definition/**/main.py` use the public API |
+| Model adapters | `fairLMs/definitions/models/` |
+| Shared contracts | `fairLMs/definitions/core/` |
+| Numerical helpers | `fairLMs/definitions/utils/` |
+| Metric API | `fairLMs/definitions/` (33 classes, all expose `compute`) |
+| Dataset diagnostics | `fairLMs/datasets/diagnostics/` |
+| Leaf demos | `fairLMs/definitions/**/main.py` use the public API |
 | Examples | `examples/` |
 | Per-metric docs | leaf `README.md` files show Public API first |
-| Canonical data | `fairLMs/data/` |
+| Bundled small data | `fairLMs/datasets/resources/` |
 | Install + docs | `pyproject.toml`, `README.md` |
 
 ---
 
 ## Remaining work
 
-### Phase 3 — Book taxonomy aliases — SKIPPED
+### Phase 3 — Consolidate the definition packages — DONE
 
-Not planned. Prefer:
+The duplicate `definition/` and `definitions/` trees were merged. Prefer:
 
 ```python
-from fairLMs.metrics import CrowSPairsScore
+from fairLMs.definitions import CrowSPairsScore
 ```
 
 ### Phase 4 — Demote scripts — DONE
@@ -60,7 +62,7 @@ from fairLMs.metrics import CrowSPairsScore
    every entry in `METRIC_REGISTRY`)
 2. Document which metrics need which extras (`openai`, etc.) — CR / CTF / BA
    require `OPENAI_API_KEY`; all others run locally
-3. Deduplicate leftover CrowS/BBQ copies under `definition/**/data/`
+3. Deduplicate leftover CrowS/BBQ copies under `definitions/**/data/`
 4. Document/handle local-only corpora (`red_pill_corpus.csv`, BBQ zips)
 
 ### Phase 6 — Uniform call contract — DONE (all 33 metrics)
@@ -74,22 +76,22 @@ read the same knob from both `__init__` and `kwargs`. All 33 metrics across all
   `get_params()` / `set_params()` / `__repr__` on `FairnessMetric`
   (sklearn's `BaseEstimator` protocol).
 * **Data is positional and typed** — 17 containers in
-  `fairLMs/metrics/data.py` validate shape at construction.
+  `fairLMs/definitions/data.py` validate shape at construction.
 * **`compute(model, data)`** — exactly two positional arguments, everywhere.
 * **Unknown kwargs raise `TypeError`** via `_reject_unknown_kwargs`.
 * Legacy keywords (`T1_terms=`, `prompts=`, `y_true=`, …) still work, with a
   `DeprecationWarning` naming the replacement.
 
 ```python
-from fairLMs.metrics import WEAT, WordSets
+from fairLMs.definitions import WEAT, WordSets
 WEAT(pooling="mean", n_samples=10_000).compute(model, WordSets(t1, t2, a1, a2))
 ```
 
 The 5 model-free metrics are additionally exposed as plain functions in
-`fairLMs/metrics/functional.py`, in the style of `sklearn.metrics`:
+`fairLMs/definitions/functional.py`, in the style of `sklearn.metrics`:
 
 ```python
-from fairLMs.metrics import equal_opportunity_gap
+from fairLMs.definitions import equal_opportunity_gap
 equal_opportunity_gap(y_true, y_pred, groups, g1="A", g2="B")   # -> float
 ```
 
@@ -146,10 +148,10 @@ Update imports to `fairLMs` and reinstall with `pip install -e .`.
 
 ## Success check
 
-A new user never needs to know `definition/encoder_only/.../cps/`. They only need:
+A new user never needs to know `definitions/encoder_only/.../cps/`. They only need:
 
 ```python
-from fairLMs.metrics import CrowSPairsScore
+from fairLMs.definitions import CrowSPairsScore
 ```
 
 and a single method: **`compute`**.

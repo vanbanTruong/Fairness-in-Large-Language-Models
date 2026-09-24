@@ -18,10 +18,10 @@ The first two families need `task="mlm"`; the similarity family needs
 ## End to end
 
 ```python
-from fairLMs.data import weat_c1
+from fairLMs.definitions.resources import weat_c1
 from fairLMs.datasets import CrowSPairs
-from fairLMs.metrics import AllUnmaskedLikelihoodScore, CrowSPairsScore, WEAT
-from fairLMs.models import HuggingFaceModel
+from fairLMs.definitions import AllUnmaskedLikelihoodScore, CrowSPairsScore, WEAT
+from fairLMs.definitions.models import HuggingFaceModel
 
 # --- pair-preference metrics: masked-LM head, bundled CrowS-Pairs ------------
 mlm = HuggingFaceModel("bert-base-uncased", task="mlm")

@@ -29,7 +29,7 @@ missing item rather than reporting "not applicable":
 
 ```python
 from fairLMs.mitigation import IterativeNullspaceProjection
-from fairLMs.models import OpenAIModel
+from fairLMs.definitions.models import OpenAIModel
 
 IterativeNullspaceProjection().apply(OpenAIModel(), evidence)
 # TypeError: IterativeNullspaceProjection requires `hidden_states`;
@@ -74,7 +74,7 @@ Post-processing needs no model at all, which makes it the quickest way to see th
 contract end to end.
 
 ```python
-from fairLMs.diagnostics import LabeledScoredGroups, ScoredGroups
+from fairLMs.datasets.diagnostics import LabeledScoredGroups, ScoredGroups
 from fairLMs.mitigation import GroupAwareThresholding
 
 evidence = LabeledScoredGroups(
@@ -122,7 +122,7 @@ capabilities exposed by the edited adapter can use the same compute interface.
 Projection evidence must declare its representation layer and pair IDs:
 
 ```python
-from fairLMs.metrics import METRIC_REGISTRY
+from fairLMs.definitions import METRIC_REGISTRY
 from fairLMs.mitigation import SubspaceProjection
 
 # vectors: AttributeLabeledVectors with representation_layer and pair_ids;
@@ -194,7 +194,7 @@ it is declared decoder-only and encoder-decoder and refused elsewhere.
 
 ```python
 from fairLMs.mitigation import MetricEvaluation, compare_before_after
-from fairLMs.metrics import WEAT, EqualOpportunityGap
+from fairLMs.definitions import WEAT, EqualOpportunityGap
 
 report = compare_before_after(
     base_model,

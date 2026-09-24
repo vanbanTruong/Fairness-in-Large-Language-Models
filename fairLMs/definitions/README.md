@@ -1,105 +1,77 @@
-# Fairness Definitions for Language Models
+# Fairness definitions
 
-A Python library of fairness definitions and bias metrics for large language models. Metrics are organized by **architecture** (encoder-only, decoder-only, encoder–decoder) and by **bias type** (intrinsic vs. extrinsic), with a runnable implementation and local README for each metric.
+This directory is the single implementation and public API for FairLMs'
+model-level fairness definitions. It combines the tested FairLMs metric API
+with the architecture taxonomy used by the accompanying paper.
 
-## Taxonomy
+## Public API
 
+Install the repository package once from the repository root:
+
+```bash
+python -m pip install -e ./fairLMs
 ```
-Definitions/
-├── encoder_only/          # Masked LMs (e.g. BERT)
-│   ├── intrinsic_bias/    # Embedding / probability associations inside the model
-│   └── extrinsic_bias/    # Downstream task disparities
-├── decoder_only/          # Autoregressive LMs (e.g. GPT-2, Llama-2)
+
+Import metric classes and evidence containers from `fairLMs.definitions`:
+
+```python
+from fairLMs.definitions import WEAT, WordSets, list_metrics
+
+metric = WEAT()
+result = metric.compute(model, word_sets)
+print(result.score)
+```
+
+All 33 registered definitions use the same interface:
+
+```python
+metric.compute(model, data)
+```
+
+Use `list_metrics()` to inspect registry names and `get_metric(name)` to create
+a metric dynamically.
+
+## Taxonomy and low-level implementations
+
+The three architecture directories contain low-level computation functions,
+small stimuli, and runnable examples. Shared contracts, model adapters,
+numerical helpers, and reusable word sets also live here:
+
+```text
+definitions/
+├── core/
+├── models/
+├── utils/
+├── resources/
+├── encoder_only/
 │   ├── intrinsic_bias/
 │   └── extrinsic_bias/
-└── encoder_decoder/       # Seq2seq models (e.g. T5, mT5, mBART)
+├── decoder_only/
+│   ├── intrinsic_bias/
+│   └── extrinsic_bias/
+└── encoder_decoder/
     ├── intrinsic_bias/
     └── extrinsic_bias/
 ```
 
-- **Intrinsic bias** — associations measurable from representations, token probabilities, or attention without a task head.
-- **Extrinsic bias** — disparities that show up on downstream behavior (QA, NLI, generation, translation, summarization, etc.).
+Advanced users may import a low-level function directly, for example:
 
-Each leaf directory typically contains `main.py` (runner), a metric module, optional `data/`, results CSV, and a `README.md` with parameters, references, and how to run.
-
-## Metrics
-
-### Encoder-only
-
-| Category | Metric | Abbrev. |
-|---|---|---|
-| Similarity-based | Word / Sentence / Contextualized Embedding Association Test | WEAT, SEAT, CEAT |
-| Masked-token | Contrast-Based Score, Discovery of Correlations, Log Probability Bias Score | CBS, DisCo, LPBS |
-| Pseudo log-likelihood | All Unmasked Likelihood, Attention-weighted AUL, CrowS-Pairs Score, Pseudo Log-Likelihood, StereoSet CAT / iCAT | AUL, AULA, CPS, PLL, CAT |
-| Extrinsic | BBQ-style context disparity, Equal Opportunity, Fair Inference | S_DIS / S_AMB, EO, FI |
-
-### Decoder-only
-
-| Category | Metric | Abbrev. |
-|---|---|---|
-| Stereotypical association | Concept Association, Stereotypical Log-Likelihood | CA, SLL |
-| Attention-head disparity | Gradient-based Bias Estimation, Natural Indirect Effect | GBE, NIE |
-| Demographic representation | Demographic Normalized Probability, Demographic Representation Disparity | DNP, DRD |
-| Counterfactual fairness | Change Rate, Counterfactual Token Fairness | CR, CTF |
-| Performance disparity | Accuracy Disparity, BiasAsker, Sensitive-to-Neutral Similarity | AD, BA, SNS |
-
-### Encoder–decoder
-
-| Category | Metric | Abbrev. |
-|---|---|---|
-| Stereotypical association | Stereotype Disparity, Shapley Value Attribution | SD, SVA |
-| Algorithmic disparity | Lexical Frequency Profile, Morphological Complexity Disparity | LFP, MCD |
-| Extrinsic | Counterfactual Fairness, Idealized Bias Score, Semantic Similarity, Normalized Position Disparity | AUC, IBS, SS, NPD |
-
-Full method details, datasets, and run settings live in each metric’s README under the three architecture directories.
-
-## Installation
-
-Requires Python ≥ 3.9.
-
-```bash
-git clone https://github.com/vanbanTruong/Fairness-in-Large-Language-Models.git
-cd "Fairness-in-Large-Language-Models/fairLMs/definitions"
-pip install -e .
-# Install the fuller dependency set used by many runners:
-pip install -r requirements.txt
+```python
+from fairLMs.definitions.encoder_only.intrinsic_bias.similarity_based.weat.weat import (
+    compute_weat,
+)
 ```
 
-Some decoder-only metrics use gated Hugging Face models (e.g. Llama-2). Authenticate first:
+The public classes in this directory validate inputs, resolve model adapters,
+and call these low-level functions. Applications should prefer the public API
+so definitions can be combined consistently with dataset loaders, diagnostics,
+and mitigation workflows.
 
-```bash
-export HF_TOKEN=...   # or: huggingface-cli login
-```
+## Data policy
 
-API-based runners (where applicable) need an `OPENAI_API_KEY`.
+Large benchmark corpora are not duplicated inside individual metric folders.
+Use `fairLMs.datasets` to download or load them from their maintained sources.
+Only small reusable stimuli and package test resources are stored locally.
 
-## Running a metric
-
-From the repository root, after `pip install -e .`:
-
-```bash
-python -m encoder_only.intrinsic_bias.similarity_based.seat.main
-```
-
-Equivalently, from a metric directory:
-
-```bash
-cd encoder_only/intrinsic_bias/similarity_based/seat
-python main.py
-```
-
-Results are written as a CSV next to the runner (e.g. `seat_results.csv`). See that metric’s README for model names, seeds, sample caps, and expected columns.
-
-## Project layout
-
-| Path | Role |
-|---|---|
-| `encoder_only/` | Metrics for encoder-only models |
-| `decoder_only/` | Metrics for decoder-only models |
-| `encoder_decoder/` | Metrics for encoder–decoder models |
-| `pyproject.toml` | Package metadata and core dependencies |
-| `requirements.txt` | Broader runtime deps (datasets, OpenAI, etc.) |
-
-## License
-
-This project is licensed under the [MIT License](LICENSE).
+Each leaf directory has a README describing the definition, inputs, references,
+and a runnable `python -m fairLMs.definitions...main` example.

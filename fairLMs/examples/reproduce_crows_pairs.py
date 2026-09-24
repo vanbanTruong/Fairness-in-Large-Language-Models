@@ -13,8 +13,8 @@ from __future__ import annotations
 import argparse
 
 from fairLMs.datasets import CrowSPairs
-from fairLMs.metrics import CrowSPairsScore
-from fairLMs.models import HuggingFaceModel
+from fairLMs.definitions import CrowSPairsScore
+from fairLMs.definitions.models import HuggingFaceModel
 
 PUBLISHED = {"overall": 60.5, "stereo": 61.1, "antistereo": 56.9}
 

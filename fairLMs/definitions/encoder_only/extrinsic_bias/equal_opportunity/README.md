@@ -11,11 +11,26 @@ entailment probes per dataset, scores them with an MNLI model, and writes one
 gap value per dataset row. For BBQ, the reported value is the **mean absolute
 gap** across categories.
 
+## Public API
+
+```python
+from fairLMs.definitions import EqualOpportunityGap
+
+result = EqualOpportunityGap().compute(
+    y_true=[1, 1, 0, 0],
+    y_pred=[1, 0, 0, 0],
+    groups=["A", "B", "A", "B"],
+    g1="A",
+    g2="B",
+)
+print(result.score)
+```
+
 ## Files
 
 | File | Purpose |
 |---|---|
-| `main.py` | Entry point (argparse CLI): builds forced-choice sets, scores with NLI, writes `gap_g_y_results.csv` |
+| `main.py` | Short public-API demo using `EqualOpportunityGap`; writes results CSV for continuity |
 | `equal_opportunity.py` | Core: `gap_g_y()` — vectorized per-group TPR and gap, NaN-safe |
 | `data/` | Bundled BBQ / WinoBias support files |
 | `gap_g_y_results.csv` | Output of the last run |
@@ -32,12 +47,13 @@ gap** across categories.
 
 ## How to run
 
+**Preferred:** use the public API above (and/or examples under `examples/` at the repo root).
+
+**Optional legacy demo** from the repository root:
+
 ```bash
-pip install torch transformers pandas numpy
-cd <this directory>
-python main.py
-# optional:
-python main.py --model roberta-large-mnli --max-samples 500
+pip install -e .
+python -m fairLMs.definitions.encoder_only.extrinsic_bias.equal_opportunity.main
 ```
 
 ## Output \& Results

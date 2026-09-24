@@ -7,17 +7,33 @@ WEAT measures whether two sets of **target** words (e.g. European-American vs.
 African-American names) are differentially associated with two sets of
 **attribute** words (e.g. pleasant vs. unpleasant), using cosine similarity.
 
+## Public API
+
+```python
+from fairLMs.definitions import WEAT
+from fairLMs.definitions.models import HuggingFaceModel
+
+result = WEAT().compute(
+    model=HuggingFaceModel("bert-base-uncased", task="encoder"),
+    T1_terms=["john", "paul"],
+    T2_terms=["amy", "joan"],
+    A_terms=["career", "salary"],
+    B_terms=["family", "home"],
+)
+print(result.score)
+```
+
 ## Files
 
 | File | Purpose |
 |---|---|
-| `main.py` | Entry point: loads BERT, builds word embeddings, runs all tests, writes `weat_results.csv` |
+| `main.py` | Short public-API demo using `WEAT`; writes results CSV for continuity |
 | `weat.py` | Core metric: `compute_weat(T1_vecs, T2_vecs, A_vecs, B_vecs)` → effect size `d`, p-value `p` |
 | `data.py` | Word lists for the four test cases (`ALL_TESTS`) |
 | `weat_results.csv` | Output of the last run |
 
 Shared statistical helpers (`association_vectorized`, `cohens_d`,
-`permutation_pval`) live in `encoder_only/utils.py`.
+`permutation_pval`) live in `fairLMs.definitions.utils`.
 
 ## Test cases
 
@@ -36,11 +52,11 @@ All word lists are hard-coded in `data.py` — no external data files are needed
 |---|---|---|
 | Model | `bert-base-uncased` (HuggingFace pretrained checkpoint, inference only) | `main.py` → `load_bert()` |
 | Word embedding | Encode the bare word (`[CLS] word [SEP]`), take the **last hidden layer**, drop `[CLS]`/`[SEP]`, **mean over subword tokens**; word is lowercased | `main.py` → `get_embedding()` |
-| Effect size | Cohen's *d*: (mean(s(T1)) − mean(s(T2))) / pooled std (ddof=1) of all associations | `utils.py` → `cohens_d()` |
-| Association s(w, A, B) | mean cosine(w, A) − mean cosine(w, B) | `utils.py` → `association_vectorized()` |
-| p-value | One-sided permutation test over equal-size re-partitions of T1 ∪ T2. Exact enumeration when C(2n, n) ≤ `n_samples`, otherwise `n_samples` random permutations | `utils.py` → `permutation_pval()` |
+| Effect size | Cohen's *d*: (mean(s(T1)) − mean(s(T2))) / pooled std (ddof=1) of all associations | `fairLMs.definitions.utils` → `cohens_d()` |
+| Association s(w, A, B) | mean cosine(w, A) − mean cosine(w, B) | `fairLMs.definitions.utils` → `association_vectorized()` |
+| p-value | One-sided permutation test over equal-size re-partitions of T1 ∪ T2. Exact enumeration when C(2n, n) ≤ `n_samples`, otherwise `n_samples` random permutations | `fairLMs.definitions.utils` → `permutation_pval()` |
 | `n_samples` | 10,000 | `weat.py` → `compute_weat()` |
-| Random seed | `np.random.seed(43)` | `main.py` → `run_weat()` |
+| Random seed | `seed` constructor param, drives a generator local to the call. Unseeded (`None`) by default; `WEAT(seed=0)` pins the sampled p-value. Moot on the exact-enumeration branch | `fairLMs.definitions` → `WEAT` |
 | Device | CUDA if available, else CPU | `main.py` → `load_bert()` |
 
 Because the pretrained checkpoint is fixed, embeddings are deterministic, and the
@@ -58,11 +74,13 @@ Python ≥ 3.9 and the dependencies declared in the repo-root `pyproject.toml`:
 
 ## How to run
 
-From the **repository root**:
+**Preferred:** use the public API above (and/or examples under `examples/` at the repo root).
+
+**Optional legacy demo** from the repository root:
 
 ```bash
 pip install -e .
-python -m encoder_only.intrinsic_bias.similarity_based.weat.main
+python -m fairLMs.definitions.encoder_only.intrinsic_bias.similarity_based.weat.main
 ```
 
 ## Output \& Results

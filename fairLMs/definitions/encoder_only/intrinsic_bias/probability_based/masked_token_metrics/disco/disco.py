@@ -1,6 +1,6 @@
 import numpy as np
 
-from encoder_only.utils import get_top_k_predictions
+from fairLMs.definitions.encoder_only.utils import get_top_k_predictions
   
 
 

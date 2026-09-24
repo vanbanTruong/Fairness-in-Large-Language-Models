@@ -1,5 +1,5 @@
 import numpy as np
-from encoder_only.utils import build_masked_sentence, get_multitoken_log_prob
+from fairLMs.definitions.encoder_only.utils import build_masked_sentence, get_multitoken_log_prob
 
 
 def _raw_log_prob(term, sentence, tokenizer, model):

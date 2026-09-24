@@ -1,12 +1,4 @@
-"""Where loaders get their bytes: a local directory first, the Hub second.
-
-Six of the benchmarks in this package are published as plain files in a Hugging
-Face dataset repository, four are only distributed from their own project page,
-and one is a set of templates with no release at all. The helpers here give all
-of them the same two-step resolution -- an explicit ``root=`` the caller passes,
-otherwise the packaged fallback -- and one failure message that names the
-directory layout that was expected and where to get it.
-"""
+"""Shared source resolution for local and Hugging Face dataset loaders."""
 
 from __future__ import annotations
 
@@ -14,6 +6,16 @@ from pathlib import Path
 from typing import Optional, Sequence, Union
 
 PathLike = Union[str, Path]
+
+
+def from_pretrained(loader, model_name: str, **kwargs):
+    """Call a Hugging Face ``from_pretrained`` loader with the configured token."""
+    import os
+
+    token = os.environ.get("HF_TOKEN") or os.environ.get("HUGGING_FACE_HUB_TOKEN")
+    if token and "token" not in kwargs:
+        kwargs["token"] = token
+    return loader(model_name, **kwargs)
 
 
 def none_if_na(value):

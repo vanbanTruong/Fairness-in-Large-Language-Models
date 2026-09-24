@@ -16,6 +16,7 @@ import pandas as pd
 import pytest
 
 from fairLMs.datasets import (
+    BBQ,
     BOLD,
     EEC,
     GAP,
@@ -47,6 +48,51 @@ NEW_LOADERS = [
     UnQover,
     TrustGPT,
 ]
+
+
+def _write_bbq_category(path: Path) -> None:
+    rows = [
+        {"example_id": 1, "context_condition": "ambig", "question": "Who?"},
+        {"example_id": 2, "context_condition": "disambig", "question": "Who?"},
+    ]
+    path.write_text("\n".join(json.dumps(row) for row in rows) + "\n")
+
+
+def test_bbq_reads_a_caller_supplied_directory(tmp_path):
+    _write_bbq_category(tmp_path / "Age.jsonl")
+
+    rows = BBQ(
+        data_dir=tmp_path,
+        categories=["Age"],
+        context_condition="ambig",
+    ).load()
+
+    assert rows == [
+        {
+            "example_id": 1,
+            "context_condition": "ambig",
+            "question": "Who?",
+            "category": "Age",
+        }
+    ]
+
+
+def test_bbq_downloads_only_the_requested_category(monkeypatch, tmp_path):
+    cached = tmp_path / "data" / "Age.jsonl"
+    cached.parent.mkdir()
+    _write_bbq_category(cached)
+    requested = []
+
+    def fake(repo_id, filename, revision=None):
+        requested.append((repo_id, filename, revision))
+        return cached
+
+    monkeypatch.setattr("fairLMs.datasets.bbq.hub_file", fake)
+    loader = BBQ(categories=["Age"], n_max=1, revision="fixed")
+
+    assert loader.load()[0]["category"] == "Age"
+    assert loader.directory == cached.parent
+    assert requested == [("heegyu/bbq", "data/Age.jsonl", "fixed")]
 
 
 @pytest.mark.parametrize("cls", NEW_LOADERS, ids=lambda c: c.__name__)

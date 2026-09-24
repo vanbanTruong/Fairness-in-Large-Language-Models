@@ -1,7 +1,7 @@
 """Before/after comparison across a declared metric set.
 
 Comparing a base and a mitigated system "needs no new code" because an
-intra-processing result *is* a :class:`~fairLMs.models.base.ModelAdapter`. This
+intra-processing result *is* a :class:`~fairLMs.definitions.models.base.ModelAdapter`. This
 module is only the thin helper that runs a declared metric set against both and
 reports the deltas.
 
@@ -23,9 +23,9 @@ import json
 from dataclasses import dataclass, field
 from typing import Any, Mapping, Optional, Sequence
 
-from fairLMs.metrics import METRIC_REGISTRY, FairnessMetric
-from fairLMs.provenance import json_safe, model_provenance
-from fairLMs.diagnostics._utils import freeze_json_mapping, thaw_json
+from fairLMs.definitions import METRIC_REGISTRY, FairnessMetric
+from fairLMs.definitions.core.provenance import json_safe, model_provenance
+from fairLMs.datasets.diagnostics._utils import freeze_json_mapping, thaw_json
 import copy
 import math
 

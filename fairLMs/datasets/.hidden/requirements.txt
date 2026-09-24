@@ -1,5 +1,0 @@
-nltk
-scikit-learn
-gensim
-matplotlib
-numpy

@@ -1,8 +1,21 @@
 # utils
 
-Shared numerical and I/O helpers. These are the building blocks the metrics are assembled from: pseudo-log-likelihood scoring, embedding and pooling, association statistics, masking, bundled-data paths and CSV output. They are public and stable, so a custom metric can reuse them rather than reimplementing the same pooling or permutation test.
+Shared numerical helpers used by fairness definitions: pseudo-log-likelihood
+scoring, embedding and pooling, association statistics, masking, and summary
+statistics. Custom definitions can reuse them instead of reimplementing the
+same scoring logic.
 
-::: fairLMs.utils
+::: fairLMs.definitions.utils
+    options:
+      show_root_heading: true
+      show_source: true
+      members_order: source
+      filters: ["!^_"]
+
+CSV result output is separate from numerical helpers and always writes outside
+the installed package:
+
+::: fairLMs.definitions.io
     options:
       show_root_heading: true
       show_source: true

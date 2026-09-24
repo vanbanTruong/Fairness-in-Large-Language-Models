@@ -48,9 +48,9 @@ The synchronized upstream version is single-sourced in
 ## Quick start
 
 ```python
-from fairLMs.metrics import CrowSPairsScore, list_metrics
+from fairLMs.definitions import CrowSPairsScore, list_metrics
 from fairLMs.datasets import CrowSPairs
-from fairLMs.models import HuggingFaceModel
+from fairLMs.definitions.models import HuggingFaceModel
 
 model = HuggingFaceModel("bert-base-uncased", task="mlm")
 result = CrowSPairsScore().compute(model, CrowSPairs(n_max=50))
@@ -95,12 +95,12 @@ Metric(**config).compute(model, data) -> MetricResult
 * **Configuration** goes in the constructor, keyword-only, and is introspectable
   via `get_params()` / `set_params()` — so metrics can be cloned or swept.
 * **Data** is the second positional argument: a `FairnessDataset`, a plain
-  sequence, or a typed container from `fairLMs.metrics.data` for metrics that
+  sequence, or a typed container from `fairLMs.definitions.data` for metrics that
   need several labelled sets.
 * **Unknown keywords raise `TypeError`** instead of silently using a default.
 
 ```python
-from fairLMs.metrics import WEAT, SEAT, WordSets
+from fairLMs.definitions import WEAT, SEAT, WordSets
 
 words = WordSets(target_1=t1, target_2=t2, attribute_1=a1, attribute_2=a2)
 WEAT(n_samples=10_000).compute(model, words)
@@ -109,14 +109,14 @@ SEAT(pooling="cls").compute(model, words)      # same data, different metric
 WEAT(pooling="cls").get_params()               # {'n_samples': 10000, 'pooling': 'cls'}
 ```
 
-The published association tests ship pre-wrapped in `fairLMs.data`, so a
+The published association tests ship pre-wrapped in `fairLMs.definitions.resources`, so a
 standard run needs no term lists at all — and swapping the checkpoint does not
 change the call:
 
 ```python
-from fairLMs.data import weat_c1, list_word_sets
-from fairLMs.metrics import SEAT
-from fairLMs.models import HuggingFaceModel
+from fairLMs.definitions.resources import weat_c1, list_word_sets
+from fairLMs.definitions import SEAT
+from fairLMs.definitions.models import HuggingFaceModel
 
 metric = SEAT(n_samples=1_000, seed=0)
 for ckpt in ("bert-base-uncased", "roberta-base"):
@@ -159,7 +159,7 @@ Five metrics score predictions you already have. They also exist as plain
 functions, mirroring `sklearn.metrics`:
 
 ```python
-from fairLMs.metrics import equal_opportunity_gap, accuracy_disparity
+from fairLMs.definitions import equal_opportunity_gap, accuracy_disparity
 
 equal_opportunity_gap(y_true, y_pred, groups, g1="A", g2="B")   # -> float
 accuracy_disparity(scores_stereotype, scores_counter)           # -> float
@@ -188,7 +188,7 @@ published as a vector of eight independent construction slots (`b_min`,
 with no aggregate score. Three of the slots read a quantity that needs an
 optional backend -- a sentence embedding (`b_equiv`), a grammatical-error count
 (`b_gram`) or a dependency-tree depth (`b_diff_dep`). Each is a real class that
-takes `backend=`; `fairLMs.diagnostics.backends` ships a reference backend for
+takes `backend=`; `fairLMs.datasets.diagnostics.backends` ships a reference backend for
 each, and `pip install "fairLMs[nlp]"` adds the grammar-checker and parser
 dependencies. Without a backend such a slot is `blocked` with a reason code
 naming the missing backend once it was requested and its required evidence view
@@ -201,7 +201,7 @@ components over one axis of a `DatasetEvidence` and returns one report, while
 [dataset audit guide](docs/guides/dataset-audit.md).
 
 ```python
-from fairLMs.diagnostics import (
+from fairLMs.datasets.diagnostics import (
     DatasetAuditSpec,
     ReferenceDistribution,
     RepresentationEvidence,
@@ -265,7 +265,7 @@ maximum pairwise Wasserstein-1 distance in the scorer's native score units.
 inside complete, explicitly declared two-condition pairs.
 
 ```python
-from fairLMs.diagnostics import (
+from fairLMs.datasets.diagnostics import (
     DatasetAuditSpec,
     ScoreRateTransform,
     ScoredGroups,
@@ -324,7 +324,7 @@ Paired sensitivity uses independent evidence because group marginals do not
 preserve which rows are counterparts:
 
 ```python
-from fairLMs.diagnostics import (
+from fairLMs.datasets.diagnostics import (
     PairedScores,
     ScorerCounterfactualSensitivity,
 )
@@ -381,17 +381,17 @@ Shared loaders:
 
 ```python
 from fairLMs.datasets import CrowSPairs, BBQ, StereoSet
-from fairLMs.models import load_masked_lm
+from fairLMs.definitions.models import load_masked_lm
 
 crows = CrowSPairs().load()
 bbq = BBQ(categories=["Age"]).load()
 loaded = load_masked_lm("bert-base-uncased")
 ```
 
-Leaf runners under `definition/` are short demos of the same public API:
+Leaf runners under `definitions/` are short demos of the same public API:
 
 ```bash
-python -m fairLMs.definition.encoder_only.intrinsic_bias.probability_based.pseudo_log_likelihood_metrics.cps.main
+python -m fairLMs.definitions.encoder_only.intrinsic_bias.probability_based.pseudo_log_likelihood_metrics.cps.main
 ```
 
 See also the local [`examples/`](examples/) directory.
@@ -400,18 +400,26 @@ See also the local [`examples/`](examples/) directory.
 
 ```
 fairLMs/
-├── metrics/        # Public API: CrowSPairsScore, WEAT, … (all expose compute)
-│   ├── data.py     #   Validated input containers (WordSets, ProbeSet, …)
-│   └── functional.py #  sklearn.metrics-style functions (model-free metrics)
+├── datasets/       # Loaders, dataset diagnostics, and small resources
+│   ├── diagnostics/
+│   └── resources/
+├── definitions/    # Public API and the 33 architecture-organized definitions
+│   ├── data.py     # Validated input containers (WordSets, ProbeSet, …)
+│   ├── functional.py # sklearn.metrics-style functions (model-free metrics)
+│   ├── core/       # Applicability, parameters, and provenance
+│   ├── models/     # Hugging Face and OpenAI adapters
+│   ├── utils/      # Numerical metric helpers
+│   ├── resources/  # WEAT/SEAT word sets
+│   ├── encoder_only/
+│   ├── decoder_only/
+│   └── encoder_decoder/
 ├── mitigation/     # Pre-, in-, intra-, and post-processing mitigators
-├── diagnostics/    # Dataset/result-table evidence, applicability, and reports
-├── datasets/       # Loader modules plus this repository's dataset resources
-├── models/         # HuggingFaceModel, OpenAIModel, load_* helpers
-├── utils/          # PLL / masking / association / path helpers
-├── data/           # Bundled CrowS-Pairs + BBQ files; exports WEAT/SEAT word sets
-├── artifacts/      # Preferred output dir for metric CSVs
-├── definition/     # Upstream runtime implementations required by metrics
-└── definitions/    # Existing research snapshot, kept separate for review
+├── docs/           # Project documentation
+├── tests/          # Unit, packaging, and workflow tests
+├── examples/       # Runnable examples
+├── scripts/        # Documentation and release tooling
+├── __init__.py
+└── _version.py
 ```
 
 Repo-root `examples/` has additional runnable snippets.
@@ -420,14 +428,14 @@ Every metric exposes the same method: `compute(...)`.
 
 ## Datasets
 
-Eighteen loaders behind one interface. `data/` ships two of the corpora;
-the rest are fetched or pointed at. See [Loaders](docs/registry/loaders.md) for
+Eighteen loaders share one interface. Only the small CrowS-Pairs CSV is
+distributed; larger corpora are fetched or pointed at. See [Loaders](docs/registry/loaders.md) for
 the generated table with every constructor argument.
 
 | Class | Source | Notes |
 |-------|--------|--------|
-| `CrowSPairs` | Bundled CSV under `data/crows_pairs/` | Stereotype / anti pairs |
-| `BBQ` | Bundled jsonl under `data/bbq/` | Optional `context_condition` filter |
+| `CrowSPairs` | Bundled CSV under `datasets/resources/crows_pairs/` | Stereotype / anti pairs |
+| `BBQ` | Hugging Face `heegyu/bbq`, cached at first use | Optional `context_condition` filter |
 | `StereoSet` | Hugging Face (`stereoset` / `McGill-NLP/stereoset`) | Pairs or triples |
 | `BiasInBios` | Hugging Face `LabHC/bias_in_bios` | Profession / gender helpers |
 | `WinoBias` | Hugging Face `wino_bias` | Occupation direction helpers |
@@ -445,9 +453,7 @@ the generated table with every constructor argument.
 | `UnQover` | Local `root=` | Streams the multi-GB slotmaps |
 | `TrustGPT` | Bundled templates + your norms | No data release; prompts are built |
 
-Bundled loaders prefer canonical files in `data/`, then fall back to
-legacy copies under `definition/` so existing scripts keep working. The four
-`root=` benchmarks are distributed only from their own project pages and never
+The four `root=` benchmarks are distributed only from their own project pages and never
 download anything; the loader raises with the project URL if you have not
 pointed it at a copy.
 
@@ -463,7 +469,7 @@ already-validated `WordSets`, ready to pass straight to `compute`:
 | `seat_c1` … `seat_c4` | May et al. (2019), expanded name lists | Same four axes |
 
 ```python
-from fairLMs.data import weat_c2, get_word_set, WORD_SET_LABELS
+from fairLMs.definitions.resources import weat_c2, get_word_set, WORD_SET_LABELS
 
 get_word_set("seat_c1")                # same objects, by name
 WORD_SET_LABELS["weat_c2"]             # 'C2 – Gender (Male/Female names × Career/Family)'
@@ -477,7 +483,7 @@ lists, which `SEAT` requires. CEAT is not included — it consumes `ContextSets`
 ## Models
 
 ```python
-from fairLMs.models import (
+from fairLMs.definitions.models import (
     HuggingFaceModel,
     load_masked_lm,      # task="mlm"
     load_encoder,        # task="encoder"
@@ -497,8 +503,8 @@ Set `HF_TOKEN` (or `HUGGING_FACE_HUB_TOKEN`) for gated models such as Llama-2.
 
 1. **One verb for metrics** — `compute` (sklearn’s `fit` / `predict` analogue).
 2. **Separate metrics from datasets** — reuse the same metric on CrowS-Pairs, StereoSet, or custom data.
-3. **Stable public surface** — internals under `definition/` can change without breaking user code.
-4. **Book-aligned taxonomy** — `definition/{encoder_only,encoder_decoder,decoder_only}/{intrinsic_bias,extrinsic_bias}/…` mirrors the conceptual organization of the accompanying textbook.
+3. **Stable public surface** — internals under `definitions/` can change without breaking user code.
+4. **Book-aligned taxonomy** — `definitions/{encoder_only,encoder_decoder,decoder_only}/{intrinsic_bias,extrinsic_bias}/…` mirrors the conceptual organization of the accompanying textbook.
 5. **Applicability before computation** — dataset diagnostics report missing or
    incompatible evidence instead of manufacturing a numeric result.
 
@@ -508,7 +514,7 @@ Set `HF_TOKEN` (or `HUGGING_FACE_HUB_TOKEN`) for gated models such as Llama-2.
 pip install -e ".[dev]"
 pytest                  # contract suite over every metric in the registry
 # Run a leaf metric script:
-python -m fairLMs.definition.encoder_only.intrinsic_bias.similarity_based.weat.main
+python -m fairLMs.definitions.encoder_only.intrinsic_bias.similarity_based.weat.main
 ```
 
 `tests/test_common.py` is the analogue of scikit-learn's `check_estimator`: it
@@ -524,15 +530,15 @@ HF_HUB_OFFLINE=1 pytest -q     # what CI runs; a few seconds, no downloads
 ```
 
 The packaging test catches a class of problem that an editable development
-environment can hide: `fairLMs.metrics` eagerly imports every metric family, so any
-third-party module imported at module scope under `fairLMs/definition/` is a
+environment can hide: `fairLMs.definitions` eagerly imports every metric family, so any
+third-party module imported at module scope under `fairLMs/definitions/` is a
 hard requirement of `import fairLMs`. If such a dependency is only listed in an
 extra, a clean installation cannot import the package. The local
 [`tests/test_packaging.py`](tests/test_packaging.py) guard walks the source AST
 and names the offending file.
 
-Metric result CSVs should go under `artifacts/` (via
-`fairLMs.utils.results_to_csv`); leaf-local `*_results.csv` files are ignored.
+`fairLMs.definitions.io.results_to_csv` writes to a caller-supplied directory,
+or to `./fairlms-results` by default. Run artifacts never go into the package.
 
 ## License
 

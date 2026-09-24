@@ -9,7 +9,7 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from fairLMs.diagnostics import PairedScores
+from fairLMs.datasets.diagnostics import PairedScores
 
 AXIS = "unfamiliar-intervention-axis"
 PAIR_FIELD = "external__match_key_41"

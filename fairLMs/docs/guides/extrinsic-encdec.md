@@ -19,13 +19,13 @@ encoder.
 ## End to end
 
 ```python
-from fairLMs.metrics import (
+from fairLMs.definitions import (
     CounterfactualAucScore,
     InferenceBiasScore,
     NormalizedPositionDistance,
 )
-from fairLMs.metrics.data import LabeledSentences
-from fairLMs.models import HuggingFaceModel
+from fairLMs.definitions.data import LabeledSentences
+from fairLMs.definitions.models import HuggingFaceModel
 
 t5 = HuggingFaceModel("t5-small", task="seq2seq")
 
@@ -103,8 +103,8 @@ and measures whether the two translations mean the same thing, so it needs a
 sentence encoder in addition to the translator. There is no default:
 
 ```python
-from fairLMs.metrics import TranslationSimilarityScore
-from fairLMs.models import HuggingFaceModel
+from fairLMs.definitions import TranslationSimilarityScore
+from fairLMs.definitions.models import HuggingFaceModel
 
 labse = HuggingFaceModel("sentence-transformers/LaBSE", task="encoder").load()
 
@@ -161,6 +161,6 @@ task.
 ## Data sources
 
 None of these has a bundled dataset. The leaf runners under
-`fairLMs/definition/encoder_decoder/extrinsic_bias/` pull articles from XSum and
+`fairLMs/definitions/encoder_decoder/extrinsic_bias/` pull articles from XSum and
 sentence pairs from Europarl via `datasets.load_dataset` at runtime, so they need
 network access on first use.

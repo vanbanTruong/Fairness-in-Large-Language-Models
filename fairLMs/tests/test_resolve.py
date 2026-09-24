@@ -1,6 +1,6 @@
 """Tests for the argument-normalising dispatch layer.
 
-``fairLMs.metrics.resolve`` sits between every metric and its model. It accepts
+``fairLMs.definitions.resolve`` sits between every metric and its model. It accepts
 five different spellings of "here is a model" and three of "here is a dataset",
 and picks a device when the caller did not. A bug here misroutes silently: the
 metric still runs, still returns a float, and nobody learns that the tokenizer
@@ -14,15 +14,15 @@ them.
 import pytest
 import torch
 
-from fairLMs.metrics.resolve import (
+from fairLMs.definitions.resolve import (
     get_examples,
     get_openai_bundle,
     get_tokenizer_model,
     require_kwargs,
 )
-from fairLMs.models import HuggingFaceModel
-from fairLMs.models.base import LoadedModel
-from fairLMs.models.openai import OpenAILoadedModel, OpenAIModel
+from fairLMs.definitions.models import HuggingFaceModel
+from fairLMs.definitions.models.base import LoadedModel
+from fairLMs.definitions.models.openai import OpenAILoadedModel, OpenAIModel
 from .stubs import StubMaskedLM, StubOpenAIClient, StubTokenizer
 
 

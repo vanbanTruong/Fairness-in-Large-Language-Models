@@ -6,7 +6,7 @@ from typing import Any, Optional
 
 from fairLMs.mitigation.base import MitigationResult, Mitigator
 from fairLMs.mitigation.evidence import PromptSpec
-from fairLMs.models.base import LoadedModel, ModelAdapter
+from fairLMs.definitions.models.base import LoadedModel, ModelAdapter
 
 __all__ = ["SelfDebiasedModelAdapter", "SelfDebiasing"]
 
@@ -19,7 +19,7 @@ class SelfDebiasedModelAdapter(ModelAdapter):
     """
 
     def __init__(self, base, spec, *, decay, max_new_tokens, epsilon=0.01, seed=0):
-        from fairLMs.applicability import ModelProfile, AccessLevel
+        from fairLMs.definitions.core.applicability import ModelProfile, AccessLevel
 
         self.base, self.spec = base, spec
         self.decay, self.max_new_tokens = decay, max_new_tokens
@@ -86,7 +86,7 @@ class SelfDebiasing(Mitigator):
     Examples
     --------
     >>> from fairLMs.mitigation import PromptSpec, SelfDebiasing
-    >>> from fairLMs.models.base import ModelAdapter
+    >>> from fairLMs.definitions.models.base import ModelAdapter
     >>> class Stub(ModelAdapter):
     ...     name = "stub"
     ...     task = "causal"

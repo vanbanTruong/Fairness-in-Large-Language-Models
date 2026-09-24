@@ -5,7 +5,7 @@ from __future__ import annotations
 import math
 from typing import Any, Dict, List, Sequence
 
-from fairLMs.diagnostics.evidence import LabeledScoredGroups
+from fairLMs.datasets.diagnostics.evidence import LabeledScoredGroups
 from fairLMs.mitigation.base import MitigationResult, Mitigator
 from fairLMs.mitigation.postprocessing._shared import (
     _ALL_ARCHITECTURES,
@@ -133,7 +133,7 @@ class ScoreCalibration(Mitigator):
 
     Examples
     --------
-    >>> from fairLMs.diagnostics import LabeledScoredGroups, ScoredGroups
+    >>> from fairLMs.datasets.diagnostics import LabeledScoredGroups, ScoredGroups
     >>> from fairLMs.mitigation import ScoreCalibration
     >>> evidence = LabeledScoredGroups(
     ...     scored=ScoredGroups(

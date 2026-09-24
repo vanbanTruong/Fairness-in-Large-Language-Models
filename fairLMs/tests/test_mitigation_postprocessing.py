@@ -4,7 +4,7 @@ import math
 
 import pytest
 
-from fairLMs.diagnostics import LabeledScoredGroups, ScoredGroups
+from fairLMs.datasets.diagnostics import LabeledScoredGroups, ScoredGroups
 from fairLMs.mitigation import (
     CandidateSets,
     OutputReranking,
@@ -350,7 +350,7 @@ class TestOutputReranking:
             OutputReranking(lambda_=2.0).apply(None, self._sets())
 
     def test_an_encoder_only_model_is_refused_as_non_generative(self):
-        from fairLMs.applicability import TASK_PROFILES
+        from fairLMs.definitions.core.applicability import TASK_PROFILES
 
         with pytest.raises(TypeError, match="decoder_only"):
             OutputReranking().apply(TASK_PROFILES["mlm"], self._sets())

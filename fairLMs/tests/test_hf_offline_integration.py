@@ -23,7 +23,7 @@ from transformers import (
     T5ForConditionalGeneration,
 )
 
-from fairLMs.metrics import (
+from fairLMs.definitions import (
     AllUnmaskedLikelihoodAttentionScore,
     CrowSPairsScore,
     PseudoLogLikelihoodScore,
@@ -31,8 +31,8 @@ from fairLMs.metrics import (
     DemographicRepresentationDivergence,
 )
 from fairLMs.mitigation import ProjectedModelAdapter, SelfDebiasing, PromptSpec
-from fairLMs.models import HuggingFaceModel
-from fairLMs.models.base import LoadedModel, ModelAdapter
+from fairLMs.definitions.models import HuggingFaceModel
+from fairLMs.definitions.models.base import LoadedModel, ModelAdapter
 
 VOCAB = [
     "[PAD]",

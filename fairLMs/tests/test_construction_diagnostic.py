@@ -15,7 +15,7 @@ from pathlib import Path
 
 import pytest
 
-from fairLMs.diagnostics import (
+from fairLMs.datasets.diagnostics import (
     BACKEND_CONSTRUCTION_SLOTS,
     CONSTRUCTION_BACKEND_REQUIREMENTS,
     CONSTRUCTION_SLOTS,
@@ -50,7 +50,7 @@ from fairLMs.diagnostics import (
     audit_construction,
     construction_vector,
 )
-from fairLMs.diagnostics.construction import (
+from fairLMs.datasets.diagnostics.construction import (
     BACKEND_BLOCKED_WARNING,
     CONSTRUCTION_VECTOR_WARNING,
     INJECTED_PREDICATE_WARNING,
@@ -1531,8 +1531,8 @@ def test_backend_protocols_are_real_types():
     # Imported from the module, not the package surface: D032 keeps
     # unimplemented machinery off the public API, so these stay internal until
     # P2C-06 gives them an injection point.
-    from fairLMs.diagnostics import CONSTRUCTION_BACKEND_REQUIREMENTS
-    from fairLMs.diagnostics.construction import (
+    from fairLMs.datasets.diagnostics import CONSTRUCTION_BACKEND_REQUIREMENTS
+    from fairLMs.datasets.diagnostics.construction import (
         DependencyParserBackend,
         EmbeddingBackend,
         GrammarCheckerBackend,
@@ -1554,7 +1554,7 @@ def test_blocked_slots_do_not_advertise_an_install_that_does_not_exist():
         import tomli as tomllib
     from pathlib import Path
 
-    from fairLMs.diagnostics import CONSTRUCTION_BACKEND_REQUIREMENTS
+    from fairLMs.datasets.diagnostics import CONSTRUCTION_BACKEND_REQUIREMENTS
 
     root = Path(__file__).resolve().parents[1]
     declared = set(
@@ -1569,11 +1569,13 @@ def test_blocked_slots_do_not_advertise_an_install_that_does_not_exist():
             assert name in declared, f"{slot} advertises undeclared extra {extra!r}"
         assert requirement["availability"] == "optional_backend"
         # The blocked reason names a reference backend that really exists.
-        from fairLMs.diagnostics import construction as construction_module
-        from fairLMs.diagnostics import backends as backends_module
+        from fairLMs.datasets.diagnostics import construction as construction_module
+        from fairLMs.datasets.diagnostics import backends as backends_module
 
         reason = construction_module._BACKEND_BLOCKED_REASONS[slot]
-        match = re.search(r"fairLMs\.diagnostics\.backends\.(\w+)\(\)", reason)
+        match = re.search(
+            r"fairLMs\.datasets\.diagnostics\.backends\.(\w+)\(\)", reason
+        )
         assert match is not None, reason
         assert hasattr(backends_module, match.group(1)), match.group(1)
     for extra in ("grammar", "parse", "nlp"):

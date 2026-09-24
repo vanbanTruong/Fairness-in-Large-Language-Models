@@ -8,7 +8,7 @@ from typing import List, Optional, Sequence, Union
 import pandas as pd
 
 from fairLMs.datasets.base import FairnessDataset, optional_limit
-from fairLMs.utils.paths import resolve_crows_pairs_csv
+from fairLMs.datasets._paths import resolve_crows_pairs_csv
 
 PathLike = Union[str, Path]
 

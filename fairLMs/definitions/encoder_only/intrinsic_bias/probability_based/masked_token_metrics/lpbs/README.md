@@ -21,11 +21,24 @@ mean LPBS itself: the fraction of attributes whose LPBS sign matches the
 stereotype direction (or, for XNLI, the fraction with LPBS &gt; 0 favoring
 `christian`).
 
+## Public API
+
+```python
+from fairLMs.definitions import LogProbabilityBiasScore
+from fairLMs.definitions.models import HuggingFaceModel
+
+result = LogProbabilityBiasScore().compute(
+    model=HuggingFaceModel("bert-base-uncased", task="mlm"),
+    attribute_words=["doctor", "nurse", "engineer"],
+)
+print(result.score)
+```
+
 ## Files
 
 | File | Purpose |
 |---|---|
-| `main.py` | Entry point: loads BERT, builds probes, scores three configurations, writes `lpbs_results.csv` |
+| `main.py` | Short public-API demo using `LogProbabilityBiasScore`; writes results CSV for continuity |
 | `lpbs.py` | Core metric: `_attribute_bias_score()` (one cell) and `compute_lpbs()` |
 | `lpbs_results.csv` | Output of the last run |
 
@@ -65,10 +78,13 @@ pip install "datasets<3"  # script-based "wino_bias" removed in datasets>=3
 
 ## How to run
 
-From the **repository root**:
+**Preferred:** use the public API above (and/or examples under `examples/` at the repo root).
+
+**Optional legacy demo** from the repository root:
 
 ```bash
-python -m encoder_only.intrinsic_bias.probability_based.masked_token_metrics.lpbs.main
+pip install -e .
+python -m fairLMs.definitions.encoder_only.intrinsic_bias.probability_based.masked_token_metrics.lpbs.main
 ```
 
 ## Output \& Results

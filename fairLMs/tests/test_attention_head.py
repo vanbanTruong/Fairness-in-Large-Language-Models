@@ -16,19 +16,19 @@ import numpy as np
 import pytest
 import torch
 
-from fairLMs.definition.decoder_only.intrinsic_bias.attention_head_based_disparity.gbe.gbe import (
+from fairLMs.definitions.decoder_only.intrinsic_bias.attention_head_based_disparity.gbe.gbe import (
     compute_gbe,
     compute_gbe_mass,
     gbe_permutation_null,
     null_summary,
     random_partition,
 )
-from fairLMs.definition.decoder_only.intrinsic_bias.attention_head_based_disparity.nie.nie import (
+from fairLMs.definitions.decoder_only.intrinsic_bias.attention_head_based_disparity.nie.nie import (
     compute_nie,
     compute_nie_matrix,
 )
-from fairLMs.metrics import GradientBasedBiasEstimation, NaturalIndirectEffect, ProbeSet, WordSets
-from fairLMs.metrics.attention_head import _derive_head_shape
+from fairLMs.definitions import GradientBasedBiasEstimation, NaturalIndirectEffect, ProbeSet, WordSets
+from fairLMs.definitions.attention_head import _derive_head_shape
 from .stubs import VOCAB, StubTokenizer, TinyCausalLM
 
 PROBES = [

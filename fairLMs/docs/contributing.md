@@ -17,9 +17,9 @@ See [Writing a metric](guides/custom-metric.md) for the full contract. In short:
 1. Subclass `FairnessMetric`, declare `name`, `bias_type` and `architectures`,
    and keep `__init__` to configuration stored verbatim.
 2. Implement `compute(model, data, **legacy) -> MetricResult`, resolving the
-   model through `fairLMs.metrics.resolve.get_tokenizer_model` rather than
+   model through `fairLMs.definitions.resolve.get_tokenizer_model` rather than
    loading a checkpoint yourself.
-3. Add the class to `METRIC_REGISTRY` in `fairLMs/metrics/__init__.py` and to
+3. Add the class to `METRIC_REGISTRY` in `fairLMs/definitions/__init__.py` and to
    `__all__`.
 4. Run the suite. The contract tests iterate over the registry, so
    registration alone earns the checks.
@@ -28,10 +28,10 @@ See [Writing a metric](guides/custom-metric.md) for the full contract. In short:
 pytest -k your_metric_name
 ```
 
-The internal implementation belongs under `fairLMs/definition/` in the
-`{architecture}/{bias_type}/…` taxonomy, with a short `main.py` demonstrating
-the public API. The wrapper in `fairLMs/metrics/` is the stable surface;
-`definition/` can change without breaking user code.
+The low-level implementation belongs under the
+`fairLMs/definitions/{architecture}/{bias_type}/…` taxonomy, with a short
+`main.py` demonstrating the public API. Its root-level wrapper is the stable
+surface and can evolve independently of the nested calculation module.
 
 ## Adding a loader
 
@@ -41,8 +41,8 @@ Subclass `FairnessDataset`, implement `load()`, and export the class from
 docstring is the description it prints, so make it say what `load()` returns.
 
 Set `data_origin` to where the bytes come from; the table groups loaders by it.
-Prefer Hub download over vendoring. Only CrowS-Pairs and BBQ are bundled, and
-anything you add under `fairLMs/data/` must also be declared in
+Prefer Hub download over vendoring. Only CrowS-Pairs is bundled, and
+anything you add under `fairLMs/datasets/resources/` must also be declared in
 `[tool.setuptools.package-data]` or it will not ship in the wheel. Fetch a
 published data file with `fairLMs.datasets._sources.hub_file` rather than
 `datasets.load_dataset`: several benchmark repositories still ship a loading

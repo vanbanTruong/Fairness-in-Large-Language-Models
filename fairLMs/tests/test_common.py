@@ -12,7 +12,7 @@ import inspect
 
 import pytest
 
-from fairLMs.metrics import (
+from fairLMs.definitions import (
     METRIC_REGISTRY,
     FairnessMetric,
     MetricResult,
@@ -190,7 +190,7 @@ def test_declared_params_are_accepted_kwargs(name):
 def _cheap_cases():
     import numpy as np
 
-    from fairLMs.metrics import GroupPredictions, ScorePair, VectorSets
+    from fairLMs.definitions import GroupPredictions, ScorePair, VectorSets
 
     rng = np.random.default_rng(0)
     return {
@@ -252,7 +252,7 @@ def test_metric_declares_requirements(name, cls):
 
 @pytest.mark.parametrize("name,cls", sorted(METRIC_REGISTRY.items()))
 def test_metric_declaration_uses_the_public_vocabulary(name, cls):
-    from fairLMs.applicability import validate_declaration
+    from fairLMs.definitions.core.applicability import validate_declaration
 
     validate_declaration(cls)
 
@@ -288,8 +288,8 @@ def test_discovery_of_correlations_reaches_its_declaration_check():
     ``requires``/``required_task`` declarations could be consulted, so the
     applicability contract was unreachable for this metric.
     """
-    from fairLMs.metrics.data import GroupWordPairs
-    from fairLMs.models.base import LoadedModel
+    from fairLMs.definitions.data import GroupWordPairs
+    from fairLMs.definitions.models.base import LoadedModel
 
     metric = METRIC_REGISTRY["discovery_of_correlations"]()
     evidence = GroupWordPairs(["he", "man"], ["she", "woman"])
@@ -317,10 +317,10 @@ def test_bias_amplifier_refuses_to_score_when_no_call_succeeded(monkeypatch):
     to 0.5 for absolute bias, which is exactly the value a perfectly unbiased
     model produces. A fairness library must not fabricate that number.
     """
-    from fairLMs.metrics.data import GroupProperties
-    from fairLMs.models.openai import OpenAILoadedModel
+    from fairLMs.definitions.data import GroupProperties
+    from fairLMs.definitions.models.openai import OpenAILoadedModel
 
-    from fairLMs.definition.decoder_only.extrinsic_bias.performance_disparity.ba import (
+    from fairLMs.definitions.decoder_only.extrinsic_bias.performance_disparity.ba import (
         ba as ba_module,
     )
 
@@ -346,7 +346,7 @@ def test_bias_amplifier_refuses_to_score_when_no_call_succeeded(monkeypatch):
 
 def test_bias_amplifier_distinguishes_a_failed_call_from_a_tie(monkeypatch):
     """A failed comparison is excluded, not counted as half a preference."""
-    from fairLMs.definition.decoder_only.extrinsic_bias.performance_disparity.ba import (
+    from fairLMs.definitions.decoder_only.extrinsic_bias.performance_disparity.ba import (
         ba as ba_module,
     )
 

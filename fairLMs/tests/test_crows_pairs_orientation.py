@@ -13,7 +13,7 @@ import pandas as pd
 import pytest
 
 from fairLMs.datasets import CrowSPairs
-from fairLMs.utils.paths import resolve_crows_pairs_csv
+from fairLMs.datasets._paths import resolve_crows_pairs_csv
 
 
 @pytest.fixture(scope="module")

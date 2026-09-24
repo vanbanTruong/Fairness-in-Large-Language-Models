@@ -1,5 +1,0 @@
-black
-brown
-dark
-light
-white

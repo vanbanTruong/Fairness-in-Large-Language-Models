@@ -10,10 +10,20 @@ can be called from this repository as:
 
 ```python
 from fairLMs.mitigation import list_mitigators
-from fairLMs.diagnostics import audit_dataset
+from fairLMs.datasets.diagnostics import audit_dataset
 from fairLMs.datasets import BBQ
 ```
 
-The upstream runtime directory `definition/` is kept separate from the existing
-`definitions/` research snapshot. This prevents synchronization from
-overwriting the definitions currently under review.
+The upstream runtime tree was merged into `definitions/`, which is now the only
+definition package and the public metric API. The earlier research snapshot
+from commit `1eb0c9d` was removed after comparison because it duplicated the
+same 33 metrics, was not part of the installed `fairLMs` package, and contained
+hundreds of megabytes of repeated dataset files. Dataset access now remains the
+responsibility of `fairLMs.datasets` and the small shared resources bundled by
+the package.
+
+The synchronized runtime is organized into three implementation packages:
+`datasets` (including diagnostics), `definitions` (including shared contracts,
+model adapters, numerical helpers, and word sets), and `mitigation`. Project
+documentation, tests, examples, and maintenance scripts remain separate and
+are excluded from the wheel.

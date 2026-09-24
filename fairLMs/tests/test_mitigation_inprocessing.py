@@ -8,7 +8,7 @@ which is the only thing that makes it composable with a real training loop.
 import pytest
 import torch
 
-from fairLMs.metrics import PromptPairs
+from fairLMs.definitions import PromptPairs
 from fairLMs.mitigation import (
     AdversarialDebiasing,
     AttributeLabeledVectors,

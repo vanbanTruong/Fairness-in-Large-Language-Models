@@ -2,7 +2,7 @@
 
 # Metrics
 
-33 registered metrics. Instantiate any of them by registry name with `fairLMs.metrics.get_metric(name)`, or import the class directly. Every metric exposes `compute(model, data) -> MetricResult`.
+33 registered metrics. Instantiate any of them by registry name with `fairLMs.definitions.get_metric(name)`, or import the class directly. Every metric exposes `compute(model, data) -> MetricResult`.
 
 `bias_type` and `architectures` document where a metric sits in the taxonomy. **`required_task` is enforced**: it names the head the checkpoint must be loaded with, and a mismatch is refused before the metric runs rather than surfacing as a missing attribute or as numbers read off an untrained head. See [Models](../api/models.md).
 

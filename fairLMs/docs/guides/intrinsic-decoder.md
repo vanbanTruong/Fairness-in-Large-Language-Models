@@ -17,9 +17,9 @@ heads.
 ## End to end
 
 ```python
-from fairLMs.metrics import CooccurrenceAssociation, StereotypicalLogLikelihood
-from fairLMs.metrics.data import ConceptSpec, OccupationTriples
-from fairLMs.models import HuggingFaceModel
+from fairLMs.definitions import CooccurrenceAssociation, StereotypicalLogLikelihood
+from fairLMs.definitions.data import ConceptSpec, OccupationTriples
+from fairLMs.definitions.models import HuggingFaceModel
 
 gpt2 = HuggingFaceModel("gpt2", task="causal")
 
@@ -79,8 +79,8 @@ The other two metrics are heavier and answer a mechanistic question, *which
 heads carry this bias*, rather than *how much bias is there*:
 
 ```python
-from fairLMs.metrics import GradientBasedBiasEstimation, NaturalIndirectEffect
-from fairLMs.metrics.data import ProbeSet, WordSets
+from fairLMs.definitions import GradientBasedBiasEstimation, NaturalIndirectEffect
+from fairLMs.definitions.data import ProbeSet, WordSets
 
 gbe = GradientBasedBiasEstimation().compute(gpt2, WordSets(
     target_1=["man", "he", "his"],

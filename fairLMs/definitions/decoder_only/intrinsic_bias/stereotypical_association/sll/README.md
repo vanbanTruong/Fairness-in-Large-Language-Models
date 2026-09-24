@@ -14,13 +14,26 @@ SLL = lp(stereo) − lp(counter)   # first-subtoken log-prob
 Positive ≈ preference for the stereo/male continuation; ≈ 0 is fair. Each
 dataset row reports the mean SLL over pairs for NV, CV, and IV.
 
+## Public API
+
+```python
+from fairLMs.definitions import StereotypicalLogLikelihood
+from fairLMs.definitions.models import HuggingFaceModel
+
+result = StereotypicalLogLikelihood().compute(
+    model=HuggingFaceModel("gpt2", task="causal"),
+    occupation_pairs=[("nurse", "he", "she"), ("surgeon", "he", "she")],
+)
+print(result.score)
+```
+
 ## Files
 
 | File | Purpose |
 |---|---|
-| `main.py` | Entry point: builds occupation pairs, scores templates, writes `sll_results.csv` |
+| `main.py` | Short public-API demo using `StereotypicalLogLikelihood`; writes results CSV for continuity |
 | `sll.py` | Core: `next_token_log_prob`, `sll_for_occupation`, `compute_sll` |
-| `data/` | Bundled BBQ jsonl |
+| `data/` | Prefer `fairLMs.datasets.BBQ`; it downloads requested categories or accepts `data_dir=` |
 | `sll_results.csv` | Output of the last run |
 
 ## Parameters and settings
@@ -33,11 +46,13 @@ dataset row reports the mean SLL over pairs for NV, CV, and IV.
 
 ## How to run
 
+**Preferred:** use the public API above (and/or examples under `examples/` at the repo root).
+
+**Optional legacy demo** from the repository root:
+
 ```bash
-pip install torch transformers datasets pandas numpy
-export HF_TOKEN=...   # or HUGGING_FACE_HUB_TOKEN
-cd <this directory>
-python main.py
+pip install -e .
+python -m fairLMs.definitions.decoder_only.intrinsic_bias.stereotypical_association.sll.main
 ```
 
 ## Output \& Results

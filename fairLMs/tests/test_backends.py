@@ -13,12 +13,12 @@ from dataclasses import dataclass, field
 
 import pytest
 
-from fairLMs.diagnostics import (
+from fairLMs.datasets.diagnostics import (
     DependencyParserBackend,
     EmbeddingBackend,
     GrammarCheckerBackend,
 )
-from fairLMs.diagnostics.backends import (
+from fairLMs.datasets.diagnostics.backends import (
     HuggingFaceEmbeddingBackend,
     LanguageToolGrammarBackend,
     SpacyDependencyBackend,

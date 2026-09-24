@@ -48,7 +48,7 @@ def _summary(obj) -> str:
 
 def _aliases() -> dict:
     """Map class -> short alias exported alongside it (CPS, AUL, DisCo, ...)."""
-    import fairLMs.metrics as M
+    import fairLMs.definitions as M
 
     out = {}
     for name in M.__all__:
@@ -63,7 +63,7 @@ def _aliases() -> dict:
 
 
 def metrics_page() -> str:
-    from fairLMs.metrics import METRIC_REGISTRY
+    from fairLMs.definitions import METRIC_REGISTRY
 
     aliases = _aliases()
     rows = []
@@ -84,7 +84,7 @@ def metrics_page() -> str:
         HEADER
         + "# Metrics\n\n"
         + f"{len(rows)} registered metrics. Instantiate any of them by registry "
-        "name with `fairLMs.metrics.get_metric(name)`, or import the class "
+        "name with `fairLMs.definitions.get_metric(name)`, or import the class "
         "directly. Every metric exposes "
         "`compute(model, data) -> MetricResult`.\n\n"
         "`bias_type` and `architectures` document where a metric sits in the "
@@ -171,7 +171,7 @@ def loaders_page() -> str:
 
 
 def diagnostics_page() -> str:
-    from fairLMs.diagnostics import DIAGNOSTIC_REGISTRY
+    from fairLMs.datasets.diagnostics import DIAGNOSTIC_REGISTRY
 
     rows = []
     for name, cls in sorted(DIAGNOSTIC_REGISTRY.items()):
@@ -186,7 +186,7 @@ def diagnostics_page() -> str:
             )
         )
 
-    from fairLMs.diagnostics import (
+    from fairLMs.datasets.diagnostics import (
         BACKEND_CONSTRUCTION_SLOTS,
         CONSTRUCTION_BACKEND_REQUIREMENTS,
         CONSTRUCTION_SLOTS,
@@ -242,7 +242,7 @@ def diagnostics_page() -> str:
         + f"The {len(backend_rows)} slots below read a quantity that needs an "
         "optional backend: a sentence embedding, a grammatical-error count or a "
         "dependency-tree depth. Each is a registered class that takes `backend=`; "
-        "reference implementations live in `fairLMs.diagnostics.backends`. The "
+        "reference implementations live in `fairLMs.datasets.diagnostics.backends`. The "
         "embedding backend runs on the core dependencies, while the grammar and "
         "parser backends need the `grammar` and `parse` extras "
         "(`pip install \"fairLMs[nlp]\"` installs both). Without a backend the slot "

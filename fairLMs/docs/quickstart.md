@@ -8,8 +8,8 @@ manufacture a number.
 
 ```python
 from fairLMs.datasets import CrowSPairs
-from fairLMs.metrics import CrowSPairsScore
-from fairLMs.models import HuggingFaceModel
+from fairLMs.definitions import CrowSPairsScore
+from fairLMs.definitions.models import HuggingFaceModel
 
 model = HuggingFaceModel("bert-base-uncased", task="mlm")
 data = CrowSPairs(n_max=50)
@@ -27,7 +27,7 @@ print(result.by_category)   # per-bias-type breakdown
 Metrics can also be looked up by registry name:
 
 ```python
-from fairLMs.metrics import get_metric, list_metrics
+from fairLMs.definitions import get_metric, list_metrics
 
 list_metrics()                      # all 33 registry names
 metric = get_metric("crows_pairs_score")
@@ -51,13 +51,13 @@ result = metric.compute(model, pairs)      # identical call
 ```
 
 For metrics that need more structure than a flat sequence, build a validated
-container from [`fairLMs.metrics.data`](api/containers.md). Containers check
+container from [`fairLMs.definitions.data`](api/containers.md). Containers check
 their own shape at construction, so malformed evidence fails immediately
 instead of deep inside a metric:
 
 ```python
-from fairLMs.data import weat_c1          # bundled WEAT stimulus set
-from fairLMs.metrics import WEAT
+from fairLMs.definitions.resources import weat_c1          # bundled WEAT stimulus set
+from fairLMs.definitions import WEAT
 
 encoder = HuggingFaceModel("bert-base-uncased", task="encoder")
 WEAT().compute(encoder, weat_c1)
@@ -69,7 +69,7 @@ Five metrics score predictions you already have, and also exist as plain
 functions in the style of `sklearn.metrics`:
 
 ```python
-from fairLMs.metrics import equal_opportunity_gap, accuracy_disparity
+from fairLMs.definitions import equal_opportunity_gap, accuracy_disparity
 
 equal_opportunity_gap(y_true, y_pred, groups, g1="A", g2="B")   # -> float
 accuracy_disparity(scores_stereotype, scores_counter)           # -> float
@@ -85,7 +85,7 @@ evidence and an audit spec rather than a model, and report applicability as a
 first-class outcome.
 
 ```python
-from fairLMs.diagnostics import (
+from fairLMs.datasets.diagnostics import (
     DatasetAuditSpec,
     ScoredGroups,
     ScorerMeanGap,

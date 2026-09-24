@@ -21,9 +21,9 @@ import urllib.request
 import numpy as np
 from transformers import AutoModel, AutoTokenizer
 
-from fairLMs.diagnostics.backends import HuggingFaceEmbeddingBackend
-from fairLMs.metrics import WEAT
-from fairLMs.metrics.data import VectorSets
+from fairLMs.datasets.diagnostics.backends import HuggingFaceEmbeddingBackend
+from fairLMs.definitions import WEAT
+from fairLMs.definitions.data import VectorSets
 
 BASE = "https://raw.githubusercontent.com/McGill-NLP/bias-bench/main/data/seat/sent-weat{}.jsonl"
 TESTS = ("6", "6b", "7", "7b", "8", "8b")

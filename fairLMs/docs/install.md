@@ -16,7 +16,7 @@ Requires Python 3.10 or later.
 | `docs` | `pip install "fairLMs[docs]"` | `mkdocs-material`, `mkdocstrings[python]`, `mkdocs-jupyter` |
 
 `torch`, `transformers`, `datasets`, `scikit-learn`, `wordfreq` and `nltk` are
-required dependencies, not extras: `fairLMs.metrics` imports every metric family
+required dependencies, not extras: `fairLMs.definitions` imports every metric family
 eagerly, so `import fairLMs` needs them present.
 
 ## From source
@@ -42,8 +42,8 @@ python -c "import fairLMs; print(fairLMs.__version__)"
 
 The library is MIT licensed; each benchmark retains its own license.
 
-CrowS-Pairs and BBQ are **bundled** with the package, so those metrics run
-offline. Eleven more -- StereoSet, Bias in Bios, WinoBias, XNLI, BOLD, HONEST,
+The small CrowS-Pairs CSV is bundled and works offline. BBQ and eleven more --
+StereoSet, Bias in Bios, WinoBias, XNLI, BOLD, HONEST,
 RealToxicityPrompts, HolisticBias, EEC, GAP and Winogender -- are downloaded
 from the Hugging Face Hub at first use. Bias-NLI, RedditBias, Grep-BiasIR and
 UnQover are distributed only from their own project pages, so their loaders
@@ -51,5 +51,7 @@ take a `root=` pointing at your copy and download nothing; TrustGPT has no data
 release and builds its prompts from bundled templates. See
 [Loaders](registry/loaders.md) for the per-loader breakdown.
 
-Gated or rate-limited Hub downloads pick up `HF_TOKEN` or
+BBQ is downloaded from its Hugging Face mirror into the standard cache on first
+use, or can read caller-supplied JSONL files through `data_dir=`. Gated or
+rate-limited Hub downloads pick up `HF_TOKEN` or
 `HUGGING_FACE_HUB_TOKEN` from the environment automatically.

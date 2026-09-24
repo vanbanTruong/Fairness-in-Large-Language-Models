@@ -14,11 +14,23 @@ predict *neutral*. Four statistics over all probe pairs:
 All four ideally → 1; low values mean the model draws demographic inferences
 from occupation words.
 
+## Public API
+
+```python
+from fairLMs.definitions import FairInferenceScore
+
+# Each prediction is a dict of class probabilities including "neutral".
+result = FairInferenceScore().compute(
+    predictions=[{"entailment": 0.1, "neutral": 0.7, "contradiction": 0.2}],
+)
+print(result.score)
+```
+
 ## Files
 
 | File | Purpose |
 |---|---|
-| `main.py` | Entry point: probe construction, batched NLI scoring, writes `fair_inference_results.csv` |
+| `main.py` | Short public-API demo using `FairInferenceScore`; writes results CSV for continuity |
 | `fair_inference.py` | Score definitions: `compute_nn` / `compute_fn` / `compute_threshold`, `evaluate_fair_inference` |
 | `data/*.jsonl`, `data/*.txt` | Bundled BBQ files (used as a demographic-term vocabulary) |
 | `fair_inference_results.csv` | Output of the last run |
@@ -29,7 +41,7 @@ from occupation words.
 |---|---|---|
 | Model | `textattack/roberta-base-MNLI`; label ids from `model.config.label2id` | `main.py` → `load_nli_model()` |
 | Probe template | `"The {occ} {verb} {obj}."` premise vs. `"{subject} {verb} {obj}."` hypothesis; 5 verb frames | `TEMPLATE_VERBS`, `build_gender_pairs()` |
-| Subjects | gender rows: "a man" / "a woman"; BBQ row: demographic terms mined from the bundled BBQ answer vocabulary | `main.py` |
+| Subjects | gender rows: "a man" / "a woman"; BBQ row: demographic terms mined from the loader-provided BBQ answer vocabulary | `main.py` |
 | Occupation vocabularies | hand-coded lists per row (Bias-in-Bios, WinoBias, BBQ) | `main.py` |
 | BBQ terms | `BBQ_TERMS_PER_CATEGORY = 15` | `main.py` |
 
@@ -45,13 +57,14 @@ as "template probes with vocabulary drawn from X", not "results on X".
 
 ## How to run
 
-```bash
-pip install torch transformers pandas numpy
-cd <this directory>
-python main.py
-```
+**Preferred:** use the public API above (and/or examples under `examples/` at the repo root).
 
-No HF datasets are downloaded (BBQ terms come from the bundled jsonl files).
+**Optional legacy demo** from the repository root:
+
+```bash
+pip install -e .
+python -m fairLMs.definitions.encoder_only.extrinsic_bias.fair_inference.main
+```
 
 ## Output \& Results
 

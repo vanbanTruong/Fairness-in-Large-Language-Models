@@ -9,8 +9,8 @@ import numpy as np
 import pytest
 import torch
 
-from fairLMs.applicability import TASK_PROFILES
-from fairLMs.metrics import METRIC_REGISTRY, WEAT, WordSets
+from fairLMs.definitions.core.applicability import TASK_PROFILES
+from fairLMs.definitions import METRIC_REGISTRY, WEAT, WordSets
 from fairLMs.mitigation import (
     AttributeLabeledVectors,
     IterativeNullspaceProjection,
@@ -21,7 +21,7 @@ from fairLMs.mitigation import (
     SubspaceProjection,
 )
 from fairLMs.mitigation.intraprocessing import _nullspace_projection
-from fairLMs.models.base import LoadedModel, ModelAdapter
+from fairLMs.definitions.models.base import LoadedModel, ModelAdapter
 from .stubs import StubSentenceEncoder, StubTokenizer
 
 
@@ -128,7 +128,7 @@ class TestSubspaceProjection:
             SubspaceProjection().apply(StubEncoderAdapter(), evidence)
 
     def test_textual_pairs_without_an_encoder_are_refused(self):
-        from fairLMs.metrics import PromptPairs
+        from fairLMs.definitions import PromptPairs
 
         with pytest.raises(ValueError, match="needs an encoder"):
             SubspaceProjection(layer="input_embeddings").apply(
@@ -142,7 +142,7 @@ class TestSubspaceProjection:
         assert "Gonen" in claim and "hide rather than remove" in claim
 
     def test_an_api_model_is_refused_for_lacking_hidden_states(self):
-        from fairLMs.models.openai import OpenAIModel
+        from fairLMs.definitions.models.openai import OpenAIModel
 
         with pytest.raises(TypeError, match="hidden_states"):
             SubspaceProjection().apply(OpenAIModel(), _vectors())
@@ -206,7 +206,7 @@ class TestIterativeNullspaceProjection:
         assert "Gonen" in result.provenance["removal_claim"]
 
     def test_the_motivating_refusal_names_hidden_states(self):
-        from fairLMs.models.openai import OpenAIModel
+        from fairLMs.definitions.models.openai import OpenAIModel
 
         with pytest.raises(TypeError) as exc:
             IterativeNullspaceProjection().apply(OpenAIModel(), _vectors())
@@ -315,7 +315,7 @@ class TestTheAdapterGuarantee:
     def test_the_wrapped_adapter_profiles_like_the_original(self):
         base = StubEncoderAdapter()
         mitigated = SubspaceProjection().apply(base, _vectors()).result
-        from fairLMs.applicability import describe_model
+        from fairLMs.definitions.core.applicability import describe_model
 
         assert describe_model(mitigated).architecture == "encoder_only"
         assert "hidden_states" in describe_model(mitigated).capabilities

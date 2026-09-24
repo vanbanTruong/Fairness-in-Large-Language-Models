@@ -9,7 +9,7 @@ from pathlib import Path
 
 import pytest
 
-from fairLMs.diagnostics import (
+from fairLMs.datasets.diagnostics import (
     AssociationCounts,
     ComponentOverride,
     DatasetAuditSpec,

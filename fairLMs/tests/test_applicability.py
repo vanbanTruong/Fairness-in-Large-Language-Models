@@ -12,7 +12,7 @@ import re
 import pytest
 import torch
 
-from fairLMs.applicability import (
+from fairLMs.definitions.core.applicability import (
     ACCESS_LEVELS,
     ARCHITECTURES,
     CAPABILITIES,
@@ -25,10 +25,10 @@ from fairLMs.applicability import (
     describe_model,
     validate_declaration,
 )
-from fairLMs.metrics import METRIC_REGISTRY, SEAT, WordSets
-from fairLMs.models.base import LoadedModel
-from fairLMs.models.huggingface import HuggingFaceModel
-from fairLMs.models.openai import OpenAIModel
+from fairLMs.definitions import METRIC_REGISTRY, SEAT, WordSets
+from fairLMs.definitions.models.base import LoadedModel
+from fairLMs.definitions.models.huggingface import HuggingFaceModel
+from fairLMs.definitions.models.openai import OpenAIModel
 
 
 def _loaded(task):
@@ -291,9 +291,9 @@ class TestMetricRetrofit:
     ],
 )
 def test_tokenizer_dependent_metrics_are_refused_over_an_api(metric_name):
-    from fairLMs.applicability import ApplicabilityError, check_applicability
-    from fairLMs.metrics import METRIC_REGISTRY
-    from fairLMs.models.openai import OpenAILoadedModel
+    from fairLMs.definitions.core.applicability import ApplicabilityError, check_applicability
+    from fairLMs.definitions import METRIC_REGISTRY
+    from fairLMs.definitions.models.openai import OpenAILoadedModel
 
     served = OpenAILoadedModel(name="gpt-x", client=object(), model="gpt-x")
 
@@ -304,7 +304,7 @@ def test_tokenizer_dependent_metrics_are_refused_over_an_api(metric_name):
 
 def test_local_profiles_all_grant_a_local_tokenizer():
     """Declaring local_tokenizer must not refuse any locally loaded model."""
-    from fairLMs.applicability import TASK_PROFILES
+    from fairLMs.definitions.core.applicability import TASK_PROFILES
 
     for task, profile in TASK_PROFILES.items():
         if task == "openai":
@@ -318,7 +318,7 @@ def test_every_metric_that_resolves_a_tokenizer_declares_it():
     get_tokenizer_model and requires a specific head, it declares the need."""
     import inspect
 
-    from fairLMs.metrics import METRIC_REGISTRY
+    from fairLMs.definitions import METRIC_REGISTRY
 
     for name, cls in sorted(METRIC_REGISTRY.items()):
         module = inspect.getmodule(cls)

@@ -7,7 +7,7 @@ from pathlib import Path
 from typing import List, Optional, Sequence, Union
 
 from fairLMs.datasets.base import FairnessDataset, optional_limit
-from fairLMs.utils.paths import bbq_category_files, resolve_bbq_dir
+from fairLMs.datasets._sources import hub_file
 
 PathLike = Union[str, Path]
 
@@ -25,7 +25,7 @@ DEFAULT_BBQ_CATEGORIES = (
 
 
 class BBQ(FairnessDataset):
-    """Load BBQ examples from bundled (or legacy) jsonl category files.
+    """Load BBQ examples from the Hub cache or a local JSONL directory.
 
     Each example is the original BBQ row dict plus::
 
@@ -33,7 +33,7 @@ class BBQ(FairnessDataset):
     """
 
     name = "bbq"
-    data_origin = "bundled with the package"
+    data_origin = "Hugging Face Hub, downloaded at first use"
 
     def __init__(
         self,
@@ -41,22 +41,53 @@ class BBQ(FairnessDataset):
         categories: Optional[Sequence[str]] = None,
         context_condition: Optional[str] = None,
         n_max: Optional[int] = None,
+        hf_path: str = "heegyu/bbq",
+        revision: Optional[str] = None,
     ):
         self.data_dir = data_dir
-        self.categories = list(categories) if categories is not None else list(
-            DEFAULT_BBQ_CATEGORIES
-        )
+        self.categories = [
+            name.removesuffix(".jsonl")
+            for name in (
+                list(categories)
+                if categories is not None
+                else list(DEFAULT_BBQ_CATEGORIES)
+            )
+        ]
         self.context_condition = context_condition
         self.n_max = n_max
+        self.hf_path = hf_path
+        self.revision = revision
         self._cache: Optional[List[dict]] = None
+        self._resolved_files: dict[str, Path] = {}
+
+    def _category_file(self, category: str) -> Path:
+        if category in self._resolved_files:
+            return self._resolved_files[category]
+        if self.data_dir is None:
+            resolved = hub_file(
+                self.hf_path,
+                f"data/{category}.jsonl",
+                self.revision,
+            )
+        else:
+            root = Path(self.data_dir).expanduser()
+            if not root.is_dir():
+                raise FileNotFoundError(f"BBQ data directory not found: {root}")
+            resolved = root / f"{category}.jsonl"
+            if not resolved.is_file():
+                raise FileNotFoundError(
+                    f"BBQ category {category!r} not found under {root}: {resolved}"
+                )
+        self._resolved_files[category] = resolved
+        return resolved
 
     def load(self) -> Sequence[dict]:
         if self._cache is not None:
             return optional_limit(self._cache, self.n_max)
 
-        files = bbq_category_files(self.data_dir, self.categories)
         examples: List[dict] = []
-        for path in files:
+        for category_name in self.categories:
+            path = self._category_file(category_name)
             category = path.stem
             with open(path, "r", encoding="utf-8") as f:
                 for line in f:
@@ -81,4 +112,8 @@ class BBQ(FairnessDataset):
 
     @property
     def directory(self) -> Path:
-        return resolve_bbq_dir(self.data_dir)
+        """Directory containing the requested local or cached category files."""
+        files = [self._category_file(category) for category in self.categories]
+        if not files:
+            raise ValueError("BBQ requires at least one category.")
+        return files[0].parent

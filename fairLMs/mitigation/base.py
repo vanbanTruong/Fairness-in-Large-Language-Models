@@ -3,7 +3,7 @@
 A mitigator adopts the same contract as a metric: it declares an intervention
 category, an access level, supported architectures, capabilities and evidence
 containers, and applicability is decided from those declarations by the one
-shared matcher in :mod:`fairLMs.applicability`.
+shared matcher in :mod:`fairLMs.definitions.core.applicability`.
 
 The four intervention categories differ in *what they hand back*, which is the
 only place the uniform contract bends:
@@ -11,7 +11,7 @@ only place the uniform contract bends:
 =========  ==================================================================
 ``pre``    transformed evidence, or per-row weights, plus transform provenance
 ``in``     a loss/regularizer callable composable with a normal training loop
-``intra``  a :class:`~fairLMs.models.base.ModelAdapter` wrapping the original
+``intra``  a :class:`~fairLMs.definitions.models.base.ModelAdapter` wrapping the original
 ``post``   a fitted decision rule: calibrator, thresholds, or reranker
 =========  ==================================================================
 
@@ -26,14 +26,14 @@ from abc import ABC, abstractmethod
 from dataclasses import dataclass, field
 from typing import Any, Mapping, Optional, Tuple
 
-from fairLMs.applicability import AccessLevel, check_applicability
-from fairLMs.diagnostics._utils import (
+from fairLMs.definitions.core.applicability import AccessLevel, check_applicability
+from fairLMs.datasets.diagnostics._utils import (
     freeze_json_mapping,
     require_nonempty_string,
     thaw_json,
 )
-from fairLMs.models.base import ModelAdapter
-from fairLMs.params import ParameterizedComponent
+from fairLMs.definitions.models.base import ModelAdapter
+from fairLMs.definitions.core.params import ParameterizedComponent
 
 __all__ = [
     "CATEGORIES",
@@ -54,7 +54,7 @@ class MitigationResult:
     """What a mitigator returns: a payload, tagged by category, plus provenance.
 
     Deliberately **not** float-convertible. Unlike
-    :class:`~fairLMs.metrics.MetricResult` this is not a scalar, and giving it a
+    :class:`~fairLMs.definitions.MetricResult` this is not a scalar, and giving it a
     ``__float__`` would invite it to be averaged into a summary number that has
     no defensible meaning.
 
@@ -152,7 +152,7 @@ class Mitigator(ParameterizedComponent, ABC):
     """Abstract base class: every mitigator exposes ``apply``.
 
     Follows the same scikit-learn conventions as
-    :class:`~fairLMs.metrics.FairnessMetric`: ``__init__`` takes configuration
+    :class:`~fairLMs.definitions.FairnessMetric`: ``__init__`` takes configuration
     only and stores each argument verbatim, **data goes to :meth:`apply`, never
     to ``__init__``**, and ``get_params`` / ``set_params`` come for free.
 
@@ -173,7 +173,7 @@ class Mitigator(ParameterizedComponent, ABC):
     architectures: Tuple[str, ...] = ()
 
     #: Capabilities the model must expose, from
-    #: :data:`fairLMs.applicability.CAPABILITIES`.
+    #: :data:`fairLMs.definitions.core.applicability.CAPABILITIES`.
     requires: frozenset = frozenset()
 
     #: Evidence container types :meth:`apply` consumes.
@@ -194,7 +194,7 @@ class Mitigator(ParameterizedComponent, ABC):
 
         Raises
         ------
-        fairLMs.applicability.ApplicabilityError
+        fairLMs.definitions.core.applicability.ApplicabilityError
             When the model or evidence cannot satisfy this mitigator's
             declarations. The message names the specific missing capability,
             container, architecture or access level.

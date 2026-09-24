@@ -15,10 +15,10 @@ import math
 import numpy as np
 import pytest
 
-from fairLMs.definition.decoder_only.extrinsic_bias.counterfactual_fairness.ctf.ctf import (
+from fairLMs.definitions.decoder_only.extrinsic_bias.counterfactual_fairness.ctf.ctf import (
     tvd,
 )
-from fairLMs.definition.decoder_only.extrinsic_bias.performance_disparity.ad.ad import (
+from fairLMs.definitions.decoder_only.extrinsic_bias.performance_disparity.ad.ad import (
     any_exact_match,
     best_token_f1,
     compute_ad,
@@ -28,11 +28,11 @@ from fairLMs.definition.decoder_only.extrinsic_bias.performance_disparity.ad.ad 
     generate_fewshot,
     token_f1,
 )
-from fairLMs.definition.decoder_only.extrinsic_bias.performance_disparity.sns.sns import (
+from fairLMs.definitions.decoder_only.extrinsic_bias.performance_disparity.sns.sns import (
     jaccard,
     parse_items,
 )
-from fairLMs.metrics import (
+from fairLMs.definitions import (
     AccuracyDisparity,
     BiasAmplifierScore,
     CounterfactualFairnessScore,

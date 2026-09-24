@@ -17,11 +17,26 @@ by the joint log-probability of its subword tokens in that many `[MASK]`
 slots, and the best candidate wins — unless it fails to beat the unknown
 option by `UNKNOWN_MARGIN`, in which case the output counts as UNKNOWN.
 
+## Public API
+
+```python
+from fairLMs.definitions import ContextBasedDisparityScore
+
+# BBQ-style model outputs; prefer fairLMs.datasets.BBQ for downloaded or local inputs.
+result = ContextBasedDisparityScore(score="s_dis").compute(
+    outputs=[
+        {"cond": "disambig", "output": "ans0", "expected": "ans0"},
+        {"cond": "ambig", "output": "ans1", "expected": "unknown"},
+    ],
+)
+print(result.score)
+```
+
 ## Files
 
 | File | Purpose |
 |---|---|
-| `main.py` | Entry point: MLM scoring, BBQ/WinoBias/Bias-in-Bios record builders, writes `context_based_results.csv` |
+| `main.py` | Short public-API demo using `ContextBasedDisparityScore`; writes results CSV for continuity |
 | `context_based.py` | Score formulas: `compute_s_dis()`, `compute_s_amb()` |
 | `data/*.jsonl`, `data/*.txt` | Bundled BBQ (9 categories) and WinoBias sentence files |
 | `context_based_results.csv` | Output of the last run |
@@ -49,10 +64,13 @@ Bias-in-Bios rows as exploratory adaptations.
 
 ## How to run
 
+**Preferred:** use the public API above (and/or examples under `examples/` at the repo root).
+
+**Optional legacy demo** from the repository root:
+
 ```bash
-pip install torch transformers pandas numpy
-cd <this directory>
-python main.py
+pip install -e .
+python -m fairLMs.definitions.encoder_only.extrinsic_bias.context_based_disparity.main
 ```
 
 ## Output \& Results

@@ -12,11 +12,26 @@ disco   = (1 − mean(overlaps)) × 100
 
 Higher DisCo = less shared completions across groups (more disparity).
 
+## Public API
+
+```python
+from fairLMs.definitions import DiscoveryOfCorrelationsScore
+from fairLMs.definitions.models import HuggingFaceModel
+
+result = DiscoveryOfCorrelationsScore(k=3).compute(
+    model=HuggingFaceModel("bert-base-uncased", task="mlm"),
+    group1_words=["he", "him"],
+    group2_words=["she", "her"],
+    templates=["[T] is a [MASK]."],
+)
+print(result.score)
+```
+
 ## Files
 
 | File | Purpose |
 |---|---|
-| `main.py` | Entry point: builds templates from occupation vocabularies, runs DisCo + null, writes `disco_results.csv` |
+| `main.py` | Short public-API demo using `DiscoveryOfCorrelationsScore`; writes results CSV for continuity |
 | `disco.py` | Core: `compute_disco()` (top-k overlap + cluster bootstrap CI), `compute_disco_multi_k()` |
 | `disco_results.csv` | Output of the last run |
 
@@ -37,10 +52,13 @@ Requires ≥3 word pairs. Gender rows use class-matched derangements
 
 ## How to run
 
-From the **repository root**:
+**Preferred:** use the public API above (and/or examples under `examples/` at the repo root).
+
+**Optional legacy demo** from the repository root:
 
 ```bash
-python -m encoder_only.intrinsic_bias.probability_based.masked_token_metrics.disco.main
+pip install -e .
+python -m fairLMs.definitions.encoder_only.intrinsic_bias.probability_based.masked_token_metrics.disco.main
 ```
 
 ## Output \& Results

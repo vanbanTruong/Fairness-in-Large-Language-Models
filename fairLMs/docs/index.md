@@ -50,7 +50,7 @@ Eleven dataset diagnostics: axis representativeness (`b_rep`), stereotype
 leakage (`b_leak`), five of the eight construction-vector slots (`b_min`,
 `b_diff_len`, `b_frame`, `b_opt`, `b_temp`) and four scoring-instrument audits
 (mean gap, rate gap, Wasserstein-1 gap, counterfactual sensitivity). The three
-remaining construction slots read a quantity that needs an optional backend; `fairLMs.diagnostics.backends` ships a reference embedding, grammar-checker and parser backend, and without one such a slot is `blocked` by name once it is requested and its required evidence view is present, and `not_applicable` before that.
+remaining construction slots read a quantity that needs an optional backend; `fairLMs.datasets.diagnostics.backends` ships a reference embedding, grammar-checker and parser backend, and without one such a slot is `blocked` by name once it is requested and its required evidence view is present, and `not_applicable` before that.
 
 !!! note "Status"
     MIT licensed. Declared support: Python 3.10–3.13. CI runs the test suite on

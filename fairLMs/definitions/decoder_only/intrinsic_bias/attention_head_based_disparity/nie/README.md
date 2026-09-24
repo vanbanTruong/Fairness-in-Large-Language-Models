@@ -12,11 +12,27 @@ score = fraction of heads with |NIEₕ| > threshold
 
 Default threshold is `NIE_THRESHOLD = 0.003` (fixed; not a top-decile cut).
 
+## Public API
+
+```python
+from fairLMs.definitions import NaturalIndirectEffect
+from fairLMs.definitions.models import HuggingFaceModel
+
+result = NaturalIndirectEffect().compute(
+    model=HuggingFaceModel("gpt2", task="causal"),
+    probes=[("The nurse said", "he", "she")],
+    N_LAYERS=12,
+    N_HEADS=12,
+    HEAD_DIM=64,
+)
+print(result.score)
+```
+
 ## Files
 
 | File | Purpose |
 |---|---|
-| `main.py` | Entry point: builds StereoSet / Winogender / Red Pill prompts, writes `nie_results.csv` |
+| `main.py` | Short public-API demo using `NaturalIndirectEffect`; writes results CSV for continuity |
 | `nie.py` | Core: `_capture_acts`, `compute_nie_matrix`, `compute_nie` |
 | `red_pill_corpus.csv` | Red Pill comment corpus |
 | `nie_results.csv` | Output of the last run |
@@ -35,10 +51,13 @@ Hooks target GPT-2 `transformer.h[*].attn.c_proj`.
 
 ## How to run
 
+**Preferred:** use the public API above (and/or examples under `examples/` at the repo root).
+
+**Optional legacy demo** from the repository root:
+
 ```bash
-pip install torch transformers datasets pandas numpy
-cd <this directory>
-python main.py
+pip install -e .
+python -m fairLMs.definitions.decoder_only.intrinsic_bias.attention_head_based_disparity.nie.main
 ```
 
 ## Output \& Results

@@ -4,7 +4,7 @@ Mitigators adopt the same contract as metrics. Each declares an intervention
 category (pre-, in-, intra- or post-processing), an access level, supported
 architectures, capabilities and evidence containers, and applicability is
 decided from those declarations by the one shared matcher in
-:mod:`fairLMs.applicability` - exactly as it is for metrics. An unsatisfiable
+:mod:`fairLMs.definitions.core.applicability` - exactly as it is for metrics. An unsatisfiable
 pairing is **refused by name**, never given a proxy.
 
 .. code-block:: python
@@ -45,13 +45,13 @@ provided here: conceptor debiasing; pruning and ablation; the no-attribute
 dataset curation and balanced collection; output filtering and safety
 classification; refusal policies and content moderation; counterfactual data
 **substitution**. The book's "bias diagnosis and data auditing" family is
-covered, but by :mod:`fairLMs.diagnostics`.
+covered, but by :mod:`fairLMs.datasets.diagnostics`.
 
 No mandatory heavy dependency: spaCy, sentence-transformers, LanguageTool and
 Java stay optional. The base install runs all fourteen components.
 """
 
-from fairLMs.applicability import (
+from fairLMs.definitions.core.applicability import (
     ACCESS_LEVELS,
     ARCHITECTURES,
     CAPABILITIES,
@@ -64,7 +64,7 @@ from fairLMs.applicability import (
     describe_model,
     validate_declaration,
 )
-from fairLMs.diagnostics.evidence import LabeledScoredGroups
+from fairLMs.datasets.diagnostics.evidence import LabeledScoredGroups
 
 from .base import (
     CATEGORIES,

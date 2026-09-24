@@ -7,7 +7,7 @@ from types import MappingProxyType
 
 import pytest
 
-from fairLMs.diagnostics import (
+from fairLMs.datasets.diagnostics import (
     BACKEND_CONSTRUCTION_SLOTS,
     CONSTRUCTION_SLOTS,
     ComponentOverride,
@@ -239,7 +239,7 @@ def test_unfamiliar_dataset_plans_and_runs_every_requested_component():
 
 
 def test_component_selection_ignores_the_registry_and_the_dataset_name(monkeypatch):
-    import fairLMs.diagnostics.registry as registry_module
+    import fairLMs.datasets.diagnostics.registry as registry_module
 
     monkeypatch.setattr(
         registry_module, "DIAGNOSTIC_REGISTRY", MappingProxyType({})

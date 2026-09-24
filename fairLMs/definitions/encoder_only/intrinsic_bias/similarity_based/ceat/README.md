@@ -13,13 +13,30 @@ This version follows the original protocol: **one context per word per trial**
 (`SAMPLE_SIZE = 1`) and full DL pooling — Q statistic, between-trial
 heterogeneity τ², weights 1/(v+τ²), and a z-test on the pooled CES.
 
+## Public API
+
+```python
+from fairLMs.definitions import CEAT
+from fairLMs.definitions.models import HuggingFaceModel
+
+# Each *_contexts value is a list of contextualized sentences per target/attribute word.
+result = CEAT(sample_size=1, n_trials=10).compute(
+    model=HuggingFaceModel("bert-base-uncased", task="encoder"),
+    T1_contexts=[["John is here."], ["Paul is here."]],
+    T2_contexts=[["Amy is here."], ["Joan is here."]],
+    A1_contexts=[["This is about career."], ["This is about salary."]],
+    A2_contexts=[["This is about family."], ["This is about home."]],
+)
+print(result.score)
+```
+
 ## Files
 
 | File | Purpose |
 |---|---|
 | `generate_embeddings.py` | Step 1: embeds up to 1,000 Reddit context sentences per word with BERT, writes `bert_weat{3,6,9,10}.pickle` |
-| `main.py` | Step 2: loads the pickles, runs CEAT with DL pooling, writes `ceat_results.csv` |
-| `ceat.py` | Standalone `compute_ceat()` + `dersimonian_laird()` (main.py has its own copy of both) |
+| `main.py` | Short public-API demo using `CEAT`; writes results CSV for continuity |
+| `ceat.py` | Core metric math (called by the public API): Standalone `compute_ceat()` + `dersimonian_laird()` (main.py has its own copy of both) |
 | `sen_dic_1.pickle` | Reddit sentence dictionary used by `generate_embeddings.py` (present in this directory) |
 | `bert_weat{3,6,9,10}.pickle` | Precomputed context embedding pools |
 | `ceat_results.csv` | Output of the last run |
@@ -56,13 +73,24 @@ corpus and equalized in length by `filter_and_equalize()`.
 3. Generate embedding pools (if needed), then run the metric:
 
 ```bash
-cd <this directory>
-python generate_embeddings.py    # writes bert_weat{3,6,9,10}.pickle (slow; GPU recommended)
-python main.py                   # writes ceat_results.csv
+pip install -e .
+# Prefer the Public API above; optional legacy:
+python -m fairLMs.definitions.encoder_only.intrinsic_bias.similarity_based.ceat.main
 ```
 
 Both scripts use local paths, so run them from inside this directory (the
-package must also be importable for `encoder_only.utils`).
+package must also be importable; shared helpers live in `fairLMs.definitions.utils`).
+
+## How to run
+
+**Preferred:** use the public API above (and/or examples under `examples/` at the repo root).
+
+**Optional legacy demo** from the repository root:
+
+```bash
+pip install -e .
+python -m fairLMs.definitions.encoder_only.intrinsic_bias.similarity_based.ceat.main
+```
 
 ## Output \& Results
 

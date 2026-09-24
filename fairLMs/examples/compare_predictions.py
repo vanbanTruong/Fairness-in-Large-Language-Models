@@ -1,6 +1,6 @@
 """Offline comparison of explicit predictions with preserved metric config."""
 
-from fairLMs.metrics import EqualOpportunityGap, GroupPredictions
+from fairLMs.definitions import EqualOpportunityGap, GroupPredictions
 from fairLMs.mitigation import MetricEvaluation, compare_before_after
 
 before = GroupPredictions([1, 1, 1, 1], [1, 1, 1, 0], ["A", "A", "B", "B"])

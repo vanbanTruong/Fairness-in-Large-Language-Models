@@ -7,9 +7,9 @@ computation), data at `compute`, and a `MetricResult` back.
 ```python
 from typing import Any
 
-from fairLMs.metrics import FairnessMetric, MetricResult
-from fairLMs.metrics.data import SentenceTriples
-from fairLMs.metrics.resolve import get_tokenizer_model
+from fairLMs.definitions import FairnessMetric, MetricResult
+from fairLMs.definitions.data import SentenceTriples
+from fairLMs.definitions.resolve import get_tokenizer_model
 
 
 class MyPairGap(FairnessMetric):
@@ -89,7 +89,7 @@ task the model was loaded with; omitting it silently disables that check.
 
 ## Registering
 
-Add the class to `METRIC_REGISTRY` in `fairLMs/metrics/__init__.py`, keyed on its
+Add the class to `METRIC_REGISTRY` in `fairLMs/definitions/__init__.py`, keyed on its
 `name`, and export it in `__all__`. Registration is what enrols it in the
 contract suite that runs over every registered metric:
 

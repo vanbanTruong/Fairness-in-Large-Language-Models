@@ -1,4 +1,4 @@
-"""Tests for ``fairLMs.data`` — the short-import wrappers around the bundled
+"""Tests for ``fairLMs.definitions.resources`` — the short-import wrappers around the bundled
 WEAT/SEAT stimuli.
 
 The point of the module is that a published association test needs no term
@@ -16,7 +16,7 @@ from __future__ import annotations
 
 import pytest
 
-from fairLMs.data import (
+from fairLMs.definitions.resources import (
     WORD_SET_LABELS,
     WORD_SETS,
     get_word_set,
@@ -24,13 +24,13 @@ from fairLMs.data import (
     seat_c1,
     weat_c1,
 )
-from fairLMs.definition.encoder_only.intrinsic_bias.similarity_based.seat import (
+from fairLMs.definitions.encoder_only.intrinsic_bias.similarity_based.seat import (
     data as seat_data,
 )
-from fairLMs.definition.encoder_only.intrinsic_bias.similarity_based.weat import (
+from fairLMs.definitions.encoder_only.intrinsic_bias.similarity_based.weat import (
     data as weat_data,
 )
-from fairLMs.metrics import SEAT, WEAT, WordSets
+from fairLMs.definitions import SEAT, WEAT, WordSets
 
 ROLES = ("target_1", "target_2", "attribute_1", "attribute_2")
 
@@ -126,7 +126,7 @@ class TestUsableByMetrics:
             raise _StopBeforeEmbedding
 
         monkeypatch.setattr(
-            "fairLMs.metrics.similarity_based.get_tokenizer_model",
+            "fairLMs.definitions.similarity_based.get_tokenizer_model",
             fake_get_tokenizer_model,
         )
 

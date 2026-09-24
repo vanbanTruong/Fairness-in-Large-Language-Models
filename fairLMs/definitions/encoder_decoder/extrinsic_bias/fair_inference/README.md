@@ -23,11 +23,23 @@ IBS = ( 2 · (n_entail_pro + n_contra_anti) / n_non_neutral − 1 ) · (1 − ac
 where `accuracy = n_neutral / (2n)`. 0 = fair; positive = biased in the
 stereotypical direction.
 
+## Public API
+
+```python
+from fairLMs.definitions import InferenceBiasScore
+
+# Sequence of (gold_label, model_prediction) pairs.
+result = InferenceBiasScore().compute(
+    predictions=[("entailment", "neutral"), ("contradiction", "contradiction")],
+)
+print(result.score)
+```
+
 ## Files
 
 | File | Purpose |
 |---|---|
-| `main.py` | Entry point: loads mBART, builds probe pairs, writes `ibs_results.csv` |
+| `main.py` | Short public-API demo using `InferenceBiasScore`; writes results CSV for continuity |
 | `ibs.py` | Core: label scoring with null calibration (`predict_nli`), `compute_ibs` |
 | `ibs_results.csv` | Output of the last run |
 
@@ -44,10 +56,13 @@ stereotypical direction.
 
 ## How to run
 
+**Preferred:** use the public API above (and/or examples under `examples/` at the repo root).
+
+**Optional legacy demo** from the repository root:
+
 ```bash
-pip install torch transformers datasets pandas
-cd <this directory>
-python main.py
+pip install -e .
+python -m fairLMs.definitions.encoder_decoder.extrinsic_bias.fair_inference.main
 ```
 
 ## Output \& Results

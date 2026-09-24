@@ -1,5 +1,9 @@
 """Reusable dataset loaders for fairLMs metrics."""
 
+from fairLMs.datasets import diagnostics
+from fairLMs.datasets.diagnostics import *
+from fairLMs.datasets.diagnostics import __all__ as _diagnostics_all
+
 from fairLMs.datasets.base import FairnessDataset
 from fairLMs.datasets.bbq import BBQ, DEFAULT_BBQ_CATEGORIES
 from fairLMs.datasets.bias_in_bios import BIOS_PROFESSION_MAP, BiasInBios
@@ -92,4 +96,6 @@ __all__ = [
     "WinoBias",
     "Winogender",
     "XNLIReligionPairs",
+    "diagnostics",
+    *_diagnostics_all,
 ]

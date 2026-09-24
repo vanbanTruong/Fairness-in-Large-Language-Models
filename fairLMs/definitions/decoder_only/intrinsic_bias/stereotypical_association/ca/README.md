@@ -13,13 +13,29 @@ CA    = TVD / ((k − 1) / k)
 
 Higher CA = more concentrated demographic association (less fair).
 
+## Public API
+
+```python
+from fairLMs.definitions import CooccurrenceAssociation
+from fairLMs.definitions.models import HuggingFaceModel
+
+result = CooccurrenceAssociation().compute(
+    model=HuggingFaceModel("gpt2", task="causal"),
+    concepts=["doctor", "nurse"],
+    prompt_template="The {} is a",
+    group_terms=["man", "woman"],
+    n_samples=2,
+)
+print(result.score)
+```
+
 ## Files
 
 | File | Purpose |
 |---|---|
-| `main.py` | Entry point: loads concepts, samples generations, writes `ca_results.csv` |
+| `main.py` | Short public-API demo using `CooccurrenceAssociation`; writes results CSV for continuity |
 | `ca.py` | Core: `generate`, `observed_distribution`, `compute_ca` |
-| `data/` | Bundled BBQ jsonl (expected under `_MAIN_DIR / data`) |
+| `data/` | Prefer `fairLMs.datasets.BBQ`; it downloads requested categories or accepts `data_dir=` |
 | `ca_results.csv` | Output of the last run |
 
 ## Parameters and settings
@@ -33,17 +49,14 @@ Higher CA = more concentrated demographic association (less fair).
 
 ## How to run
 
-```bash
-pip install torch transformers datasets pandas numpy
-export HF_TOKEN=...   # or HUGGING_FACE_HUB_TOKEN
-cd <this directory>
-python main.py
-```
+**Preferred:** use the public API above (and/or examples under `examples/` at the repo root).
 
-**Path caveat:** `_MAIN_DIR` is hard-coded to `/content/drive/MyDrive/`
-(Colab). For local runs, point it at this directory so `data/` and
-`ca_results.csv` resolve correctly. Llama-2 7B in float32 can OOM; the runner
-uses float16 on CUDA.
+**Optional legacy demo** from the repository root:
+
+```bash
+pip install -e .
+python -m fairLMs.definitions.decoder_only.intrinsic_bias.stereotypical_association.ca.main
+```
 
 ## Output \& Results
 

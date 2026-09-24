@@ -1,9 +1,9 @@
 # containers
 
-Validated input containers. These live in `fairLMs.metrics.data`; there is no
+Validated input containers. These live in `fairLMs.definitions.data`; there is no
 top-level `fairLMs.containers` module.
 
-::: fairLMs.metrics.data
+::: fairLMs.definitions.data
     options:
       show_root_heading: true
       show_source: true

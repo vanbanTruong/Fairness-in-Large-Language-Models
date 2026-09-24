@@ -10,8 +10,8 @@ from pathlib import Path
 
 import pytest
 
-import fairLMs.diagnostics as diagnostics
-from fairLMs.diagnostics import (
+import fairLMs.datasets.diagnostics as diagnostics
+from fairLMs.datasets.diagnostics import (
     DIAGNOSTIC_REGISTRY,
     DIAGNOSTIC_SCHEMA_VERSION,
     ComponentPlan,
@@ -33,7 +33,7 @@ from fairLMs.diagnostics import (
     get_diagnostic,
     list_diagnostics,
 )
-from fairLMs.metrics import METRIC_REGISTRY
+from fairLMs.definitions import METRIC_REGISTRY
 
 PUBLIC_NAMES = {
     "DIAGNOSTIC_SCHEMA_VERSION",
@@ -533,7 +533,7 @@ def guarded_import(name, *args, **kwargs):
     return real_import(name, *args, **kwargs)
 
 builtins.__import__ = guarded_import
-import fairLMs.diagnostics
+import fairLMs.datasets.diagnostics
 assert forbidden.isdisjoint(sys.modules)
 """
     env = dict(os.environ)

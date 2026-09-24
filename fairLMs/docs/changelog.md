@@ -42,7 +42,7 @@ need tens of gigabytes before `n_max` could take effect.
 implemented as `SemanticEquivalence`, `GrammarConsistency` and
 `DependencyDepthDisparity`, each taking an optional `backend=` that satisfies
 `EmbeddingBackend`, `GrammarCheckerBackend` or `DependencyParserBackend`.
-`fairLMs.diagnostics.backends` ships `HuggingFaceEmbeddingBackend` (core
+`fairLMs.datasets.diagnostics.backends` ships `HuggingFaceEmbeddingBackend` (core
 dependencies), `LanguageToolGrammarBackend` (`fairLMs[grammar]`) and
 `SpacyDependencyBackend` (`fairLMs[parse]`); `fairLMs[nlp]` installs both extras.
 The backend revision is recorded in component provenance. Without a backend the
@@ -59,11 +59,11 @@ decimal: 60.5 overall, 61.1 on stereotype pairs, 56.9 on anti-stereotype pairs
 versions on anti-stereotype rows, and therefore the gender category, were
 inverted.
 
-**Bundled corpora consolidated.** 84 files under `fairLMs/definition/` that were
-byte-identical to a copy under `fairLMs/data/` were deleted, removing
-359,582,594 bytes. `fairLMs/data/` is now the single source, and
-`fairLMs/data/checksums.json` pins the bytes that remain. Loaders resolve
-`fairLMs/data/` first and still fall back to legacy locations, so externally
+**Bundled corpora consolidated.** 84 files under `fairLMs/definitions/` that were
+byte-identical to a copy under `fairLMs/datasets/resources/` were deleted, removing
+359,582,594 bytes. `fairLMs/datasets/resources/` is now the single source, and
+`fairLMs/datasets/resources/checksums.json` pins the bytes that remain. Loaders resolve
+`fairLMs/datasets/resources/` first and still fall back to legacy locations, so externally
 maintained checkouts are unaffected. Historical MCD outputs from earlier
 development are no longer distributed; they were never validation results for
 this version.
@@ -78,8 +78,21 @@ versions, so pin a version when reporting a score. See
 
 ## Unreleased
 
+**Runtime layout consolidated.** The installed implementation now has three
+feature packages: `fairLMs.datasets` (including diagnostics),
+`fairLMs.definitions` (including shared contracts, model adapters, numerical
+helpers, and word sets), and `fairLMs.mitigation`. The former root-level
+implementation and compatibility modules were removed. Documentation, tests,
+examples, and maintenance scripts remain source-only project directories.
+
+**Large dataset snapshots removed.** CrowS-Pairs remains bundled because its
+CSV is small. BBQ now downloads requested JSONL categories from its Hugging
+Face mirror into the standard cache, while still accepting `data_dir=` for an
+existing local copy. Generated outputs, charts, duplicate corpora, and package
+artifact directories are no longer distributed.
+
 **Mismatched model heads are refused.** Every metric now declares
-`required_task`, and `fairLMs.metrics.resolve.check_task` compares it against
+`required_task`, and `fairLMs.definitions.resolve.check_task` compares it against
 the `task` a checkpoint was loaded with. Passing a `task="encoder"` model to
 `crows_pairs_score` previously failed with an `AttributeError` on a missing
 `.logits`, and the reverse mismatch could return numbers read from a randomly
@@ -120,7 +133,7 @@ can be pinned and reproduced instead of depending on ambient RNG state.
 
 ## 0.3.1
 
-Added `fairLMs.data`: the bundled WEAT and SEAT word sets (`weat_c1`–`weat_c4`,
+Added `fairLMs.definitions.resources`: the bundled WEAT and SEAT word sets (`weat_c1`–`weat_c4`,
 `seat_c1`–`seat_c4`) as validated `WordSets` containers, with a `WORD_SETS`
 registry and `get_word_set` / `list_word_sets` accessors.
 
@@ -131,7 +144,7 @@ all moved from the previous name; there is no compatibility shim.
 
 ## 0.2.0
 
-Reusable dataset and score-table diagnostics: the `fairLMs.diagnostics` package,
+Reusable dataset and score-table diagnostics: the `fairLMs.datasets.diagnostics` package,
 with axis representativeness (`b_rep`) and the four scoring-instrument audits,
 the `ready` / `blocked` / `not_applicable` / `failed` applicability model, and
 versioned JSON reports.

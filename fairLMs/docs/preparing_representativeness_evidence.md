@@ -92,7 +92,7 @@ annotation report, or other upstream process. Include zero-count cells so the
 evidence records the complete support.
 
 ```python
-from fairLMs.diagnostics import RepresentationEvidence
+from fairLMs.datasets.diagnostics import RepresentationEvidence
 
 evidence = RepresentationEvidence(
     axis="source_region",
@@ -131,7 +131,7 @@ explicit field per row. Use `value_map` when raw codes differ from the canonical
 support labels.
 
 ```python
-from fairLMs.diagnostics import RepresentationEvidence
+from fairLMs.datasets.diagnostics import RepresentationEvidence
 
 records = [
     {"prompt_id": "p1", "region_code": "N", "text": "Example one"},
@@ -186,7 +186,7 @@ column. Other columns are ignored.
 ```python
 import pandas as pd
 
-from fairLMs.diagnostics import RepresentationEvidence
+from fairLMs.datasets.diagnostics import RepresentationEvidence
 
 frame = pd.DataFrame(
     {
@@ -279,7 +279,7 @@ The following script creates evidence, declares a population reference, runs the
 diagnostic, checks applicability, and serializes the full report.
 
 ```python
-from fairLMs.diagnostics import (
+from fairLMs.datasets.diagnostics import (
     DatasetAuditSpec,
     ReferenceDistribution,
     RepresentationEvidence,

@@ -13,13 +13,30 @@ P̂_d  = p_d  / (p_s + p_s' + p_d)
 Fair when all three means ≈ **1/3**. Log-prob is taken on the first subtoken of
 each word (leading-space form preferred when present in the vocab).
 
+## Public API
+
+```python
+from fairLMs.definitions import DemographicNextTokenProportion
+from fairLMs.definitions.models import HuggingFaceModel
+
+# Prompts often come from fairLMs.datasets.BBQ / CrowSPairs.
+result = DemographicNextTokenProportion().compute(
+    model=HuggingFaceModel("gpt2", task="causal"),
+    prompts=["The person who"],
+    stereo_words=["he"],
+    counter_words=["she"],
+    neutral_words=["they"],
+)
+print(result.score)
+```
+
 ## Files
 
 | File | Purpose |
 |---|---|
-| `main.py` | Entry point: axis definitions, BBQ/CrowS/NQ loaders, writes `dnp_results.csv` |
+| `main.py` | Short public-API demo using `DemographicNextTokenProportion`; writes results CSV for continuity |
 | `dnp.py` | Core: `_token_logprobs`, `compute_dnp` |
-| `data/` | Bundled BBQ jsonl + `crows_pairs_anonymized.csv` |
+| `data/` | Prefer `fairLMs.datasets.BBQ` / `CrowSPairs`; only CrowS-Pairs is bundled |
 | `dnp_results.csv` | Output of the last run |
 
 ## Parameters and settings
@@ -33,11 +50,13 @@ each word (leading-space form preferred when present in the vocab).
 
 ## How to run
 
+**Preferred:** use the public API above (and/or examples under `examples/` at the repo root).
+
+**Optional legacy demo** from the repository root:
+
 ```bash
-pip install torch transformers datasets pandas numpy
-export HF_TOKEN=...   # gated Llama-2 access
-cd <this directory>
-python main.py
+pip install -e .
+python -m fairLMs.definitions.decoder_only.extrinsic_bias.demographic_representation.dnp.main
 ```
 
 ## Output \& Results
