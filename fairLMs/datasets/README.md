@@ -17,11 +17,13 @@ bbq_age = BBQ(categories=["Age"], n_max=100).load()
 stereoset = StereoSet(split="validation", n_max=100).load()
 ```
 
-CrowS-Pairs is bundled because its CSV is small. BBQ and other large datasets
-are downloaded into the normal Hugging Face cache on first use. Loaders that
-cannot rely on a maintained Hub source accept `root=` or another explicit local
-path; the generated [loader registry](../docs/registry/loaders.md) records the
-source policy for every class.
+CrowS-Pairs, WinoBias and Winogender are bundled because their complete
+evaluation snapshots are small and permit redistribution. BBQ and other large
+datasets are downloaded into the normal Hugging Face cache on first use.
+Loaders that cannot rely on a maintained Hub source accept `root=` or another
+explicit local path; the generated
+[loader registry](../docs/registry/loaders.md) records the source policy for
+every class.
 
 ## Audit a dataset
 

@@ -13,6 +13,8 @@ clean-environment install.
 from __future__ import annotations
 
 import ast
+import hashlib
+import json
 import pathlib
 import shlex
 import sys
@@ -192,6 +194,23 @@ def test_large_dataset_snapshots_are_not_vendored():
     assert max(path.stat().st_size for path in bundled) < 5 * 1024 * 1024
 
 
+def test_bundled_dataset_manifest_covers_and_verifies_every_data_file():
+    resources = PACKAGE / "datasets" / "resources"
+    manifest = json.loads((resources / "checksums.json").read_text(encoding="utf-8"))
+    entries = {item["path"]: item for item in manifest["files"]}
+    data_files = {
+        path.relative_to(resources).as_posix(): path
+        for path in resources.rglob("*")
+        if path.is_file() and path.suffix in {".csv", ".tsv", ".parquet"}
+    }
+
+    assert set(entries) == set(data_files)
+    for name, path in data_files.items():
+        payload = path.read_bytes()
+        assert entries[name]["bytes"] == len(payload)
+        assert entries[name]["sha256"] == hashlib.sha256(payload).hexdigest()
+
+
 def test_version_helper_script_agrees_with_package():
     """scripts/package_version.py is what the release workflow tags against.
 
@@ -240,6 +259,16 @@ def test_sdist_manifest_includes_diagnostic_reproducibility_material():
     )
     assert ["recursive-include", "docs", "*.md", "*.ipynb"] in rules
     assert ["recursive-include", "examples", "*.md", "*.py"] in rules
+    assert [
+        "recursive-include",
+        "datasets/resources",
+        "*.md",
+        "*.json",
+        "*.csv",
+        "*.tsv",
+        "*.parquet",
+        "LICENSE",
+    ] in rules
     assert (REPO_ROOT / "docs" / "preparing_audit_evidence.md").is_file()
     assert (REPO_ROOT / "examples" / "scorer_rate_gap_diagnostic.py").is_file()
     assert (REPO_ROOT / "examples" / "scorer_distribution_gap_diagnostic.py").is_file()

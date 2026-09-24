@@ -36,7 +36,7 @@ print(result.score)
 |---|---|
 | `main.py` | Short public-API demo using `DemographicNextTokenProportion`; writes results CSV for continuity |
 | `dnp.py` | Core: `_token_logprobs`, `compute_dnp` |
-| `data/` | Prefer `fairLMs.datasets.BBQ` / `CrowSPairs`; only CrowS-Pairs is bundled |
+| `data/` | Prefer `fairLMs.datasets.BBQ` / `CrowSPairs`; BBQ downloads on demand and CrowS-Pairs is bundled |
 | `dnp_results.csv` | Output of the last run |
 
 ## Parameters and settings

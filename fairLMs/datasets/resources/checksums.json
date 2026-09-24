@@ -4,6 +4,61 @@
       "path": "crows_pairs/crows_pairs_anonymized.csv",
       "sha256": "dfb36986ce0502abbaf7055b9176da3d08d48e07df1251991b5dfbcbceab9d0c",
       "bytes": 437764
+    },
+    {
+      "path": "wino_bias/type1_anti/test-00000-of-00001.parquet",
+      "sha256": "a419adf1956e28fd22a8bea1258ff69be4e3fb03d619c6239758e095585da7a4",
+      "bytes": 33763
+    },
+    {
+      "path": "wino_bias/type1_anti/validation-00000-of-00001.parquet",
+      "sha256": "98bb69f90bca677bc91821d0c1593a1759e4bf60a473decbc836b4f06c736b5d",
+      "bytes": 31620
+    },
+    {
+      "path": "wino_bias/type1_pro/test-00000-of-00001.parquet",
+      "sha256": "c27fcccafb604f2311a8a86024ed5a15c55d3dc423770695fab32079a82ccf01",
+      "bytes": 33761
+    },
+    {
+      "path": "wino_bias/type1_pro/validation-00000-of-00001.parquet",
+      "sha256": "b524ef57f3b6d835a0319a20437bdc47e3df1a6992394011d80b90a9ce22e243",
+      "bytes": 31755
+    },
+    {
+      "path": "wino_bias/type2_anti/test-00000-of-00001.parquet",
+      "sha256": "ea39d58459abcbff2f9ac8cb8c6c3c15c9d438a2af09d68e48ca1f3be776b856",
+      "bytes": 31535
+    },
+    {
+      "path": "wino_bias/type2_anti/validation-00000-of-00001.parquet",
+      "sha256": "f9dc431e97ae8cd66ca00317e702184249dfcd4fac71ff85ad2e83438d8740f2",
+      "bytes": 31020
+    },
+    {
+      "path": "wino_bias/type2_pro/test-00000-of-00001.parquet",
+      "sha256": "2068b318befbb6895c0939c2d9d66f7f4f3cb9f0021e1234830694f9c5abd3ca",
+      "bytes": 31380
+    },
+    {
+      "path": "wino_bias/type2_pro/validation-00000-of-00001.parquet",
+      "sha256": "33ece0eb93cda0413d4b7f376314cdd55a2328350c6da445d1c0d8ce75395cd1",
+      "bytes": 31103
+    },
+    {
+      "path": "winogender/all_sentences.tsv",
+      "sha256": "bd69da16bf228cb8df63fd0843aec2d8b5c36a7f21bf8c7b168bcc83932556c8",
+      "bytes": 83644
+    },
+    {
+      "path": "winogender/occupations-stats.tsv",
+      "sha256": "3f7f37c16381a70571356982ea7fe613ac700ad04a6d3b19b9f2be18248df567",
+      "bytes": 1578
+    },
+    {
+      "path": "winogender/templates.tsv",
+      "sha256": "496f2e2dc77296bcebcdd8865a8dc5715ce22b772de9abb5f531d5b3114c48a0",
+      "bytes": 14903
     }
   ]
 }

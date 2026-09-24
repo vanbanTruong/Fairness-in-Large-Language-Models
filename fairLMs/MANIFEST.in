@@ -4,4 +4,4 @@ recursive-include scripts *.py
 recursive-include docs *.md *.ipynb
 recursive-include examples *.md *.py
 include requirements-tested.txt
-recursive-include datasets/resources *.md *.json *.csv
+recursive-include datasets/resources *.md *.json *.csv *.tsv *.parquet LICENSE

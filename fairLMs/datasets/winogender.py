@@ -7,6 +7,7 @@ from typing import Dict, List, Optional, Sequence, Tuple, Union
 
 import pandas as pd
 
+from fairLMs.datasets._paths import dataset_resource_dir
 from fairLMs.datasets._sources import hub_file, none_if_na
 from fairLMs.datasets.base import FairnessDataset, optional_limit
 
@@ -14,6 +15,7 @@ PathLike = Union[str, Path]
 
 WINOGENDER_HF_PATH = "oskarvanderwal/winogender"
 WINOGENDER_HF_FILENAME = "test.tsv"
+WINOGENDER_BUNDLED_REVISION = "1c7f8b481ad8a234b41e9f76a424d6e856e13f7f"
 
 SENTENCES_FILE = "all_sentences.tsv"
 OCCUPATION_STATS_FILE = "occupations-stats.tsv"
@@ -46,14 +48,13 @@ class Winogender(FairnessDataset):
     gender:
         Keep only one of :data:`WINOGENDER_GENDERS`.
     root:
-        A local Winogender checkout, read as ``data/all_sentences.tsv``. It is
-        also what :meth:`occupation_stats` and :meth:`templates` need, since
-        the Hub mirror carries the sentences only. Without a root the sentences
-        come from the Hugging Face repo.
+        A local Winogender checkout, read as ``data/all_sentences.tsv``.
+        Without one, the complete bundled snapshot supplies sentences,
+        templates and occupation statistics.
     """
 
     name = "winogender"
-    data_origin = "Hugging Face Hub, downloaded at first use"
+    data_origin = "bundled with the package; optional Hugging Face/local override"
 
     def __init__(
         self,
@@ -75,14 +76,25 @@ class Winogender(FairnessDataset):
         self.revision = revision
         self._cache: Optional[List[dict]] = None
 
+    def _uses_bundled_snapshot(self) -> bool:
+        return (
+            self.root is None
+            and self.hf_path == WINOGENDER_HF_PATH
+            and self.revision is None
+        )
+
     def _data_dir(self) -> Path:
         if self.root is None:
+            if self._uses_bundled_snapshot():
+                return dataset_resource_dir(
+                    "winogender",
+                    [SENTENCES_FILE, OCCUPATION_STATS_FILE, TEMPLATES_FILE],
+                )
             raise FileNotFoundError(
-                "This needs the upstream Winogender checkout, which publishes "
-                f"{OCCUPATION_STATS_FILE} and {TEMPLATES_FILE} alongside the "
-                "sentences; the Hugging Face mirror has the sentences only. "
-                "Clone https://github.com/rudinger/winogender-schemas and pass "
-                "`root=` pointing at it."
+                "The selected Hugging Face Winogender source publishes only "
+                f"the sentences. Use the default bundled snapshot for "
+                f"{OCCUPATION_STATS_FILE} and {TEMPLATES_FILE}, or pass `root=` "
+                "pointing at a complete upstream checkout."
             )
         base = Path(self.root).expanduser()
         for candidate in (base, base / "Winogender"):
@@ -94,7 +106,7 @@ class Winogender(FairnessDataset):
         )
 
     def _read_sentences(self) -> pd.DataFrame:
-        if self.root is not None:
+        if self.root is not None or self._uses_bundled_snapshot():
             return pd.read_csv(self._data_dir() / SENTENCES_FILE, sep="\t")
         path = hub_file(self.hf_path, WINOGENDER_HF_FILENAME, self.revision)
         return pd.read_csv(path, sep="\t")

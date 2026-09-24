@@ -30,6 +30,7 @@ from fairLMs.datasets import (
     RedditBias,
     TrustGPT,
     UnQover,
+    WinoBias,
     Winogender,
 )
 from fairLMs.datasets import _sources
@@ -402,6 +403,25 @@ def test_gap_accepts_the_upstream_name_for_the_training_split():
     assert GAP(split="development").split == "train"
 
 
+# ----------------------------------------------------------------- WinoBias
+
+
+def test_winobias_loads_the_bundled_snapshot_offline():
+    rows = WinoBias(config="type1_pro", split="test").load()
+
+    assert len(rows) == 396
+    assert isinstance(rows[0]["tokens"], list)
+    assert "coreference_clusters" in rows[0]
+    assert len(WinoBias(config="type2_anti", split="validation", n_max=2).load()) == 2
+
+
+def test_winobias_validates_config_and_split_before_loading():
+    with pytest.raises(ValueError, match="WinoBias config"):
+        WinoBias(config="type3_pro")
+    with pytest.raises(ValueError, match="WinoBias split"):
+        WinoBias(split="train")
+
+
 # --------------------------------------------------------------- Winogender
 
 
@@ -470,9 +490,12 @@ def test_winogender_occupation_skew_is_a_probability(winogender_root):
     assert skew["technician"] == pytest.approx(0.4034)
 
 
-def test_winogender_says_where_the_occupation_stats_come_from():
-    with pytest.raises(FileNotFoundError, match="winogender-schemas"):
-        Winogender().occupation_stats()
+def test_winogender_bundles_sentences_templates_and_occupation_stats():
+    loader = Winogender()
+
+    assert len(loader.load()) == 720
+    assert len(loader.templates()) == 120
+    assert len(loader.occupation_stats()) == 60
 
 
 # ------------------------------------------------------------------ BiasNLI

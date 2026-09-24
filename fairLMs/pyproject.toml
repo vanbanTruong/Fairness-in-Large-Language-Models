@@ -205,11 +205,15 @@ filterwarnings = [
 target-version = ["py310"]
 
 [tool.setuptools.package-data]
-# Only the small CrowS-Pairs corpus is distributed. Large datasets are fetched
-# by their loaders into the user's Hugging Face cache.
+# Only small, redistribution-safe snapshots are distributed. Large datasets
+# are fetched by their loaders into the user's Hugging Face cache.
 "fairLMs.datasets.resources" = [
     "README.md",
     "NOTICE.md",
     "checksums.json",
     "crows_pairs/*.csv",
+    "wino_bias/LICENSE",
+    "wino_bias/*/*.parquet",
+    "winogender/LICENSE",
+    "winogender/*.tsv",
 ]

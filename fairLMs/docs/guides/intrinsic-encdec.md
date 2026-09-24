@@ -158,8 +158,7 @@ have a precomputed unit vector of length `d_model`.
 
 ## Data sources
 
-None of these four has a bundled dataset. The leaf runners under
-`fairLMs/definitions/encoder_decoder/` pull sentences from XSum, Europarl,
-WinoBias and XNLI at runtime via `datasets.load_dataset`, which is worth knowing
-if you are working offline. The corpora are not vendored; only CrowS-Pairs and
-BBQ are.
+The leaf runners under `fairLMs/definitions/encoder_decoder/` use the bundled
+WinoBias snapshot and pull sentences from XSum, Europarl and XNLI at runtime,
+which is worth knowing if you are working offline. CrowS-Pairs, WinoBias and
+Winogender are the only bundled evaluation datasets.

@@ -428,9 +428,10 @@ Every metric exposes the same method: `compute(...)`.
 
 ## Datasets
 
-Eighteen loaders share one interface. Only the small CrowS-Pairs CSV is
-distributed; larger corpora are fetched or pointed at. See [Loaders](docs/registry/loaders.md) for
-the generated table with every constructor argument.
+Eighteen loaders share one interface. The small CrowS-Pairs, WinoBias and
+Winogender snapshots are distributed for offline use; larger corpora are
+fetched or pointed at. See [Loaders](docs/registry/loaders.md) for the generated
+table with every constructor argument.
 
 | Class | Source | Notes |
 |-------|--------|--------|
@@ -438,7 +439,7 @@ the generated table with every constructor argument.
 | `BBQ` | Hugging Face `heegyu/bbq`, cached at first use | Optional `context_condition` filter |
 | `StereoSet` | Hugging Face (`stereoset` / `McGill-NLP/stereoset`) | Pairs or triples |
 | `BiasInBios` | Hugging Face `LabHC/bias_in_bios` | Profession / gender helpers |
-| `WinoBias` | Hugging Face `wino_bias` | Occupation direction helpers |
+| `WinoBias` | Bundled Parquet under `datasets/resources/wino_bias/` | Four configurations; occupation direction helpers |
 | `XNLIReligionPairs` | Hugging Face XNLI + templates | Religion swap pairs |
 | `BOLD` | Hugging Face `AmazonScience/bold` | Generation prompts, five domains |
 | `HONEST` | Hugging Face `MilaNLProc/honest` | Masked templates, `binary` / `queer_nonqueer` |
@@ -446,7 +447,7 @@ the generated table with every constructor argument.
 | `HolisticBias` | Hugging Face `fairnlp/holistic-bias` | `sentences` or `nouns`, per-axis counts |
 | `EquityEvaluationCorpus` (`EEC`) | Hugging Face `peixian/equity_evaluation_corpus` | Matched gender / race templates |
 | `GAP` | Hugging Face `google-research-datasets/gap` | Balanced masculine / feminine pronouns |
-| `Winogender` | Hugging Face `oskarvanderwal/winogender` | Occupation skew helpers need a local `root=` |
+| `Winogender` | Bundled TSV files under `datasets/resources/winogender/` | Sentences, templates and occupation skew helpers |
 | `BiasNLI` | Local `root=` | The retained three-column release, verbatim |
 | `RedditBias` | Local `root=` | `comments` / `pairs` / `phrases`, five axes |
 | `GrepBiasIR` | Local `root=` | Query/document pairs, gendered writings |

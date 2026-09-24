@@ -6,9 +6,10 @@
 
 Each benchmark retains its own license, and where it comes from differs. Some are redistributed with the package, some are pulled from the Hugging Face Hub the first time you load them, and some are only distributed from their own project page, so their loader needs a `root=` pointing at your copy and will not download anything:
 
-- **Hugging Face Hub, downloaded at first use**: `BBQ`, `BOLD`, `BiasInBios`, `EquityEvaluationCorpus`, `GAP`, `HONEST`, `HolisticBias`, `RealToxicityPrompts`, `StereoSet`, `WinoBias`, `Winogender`, `XNLIReligionPairs`
+- **Hugging Face Hub, downloaded at first use**: `BBQ`, `BOLD`, `BiasInBios`, `EquityEvaluationCorpus`, `GAP`, `HONEST`, `HolisticBias`, `RealToxicityPrompts`, `StereoSet`, `XNLIReligionPairs`
 - **built from bundled templates; norms supplied by the caller**: `TrustGPT`
 - **bundled with the package**: `CrowSPairs`
+- **bundled with the package; optional Hugging Face/local override**: `WinoBias`, `Winogender`
 - **local copy required (`root=`)**: `BiasNLI`, `GrepBiasIR`, `RedditBias`, `UnQover`
 
 | Loader | Alias | Description | Data origin | Constructor arguments |
@@ -28,6 +29,6 @@ Each benchmark retains its own license, and where it comes from differs. Some ar
 | `StereoSet` | n/a | Load StereoSet as pairs or triples. | Hugging Face Hub, downloaded at first use | `config`, `split`, `as_triples`, `n_max`, `hf_path`, `label_map`, `revision` |
 | `TrustGPT` | n/a | Build TrustGPT prompts from its templates and a list of social norms. | built from bundled templates; norms supplied by the caller | `norms`, `task`, `entities`, `prompt_type`, `n_max` |
 | `UnQover` | n/a | Load UnQover underspecified question/context examples. | local copy required (`root=`) | `root`, `subject`, `model`, `n_max` |
-| `WinoBias` | n/a | Load WinoBias from Hugging Face. | Hugging Face Hub, downloaded at first use | `config`, `split`, `n_max`, `hf_path`, `revision` |
-| `Winogender` | n/a | Load Winogender schemas as pronoun-resolution sentences. | Hugging Face Hub, downloaded at first use | `gender`, `root`, `n_max`, `hf_path`, `revision` |
+| `WinoBias` | n/a | Load the bundled WinoBias validation or test split. | bundled with the package; optional Hugging Face/local override | `config`, `split`, `root`, `n_max`, `hf_path`, `revision` |
+| `Winogender` | n/a | Load Winogender schemas as pronoun-resolution sentences. | bundled with the package; optional Hugging Face/local override | `gender`, `root`, `n_max`, `hf_path`, `revision` |
 | `XNLIReligionPairs` | n/a | Build religion counterfactual pairs from XNLI + templates. | Hugging Face Hub, downloaded at first use | `split`, `n_max`, `hf_path`, `include_templates`, `religion_swaps`, `religion_groups`, `templates`, `revision` |

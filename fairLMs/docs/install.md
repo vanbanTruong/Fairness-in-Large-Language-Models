@@ -42,13 +42,13 @@ python -c "import fairLMs; print(fairLMs.__version__)"
 
 The library is MIT licensed; each benchmark retains its own license.
 
-The small CrowS-Pairs CSV is bundled and works offline. BBQ and eleven more --
-StereoSet, Bias in Bios, WinoBias, XNLI, BOLD, HONEST,
-RealToxicityPrompts, HolisticBias, EEC, GAP and Winogender -- are downloaded
-from the Hugging Face Hub at first use. Bias-NLI, RedditBias, Grep-BiasIR and
-UnQover are distributed only from their own project pages, so their loaders
-take a `root=` pointing at your copy and download nothing; TrustGPT has no data
-release and builds its prompts from bundled templates. See
+The small CrowS-Pairs, WinoBias and Winogender snapshots are bundled and work
+offline. BBQ and nine more -- StereoSet, Bias in Bios, XNLI, BOLD, HONEST,
+RealToxicityPrompts, HolisticBias, EEC and GAP -- are downloaded from the
+Hugging Face Hub at first use. Bias-NLI, RedditBias, Grep-BiasIR and UnQover are
+distributed only from their own project pages, so their loaders take a `root=`
+pointing at your copy and download nothing; TrustGPT has no data release and
+builds its prompts from bundled templates. See
 [Loaders](registry/loaders.md) for the per-loader breakdown.
 
 BBQ is downloaded from its Hugging Face mirror into the standard cache on first

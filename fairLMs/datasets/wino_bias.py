@@ -2,9 +2,21 @@
 
 from __future__ import annotations
 
-from typing import Dict, List, Optional, Sequence, Tuple
+from pathlib import Path
+from typing import Dict, List, Optional, Sequence, Tuple, Union
 
+import pandas as pd
+
+from fairLMs.datasets._paths import dataset_resource_dir
+from fairLMs.datasets._sources import require_choice
 from fairLMs.datasets.base import FairnessDataset, optional_limit
+
+PathLike = Union[str, Path]
+
+WINOBIAS_CONFIGS = ("type1_anti", "type1_pro", "type2_anti", "type2_pro")
+WINOBIAS_SPLITS = ("validation", "test")
+WINOBIAS_HF_PATH = "uclanlp/wino_bias"
+WINOBIAS_HF_REVISION = "3f31267586e4408e3b3f77ec22198fd24ea8dc1d"
 
 WINOBIAS_MALE_OCC = [
     "driver",
@@ -54,36 +66,70 @@ WINOBIAS_FEMALE_OCC = [
 
 
 class WinoBias(FairnessDataset):
-    """Load WinoBias from Hugging Face.
+    """Load the bundled WinoBias validation or test split.
 
-    Tries ``wino_bias`` then ``uclanlp/wino_bias``.
+    The eight small Parquet splits are distributed with FairLMs for offline
+    use. Pass ``root=`` for another copy, or set ``hf_path=`` / ``revision=``
+    to request a Hugging Face version explicitly.
     """
 
     name = "wino_bias"
-    data_origin = "Hugging Face Hub, downloaded at first use"
+    data_origin = "bundled with the package; optional Hugging Face/local override"
 
     def __init__(
         self,
         config: str = "type1_pro",
         split: str = "test",
+        root: Optional[PathLike] = None,
         n_max: Optional[int] = None,
         hf_path: Optional[str] = None,
         revision: Optional[str] = None,
     ):
-        self.config = config
-        self.split = split
+        self.config = require_choice(config, WINOBIAS_CONFIGS, "WinoBias config")
+        self.split = require_choice(split, WINOBIAS_SPLITS, "WinoBias split")
+        self.root = root
         self.n_max = n_max
         self.hf_path = hf_path
         self.revision = revision
         self._cache: Optional[List[dict]] = None
 
+    @property
+    def _filename(self) -> Path:
+        return Path(self.config) / f"{self.split}-00000-of-00001.parquet"
+
+    def _local_path(self) -> Path:
+        if self.root is None:
+            return dataset_resource_dir("wino_bias", [self._filename]) / self._filename
+
+        base = Path(self.root).expanduser()
+        for candidate in (base, base / "wino_bias", base / "WinoBias"):
+            path = candidate / self._filename
+            if path.is_file():
+                return path.resolve()
+        raise FileNotFoundError(
+            f"WinoBias not found under {base}: expected {self._filename}."
+        )
+
+    def _load_local(self) -> List[dict]:
+        frame = pd.read_parquet(self._local_path())
+        examples: List[dict] = []
+        for raw in frame.to_dict("records"):
+            # Pandas returns Parquet list columns as ndarrays. Match the plain
+            # lists returned by datasets.load_dataset so both sources expose
+            # exactly the same public record shape.
+            examples.append(
+                {
+                    key: value.tolist() if hasattr(value, "tolist") else value
+                    for key, value in raw.items()
+                }
+            )
+        return examples
+
     def _load_hf(self):
         from datasets import load_dataset
 
         errors = []
-        candidates = (
-            [self.hf_path] if self.hf_path else ["wino_bias", "uclanlp/wino_bias"]
-        )
+        candidates = [self.hf_path] if self.hf_path else [WINOBIAS_HF_PATH]
         for path in candidates:
             if not path:
                 continue
@@ -104,8 +150,11 @@ class WinoBias(FairnessDataset):
         if self._cache is not None:
             return optional_limit(self._cache, self.n_max)
 
-        ds = self._load_hf()
-        examples = [dict(row) for row in ds]
+        if self.root is not None or (self.hf_path is None and self.revision is None):
+            examples = self._load_local()
+        else:
+            ds = self._load_hf()
+            examples = [dict(row) for row in ds]
         self._cache = examples
         return optional_limit(examples, self.n_max)
 

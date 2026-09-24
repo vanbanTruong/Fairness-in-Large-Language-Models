@@ -85,11 +85,11 @@ things:
 
 !!! warning "Leaf runners are repo-only"
     Some leaves read data files that sit beside them and are **not** shipped in
-    the wheel; only the small CrowS-Pairs resource under
-    `fairLMs/datasets/resources/` is packaged. The
+    the wheel; only the small CrowS-Pairs, WinoBias and Winogender snapshots
+    under `fairLMs/datasets/resources/` are packaged. The
     performance-disparity and attention-head leaves in particular need a source
-    checkout, and several encoder-decoder leaves download XSum, Europarl,
-    WinoBias or XNLI at runtime. The public metrics in `fairLMs.definitions` have no
+    checkout, and several encoder-decoder leaves download XSum, Europarl or
+    XNLI at runtime. The public metrics in `fairLMs.definitions` have no
     such dependency.
 
 ## Where the diagnostics sit

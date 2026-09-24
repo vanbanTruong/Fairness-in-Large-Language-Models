@@ -41,8 +41,9 @@ Subclass `FairnessDataset`, implement `load()`, and export the class from
 docstring is the description it prints, so make it say what `load()` returns.
 
 Set `data_origin` to where the bytes come from; the table groups loaders by it.
-Prefer Hub download over vendoring. Only CrowS-Pairs is bundled, and
-anything you add under `fairLMs/datasets/resources/` must also be declared in
+Prefer Hub download over vendoring. The existing bundled snapshots are small,
+license-checked and checksum-pinned; anything you add under
+`fairLMs/datasets/resources/` must meet the same conditions and be declared in
 `[tool.setuptools.package-data]` or it will not ship in the wheel. Fetch a
 published data file with `fairLMs.datasets._sources.hub_file` rather than
 `datasets.load_dataset`: several benchmark repositories still ship a loading

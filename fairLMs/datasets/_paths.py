@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from pathlib import Path
-from typing import Optional, Union
+from typing import Iterable, Optional, Union
 
 PathLike = Union[str, Path]
 
@@ -17,6 +17,19 @@ def package_root() -> Path:
 
 def resource_root() -> Path:
     return _RESOURCE_ROOT
+
+
+def dataset_resource_dir(name: str, required: Iterable[PathLike] = ()) -> Path:
+    """Return one bundled dataset directory after checking required files."""
+    directory = _RESOURCE_ROOT / name
+    missing = [str(item) for item in required if not (directory / item).is_file()]
+    if not directory.is_dir() or missing:
+        detail = f" Missing: {', '.join(missing)}." if missing else ""
+        raise FileNotFoundError(
+            f"Bundled {name} resources are incomplete under {directory}."
+            f"{detail} Reinstall FairLMs."
+        )
+    return directory
 
 
 def resolve_crows_pairs_csv(path: Optional[PathLike] = None) -> Path:

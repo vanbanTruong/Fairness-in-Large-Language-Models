@@ -35,7 +35,7 @@ print(result.score)
 |---|---|
 | `main.py` | Short public-API demo using `DemographicRepresentationDivergence`; writes results CSV for continuity |
 | `drd.py` | Core: `generate`, `_count_mentions`, `compute_drd` |
-| `data/` | Prefer `fairLMs.datasets.BBQ` / `CrowSPairs`; only CrowS-Pairs is bundled |
+| `data/` | Prefer `fairLMs.datasets.BBQ` / `CrowSPairs`; BBQ downloads on demand and CrowS-Pairs is bundled |
 | `drd_results.csv` | Summary output of the last run |
 
 Also writes per-run `drd_{dataset}_by_axis.csv` and `drd_{dataset}_rows.csv`.
