@@ -10,7 +10,7 @@ This ongoing project aims to consolidate interesting efforts in the field of fai
 Wenbin Zhang<br>
 Springer
 
-<br clear="left">
+<br clear="right">
 <br>
 
 **Tutorial:** [Fairness in Language Models: A Tutorial](https://fairness-llms-tutorial.github.io)<br>
