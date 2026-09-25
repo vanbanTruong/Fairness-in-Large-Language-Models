@@ -1,7 +1,3 @@
-include README.md LICENSE CITATION.cff CONVERSION.md mkdocs.yml requirements.txt
-recursive-include tests *.py *.json
-recursive-include scripts *.py
-recursive-include docs *.md *.ipynb
-recursive-include examples *.md *.py
-include requirements-tested.txt
+include README.md LICENSE
+recursive-include support *.md *.py *.json *.ipynb *.yml *.txt *.cff
 recursive-include datasets/resources *.md *.json *.csv *.tsv *.parquet LICENSE

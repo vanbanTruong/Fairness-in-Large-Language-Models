@@ -51,7 +51,7 @@ Hooks target GPT-2 `transformer.h[*].attn.c_proj`.
 
 ## How to run
 
-**Preferred:** use the public API above (and/or examples under `examples/` at the repo root).
+**Preferred:** use the public API above (and/or examples under `support/examples/` at the project root).
 
 **Optional legacy demo** from the repository root:
 

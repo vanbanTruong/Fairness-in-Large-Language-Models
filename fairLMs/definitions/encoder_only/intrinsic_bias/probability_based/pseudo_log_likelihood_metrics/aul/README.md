@@ -54,7 +54,7 @@ Token scoring uses `score_sentence` in `fairLMs.definitions.utils`.
 
 ## How to run
 
-**Preferred:** use the public API above (and/or examples under `examples/` at the repo root).
+**Preferred:** use the public API above (and/or examples under `support/examples/` at the project root).
 
 **Optional legacy demo** from the repository root:
 

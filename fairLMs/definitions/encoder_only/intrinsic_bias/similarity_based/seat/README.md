@@ -57,7 +57,7 @@ C1–C4 (race / gender / disease / age), word lists hard-coded in
 
 ## How to run
 
-**Preferred:** use the public API above (and/or examples under `examples/` at the repo root).
+**Preferred:** use the public API above (and/or examples under `support/examples/` at the project root).
 
 **Optional legacy demo** from the repository root:
 

@@ -5,7 +5,7 @@
 An installable local library for fairness definitions, dataset loaders,
 dataset diagnostics, bias metrics, and mitigation methods for language models.
 The runtime library was synchronized from JMLR Library release 0.5.0; see
-[`UPSTREAM.md`](UPSTREAM.md) for the exact source commit and integration notes.
+[`UPSTREAM.md`](support/metadata/UPSTREAM.md) for the exact source commit and integration notes.
 
 The long-term goal is a **stable, sklearn-style API**: import a metric, call `compute(...)`, and get a result — without caring where the implementation lives.
 
@@ -43,7 +43,7 @@ respectively.
 
 The synchronized upstream version is single-sourced in
 [`_version.py`](_version.py). The source commit is recorded separately in
-[`UPSTREAM.md`](UPSTREAM.md).
+[`UPSTREAM.md`](support/metadata/UPSTREAM.md).
 
 ## Quick start
 
@@ -81,7 +81,7 @@ print(result.result.texts)
 rows = BBQ(n_max=10).load()
 ```
 
-See [`examples/representativeness_diagnostic.py`](examples/representativeness_diagnostic.py)
+See [`support/examples/representativeness_diagnostic.py`](support/examples/representativeness_diagnostic.py)
 for a complete dataset diagnostic call.
 
 ### The contract
@@ -198,7 +198,7 @@ requested, unsupported target kind, or view not supplied) --
 status, name the slots that need a backend. `audit_dataset(evidence, spec, axis=...)` runs the requested
 components over one axis of a `DatasetEvidence` and returns one report, while
 `audit_scores` remains the separate entry point for row-level scores. See the
-[dataset audit guide](docs/guides/dataset-audit.md).
+[dataset audit guide](support/docs/guides/dataset-audit.md).
 
 ```python
 from fairLMs.datasets.diagnostics import (
@@ -245,9 +245,9 @@ outside an absolute `1e-9` sum tolerance are rejected; values inside that
 tolerance are canonicalized onto the probability simplex and the report records
 both the input sum and whether canonicalization occurred.
 
-Start with [Preparing audit evidence](docs/preparing_audit_evidence.md) for the
+Start with [Preparing audit evidence](support/docs/preparing_audit_evidence.md) for the
 evidence-layer boundary and input checklist. The detailed
-[representativeness guide](docs/preparing_representativeness_evidence.md)
+[representativeness guide](support/docs/preparing_representativeness_evidence.md)
 covers supported input paths, raw text, coverage, references, and a complete
 `b_rep` example.
 
@@ -370,11 +370,11 @@ definition; the report marks lower-tail and exclusive-boundary variants
 separately. Treat each value as a per-dataset, per-scorer diagnostic, and rate
 gaps additionally as per-rule, rather than using them to rank datasets or
 unrelated scorer scales. See
-[Preparing audit evidence](docs/preparing_audit_evidence.md) and the runnable
-[`score_rate_gap`](examples/scorer_rate_gap_diagnostic.py) and
-[`score_wasserstein_1_gap`](examples/scorer_distribution_gap_diagnostic.py)
+[Preparing audit evidence](support/docs/preparing_audit_evidence.md) and the runnable
+[`score_rate_gap`](support/examples/scorer_rate_gap_diagnostic.py) and
+[`score_wasserstein_1_gap`](support/examples/scorer_distribution_gap_diagnostic.py)
 and
-[`score_counterfactual_sensitivity`](examples/scorer_counterfactual_sensitivity_diagnostic.py)
+[`score_counterfactual_sensitivity`](support/examples/scorer_counterfactual_sensitivity_diagnostic.py)
 examples.
 
 Shared loaders:
@@ -394,7 +394,7 @@ Leaf runners under `definitions/` are short demos of the same public API:
 python -m fairLMs.definitions.encoder_only.intrinsic_bias.probability_based.pseudo_log_likelihood_metrics.cps.main
 ```
 
-See also the local [`examples/`](examples/) directory.
+See also the local [`support/examples/`](support/examples/) directory.
 
 ## Package layout
 
@@ -414,15 +414,18 @@ fairLMs/
 │   ├── decoder_only/
 │   └── encoder_decoder/
 ├── mitigation/     # Pre-, in-, intra-, and post-processing mitigators
-├── docs/           # Project documentation
-├── tests/          # Unit, packaging, and workflow tests
-├── examples/       # Runnable examples
-├── scripts/        # Documentation and release tooling
+├── support/        # Project-wide material shared by all three areas
+│   ├── docs/       # Project documentation
+│   ├── examples/   # Runnable examples
+│   ├── tests/      # Unit, packaging, and workflow tests
+│   ├── scripts/    # Documentation, packaging, and release tooling
+│   ├── metadata/   # Citation, upstream, and conversion records
+│   └── requirements/ # Convenience and verification dependency lists
 ├── __init__.py
 └── _version.py
 ```
 
-Repo-root `examples/` has additional runnable snippets.
+Project-wide runnable snippets live under `support/examples/`.
 
 Every metric exposes the same method: `compute(...)`.
 
@@ -430,7 +433,7 @@ Every metric exposes the same method: `compute(...)`.
 
 Eighteen loaders share one interface. The small CrowS-Pairs, WinoBias and
 Winogender snapshots are distributed for offline use; larger corpora are
-fetched or pointed at. See [Loaders](docs/registry/loaders.md) for the generated
+fetched or pointed at. See [Loaders](support/docs/registry/loaders.md) for the generated
 table with every constructor argument.
 
 | Class | Source | Notes |
@@ -518,7 +521,7 @@ pytest                  # contract suite over every metric in the registry
 python -m fairLMs.definitions.encoder_only.intrinsic_bias.similarity_based.weat.main
 ```
 
-`tests/test_common.py` is the analogue of scikit-learn's `check_estimator`: it
+`support/tests/test_common.py` is the analogue of scikit-learn's `check_estimator`: it
 runs the parameter/repr/keyword contract across `METRIC_REGISTRY`, so a new
 metric that breaks the shape fails there rather than surprising a user. It needs
 no network or model weights.
@@ -535,7 +538,7 @@ environment can hide: `fairLMs.definitions` eagerly imports every metric family,
 third-party module imported at module scope under `fairLMs/definitions/` is a
 hard requirement of `import fairLMs`. If such a dependency is only listed in an
 extra, a clean installation cannot import the package. The local
-[`tests/test_packaging.py`](tests/test_packaging.py) guard walks the source AST
+[`support/tests/test_packaging.py`](support/tests/test_packaging.py) guard walks the source AST
 and names the offending file.
 
 `fairLMs.definitions.io.results_to_csv` writes to a caller-supplied directory,

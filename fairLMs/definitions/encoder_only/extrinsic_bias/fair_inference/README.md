@@ -57,7 +57,7 @@ as "template probes with vocabulary drawn from X", not "results on X".
 
 ## How to run
 
-**Preferred:** use the public API above (and/or examples under `examples/` at the repo root).
+**Preferred:** use the public API above (and/or examples under `support/examples/` at the project root).
 
 **Optional legacy demo** from the repository root:
 

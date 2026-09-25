@@ -51,7 +51,7 @@ Also writes per-run `drd_{dataset}_by_axis.csv` and `drd_{dataset}_rows.csv`.
 
 ## How to run
 
-**Preferred:** use the public API above (and/or examples under `examples/` at the repo root).
+**Preferred:** use the public API above (and/or examples under `support/examples/` at the project root).
 
 **Optional legacy demo** from the repository root:
 

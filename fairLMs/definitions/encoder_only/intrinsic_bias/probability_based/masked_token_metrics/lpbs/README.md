@@ -78,7 +78,7 @@ pip install "datasets<3"  # script-based "wino_bias" removed in datasets>=3
 
 ## How to run
 
-**Preferred:** use the public API above (and/or examples under `examples/` at the repo root).
+**Preferred:** use the public API above (and/or examples under `support/examples/` at the project root).
 
 **Optional legacy demo** from the repository root:
 

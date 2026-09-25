@@ -22,7 +22,7 @@ evaluation snapshots are small and permit redistribution. BBQ and other large
 datasets are downloaded into the normal Hugging Face cache on first use.
 Loaders that cannot rely on a maintained Hub source accept `root=` or another
 explicit local path; the generated
-[loader registry](../docs/registry/loaders.md) records the source policy for
+[loader registry](../support/docs/registry/loaders.md) records the source policy for
 every class.
 
 ## Audit a dataset
@@ -56,7 +56,7 @@ datasets/
 ```
 
 Large corpora, generated outputs, charts, and model caches are deliberately not
-stored in this package. Tests use small synthetic fixtures under `tests/`.
+stored in this package. Tests use small synthetic fixtures under `support/tests/`.
 
 ## Dataset survey
 

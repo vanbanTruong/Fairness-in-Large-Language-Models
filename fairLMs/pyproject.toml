@@ -187,7 +187,7 @@ packages = [
 version = { attr = "fairLMs._version.__version__" }
 
 [tool.pytest.ini_options]
-testpaths = ["tests"]
+testpaths = ["support/tests"]
 # `fairLMs/definitions/` holds 33 `main.py` and 25 `stimuli.py` files in sibling
 # directories. Under the default "prepend" import mode pytest names a module by
 # its basename, so collecting the package -- `pytest --doctest-modules fairLMs/`

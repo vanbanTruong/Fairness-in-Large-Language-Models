@@ -1,0 +1,106 @@
+site_name: FairLMs
+site_description: A Turnkey Library for Fairness in Language Models
+site_url: https://michaellarionov.github.io/FairLMs/
+repo_url: https://github.com/vanbanTruong/Fairness-in-Large-Language-Models
+repo_name: vanbanTruong/Fairness-in-Large-Language-Models
+edit_uri: edit/main/fairLMs/support/docs/
+
+docs_dir: docs
+site_dir: ../site
+
+theme:
+  name: material
+  features:
+    - navigation.sections
+    - navigation.top
+    - navigation.instant
+    - content.code.copy
+    - content.action.edit
+    - search.suggest
+    - search.highlight
+    - toc.follow
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      toggle: {icon: material/weather-night, name: Dark mode}
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      toggle: {icon: material/weather-sunny, name: Light mode}
+
+plugins:
+  - search
+  - mkdocstrings:
+      handlers:
+        python:
+          options:
+            docstring_style: google
+            show_source: true
+            show_root_heading: true
+            members_order: source
+            separate_signature: true
+            show_signature_annotations: true
+  - mkdocs-jupyter:
+      execute: false          # set true once notebooks are CI-stable
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  # Required for the `markdown` attribute on a raw HTML block. Material's
+  # `grid cards` needs it; without it the list inside the <div> is emitted as
+  # literal text instead of being parsed.
+  - md_in_html
+  - tables
+  - toc: {permalink: true}
+  - pymdownx.highlight: {anchor_linenums: true}
+  - pymdownx.superfences
+  - pymdownx.tabbed: {alternate_style: true}
+  - pymdownx.details
+
+nav:
+  - Home: index.md
+  - Install: install.md
+  - Quickstart: quickstart.md
+  - Tour (notebook): notebooks/tour.ipynb
+  - Taxonomy: taxonomy.md
+  - Guides:
+      - Bring your own data: guides/own-data.md
+      - Intrinsic × encoder-only: guides/intrinsic-encoder.md
+      - Intrinsic × decoder-only: guides/intrinsic-decoder.md
+      - Intrinsic × encoder-decoder: guides/intrinsic-encdec.md
+      - Extrinsic × encoder-only: guides/extrinsic-encoder.md
+      - Extrinsic × decoder-only: guides/extrinsic-decoder.md
+      - Extrinsic × encoder-decoder: guides/extrinsic-encdec.md
+      - Auditing a dataset: guides/dataset-audit.md
+      - Preparing audit evidence: preparing_audit_evidence.md
+      - Preparing representativeness evidence: preparing_representativeness_evidence.md
+      - Writing a metric: guides/custom-metric.md
+      - Mitigating bias: guides/mitigation.md
+      - Writing a diagnostic: guides/custom-diagnostic.md
+  - Registry:
+      - Metrics: registry/metrics.md
+      - Loaders: registry/loaders.md
+      - Diagnostics: registry/diagnostics.md
+      - Mitigators: registry/mitigation.md
+      - Divergences from released runners: registry/divergences.md
+  - API reference:
+      - Metrics: api/metrics.md
+      - Models: api/models.md
+      - Containers: api/containers.md
+      - Diagnostics: api/diagnostics.md
+      - Diagnostic backends: api/backends.md
+      - Mitigation: api/mitigation.md
+      - Applicability: api/applicability.md
+      - Loaders: api/loaders.md
+      - Utils: api/utils.md
+  - About:
+      - Comparison with related tools: comparison.md
+      - Reproduction of published values: validation.md
+      - Changelog: changelog.md
+      - Citing FairLMs: citation.md
+      - License: license.md
+  - Contributing: contributing.md
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/vanbanTruong/Fairness-in-Large-Language-Models

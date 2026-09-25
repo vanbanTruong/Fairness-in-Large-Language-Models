@@ -52,7 +52,7 @@ WinoMT and XNLI have no gold summaries → uniform reference distribution.
 
 ## How to run
 
-**Preferred:** use the public API above (and/or examples under `examples/` at the repo root).
+**Preferred:** use the public API above (and/or examples under `support/examples/` at the project root).
 
 **Optional legacy demo** from the repository root:
 
