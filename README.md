@@ -9,6 +9,10 @@ Wenbin Zhang<br>
 Springer
 
 <br clear="right">
+**Book:** [Fairness in Language Models](https://link.springer.com/book/9783032391469)<br>
+Wenbin Zhang<br>
+Springer<br>
+<a href="https://link.springer.com/book/9783032391469"><img src="tutorial/book.png" alt="Fairness in Language Models" width="150"></a>
 
 <br>
 
