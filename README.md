@@ -3,8 +3,7 @@
 This ongoing project aims to consolidate interesting efforts in the field of fairness in Language Models (LMs), drawing on the proposed taxonomy and surveys dedicated to various aspects of fairness in LMs.
 
 
-**Book:** [Fairness in Language Models](https://link.springer.com/book/9783032391469)<br>
-<br>
+**Book:** [Fairness in Language Models](https://link.springer.com/book/9783032391469)<br>//
 <a href="https://link.springer.com/book/9783032391469"><img src="tutorial/book.png" alt="Fairness in Language Models" width="150"></a>
 
 **Tutorial:** [Fairness in Language Models: A Tutorial](https://fairness-llms-tutorial.github.io)<br>
