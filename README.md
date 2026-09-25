@@ -2,15 +2,20 @@
 
 This ongoing project aims to consolidate interesting efforts in the field of fairness in Language Models (LMs), drawing on the proposed taxonomy and surveys dedicated to various aspects of fairness in LMs.
 
-<a href="https://link.springer.com/book/9783032391469">
-  <img src="assets/book_cover.png" alt="Fairness in Language Models" width="150" align="right">
-</a>
-
-**Book:** [Fairness in Language Models](https://link.springer.com/book/9783032391469)<br>
-Wenbin Zhang<br>
-Springer
-
-<br clear="right">
+<table>
+<tr>
+<td>
+  <b>Book:</b> <a href="https://link.springer.com/book/9783032391469">Fairness in Language Models</a><br>
+  Wenbin Zhang<br>
+  Springer
+</td>
+<td width="160">
+  <a href="https://link.springer.com/book/9783032391469">
+    <img src="assets/book_cover.png" alt="Fairness in Language Models" width="150">
+  </a>
+</td>
+</tr>
+</table>
 
 <br>
 
