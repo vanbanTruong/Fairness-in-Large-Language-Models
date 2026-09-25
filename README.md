@@ -1,6 +1,6 @@
 # Fairness in Language Models
 
-This ongoing project aims to consolidate interesting efforts in the field of fairness in Language Models (LMs), drawing on the proposed taxonomy and surveys dedicated to various aspects of fairness in LMs.
+This ongoing project aims to consolidate key research efforts on fairness in Language Models (LMs), building on our proposed taxonomy, tutorials, surveys, and book that collectively address various dimensions of fairness in LMs.
 
 
 **Book:** [Fairness in Language Models](https://link.springer.com/book/9783032391469)<br>
