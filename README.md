@@ -8,8 +8,6 @@ Wenbin Zhang<br>
 Springer Nature<br>
 <a href="https://link.springer.com/book/9783032391469"><img src="tutorial/book.png" alt="Fairness in Language Models" width="150"></a>
 
-<br>
-
 **Tutorial:** [Fairness in Language Models: A Tutorial](https://fairness-llms-tutorial.github.io)<br>
 Zichong Wang, Zhipeng Yin, Jiale Zhang and Wenbin Zhang<br>
 *The 25<sup>th</sup> IEEE International Conference on Data Mining (ICDM), Washington D.C., United States, 2025*<br>
