@@ -4,8 +4,6 @@ This ongoing project aims to consolidate interesting efforts in the field of fai
 
 
 **Book:** [Fairness in Language Models](https://link.springer.com/book/9783032391469)<br>
-Wenbin Zhang<br>
-Springer Nature<br>
 <a href="https://link.springer.com/book/9783032391469"><img src="tutorial/book.png" alt="Fairness in Language Models" width="150"></a>
 
 **Tutorial:** [Fairness in Language Models: A Tutorial](https://fairness-llms-tutorial.github.io)<br>
