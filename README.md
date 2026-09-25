@@ -81,6 +81,22 @@ Email: zhip.y7@gmail.com - Zhipeng Yin<br>
 
 ## Citations
 
+### Fairness in Language Models [![Springer](https://img.shields.io/badge/Springer-Book-blue)](https://link.springer.com/book/9783032391469)
+
+If you find that our book helps your research, we would appreciate citations to the following book:
+```
+@book{zhang2026fairnesslanguagemodels,
+      title={Fairness in Language Models},
+      editor={Wenbin Zhang},
+      series={Artificial Intelligence: Foundations, Theory, and Algorithms},
+      publisher={Springer Cham},
+      year={2026},
+      edition={1},
+      isbn={978-3-032-39146-9},
+      url={https://link.springer.com/book/9783032391469},
+}
+```
+
 ### History, Development, and Principles of Large Language Models-An Introductory Survey [![PDF](https://img.shields.io/badge/PDF-Download-red)](https://arxiv.org/pdf/2402.06853)
 
 If you find that our introduction survey helps your research, we would appreciate citations to the following paper:
